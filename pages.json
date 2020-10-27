@@ -1,0 +1,57 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "计价",
+			"enablePullDownRefresh": true
+		}
+	}, {
+		"path": "pages/user/index",
+		"style": {
+			"navigationBarTitleText": "个人中心"
+		}
+	},{
+		"path": "pages/user/login",
+		"style": {
+			"navigationBarTitleText": "登录"
+		}
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "猎板网",
+		"navigationBarBackgroundColor": "#008AFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#008AFF",
+		"borderStyle": "white",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/price@2x.png",
+				"selectedIconPath": "static/price_click@2x.png",
+				"text": "计价"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"iconPath": "static/buy@2x.png",
+				"selectedIconPath": "static/buy_click@2x.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"iconPath": "static/order@2x.png",
+				"selectedIconPath": "static/order_click@2x.png",
+				"text": "订单"
+			}
+		]
+	},
+	"condition": {
+		"current": 0,
+		"list": [{
+			"name": "测试页面",
+			"path": "pages/index/index"
+		}]
+	}
+}

@@ -1,0 +1,105 @@
+.h-index {
+	.prompt {
+		height: 76rpx;
+		background: #fff9ed;
+		padding-left: 28rpx;
+		margin-bottom: 20rpx;
+		.iconfont {
+			font-size: 36rpx;
+			margin-right: 14rpx;
+			color: #ff6010;
+		}
+		.text {
+			font-size: 24rpx;
+			color: #ff6010;
+		}
+	}
+	.nowrap{
+		flex-wrap: nowrap !important;  
+	}
+	.pcb-box {
+		padding-left: 30rpx;
+		border-bottom: 20rpx solid #f7f8fa;
+		.tip{
+			height: 66rpx;
+			font-size: 24rpx;
+			color: #999999;
+		}
+		.pcb-input {
+			border-bottom: 1px solid #e7e7e7;
+			padding-right: 30rpx; 
+			&:last-child {
+				border-bottom: none;
+			}
+			&.h1 {
+				height: 100rpx;
+			}
+			&.h2 {
+				padding: 24rpx 0;
+			}
+			.label {
+				width: 168rpx;
+				line-height: 44rpx;
+				color: #323233;
+				font-size: 28rpx;
+			}
+			.wrap {
+				width: calc(100% - 100rpx);
+			}
+			.input-type1 {
+				.w1 {
+					width: 84rpx;
+				}
+				.txt {
+					font-size: 28rpx;
+					color: #999999;
+					padding: 0 40rpx;
+				}
+				.unit {
+					font-size: 28rpx;
+					color: #999999;
+					.t1 {
+						font-size: 28rpx;
+						color: #999999;
+					}
+					.iconfont {
+						font-size: 30rpx;
+						color: #999;
+						margin-left: 14rpx;
+					}
+				}
+			}
+			.list {
+				flex-wrap: wrap;
+				.box {
+					padding: 0 30rpx;
+					height: 52rpx;
+					background: #f2f2f2;
+					border-radius: 28rpx;
+					margin-right: 16rpx;
+					white-space: nowrap;
+					text-align: center;
+					&.curr {
+						background: #e7f4ff;
+						border: 2rpx solid #008aff;
+						color: #008aff;
+					}
+				}
+				&.mb {
+					.box {
+						&:nth-child(-n + 4) {
+							margin-bottom: 26rpx;
+						}
+					}
+				}
+				&.mb2 {
+					.box {
+						&:nth-child(-n + 1) {
+							margin-bottom: 26rpx;
+						}
+					}
+				}
+			}
+		}
+	}
+}

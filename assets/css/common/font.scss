@@ -1,0 +1,34 @@
+@font-face {
+	font-family: "iconfont";
+	src: url('~@/static/iconfont.ttf?t=1597739255175') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconyoujiantou:before {
+  content: "\e6b2";
+}
+
+.iconnotice:before {
+  content: "\e6b1";
+}
+
+.icontongyi:before {
+  content: "\e62b";
+}
+
+.iconiconloginuser:before {
+  content: "\e6ae";
+}
+
+.iconiconloginpassword:before {
+  content: "\e6af";
+}
+
+
