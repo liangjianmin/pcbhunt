@@ -15,6 +15,11 @@
 		"style": {
 			"navigationBarTitleText": "登录"
 		}
+	},{
+		"path": "pages/cart/index",
+		"style": {
+			"navigationBarTitleText": "购物车"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -34,7 +39,7 @@
 				"text": "计价"
 			},
 			{
-				"pagePath": "pages/user/index",
+				"pagePath": "pages/cart/index",
 				"iconPath": "static/buy@2x.png",
 				"selectedIconPath": "static/buy_click@2x.png",
 				"text": "购物车"

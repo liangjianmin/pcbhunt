@@ -14,20 +14,21 @@
 			color: #ff6010;
 		}
 	}
-	.nowrap{
-		flex-wrap: nowrap !important;  
+	.nowrap {
+		flex-wrap: nowrap !important;
 	}
 	.pcb-box {
 		padding-left: 30rpx;
 		border-bottom: 20rpx solid #f7f8fa;
-		.tip{
+		.tip {
 			height: 66rpx;
 			font-size: 24rpx;
 			color: #999999;
 		}
 		.pcb-input {
+			position: relative;
 			border-bottom: 1px solid #e7e7e7;
-			padding-right: 30rpx; 
+			padding-right: 30rpx;
 			&:last-child {
 				border-bottom: none;
 			}
@@ -100,6 +101,51 @@
 					}
 				}
 			}
+			.t-area {
+				padding-top: 24rpx;
+				padding-left: 30rpx;
+				height: 240rpx;
+				font-size: 28rpx;
+			}
+			.limit {
+				position: absolute;
+				right: 30rpx;
+				bottom: 20rpx;
+				font-size: 24rpx;
+				color: #ccc;
+			}
+		}
+	}
+	.btn-box {
+		padding: 24rpx 30rpx 40rpx 30rpx;
+		.btn-1 {
+			width: 334rpx;
+			height: 88rpx;
+			background: #5dd1ff;
+			box-shadow: 0px 8rpx 16rpx 0px rgba(93, 209, 255, 0.2);
+			border-radius: 44rpx;
+			font-size: 32rpx;
+			color: #ffffff;
+		}
+		.btn-2 {
+			width: 334rpx;
+			height: 88rpx;
+			background: #008aff;
+			box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+			border-radius: 44rpx;
+			font-size: 32rpx;
+			color: #ffffff;
+		}
+	}
+	.tip{
+		padding-bottom: 30rpx;
+		.t1{
+			font-size: 22rpx;
+			color: #999999;
+		}
+		.t2{
+			font-size: 22rpx;
+			color: #008AFF;
 		}
 	}
 }

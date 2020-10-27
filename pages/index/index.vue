@@ -155,9 +155,7 @@
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">测试选项</text>
-				<view class="wrap list row verCenter">
-					<view class="box row rowCenter verCenter curr">测试免费</view>
-				</view>
+				<view class="wrap list row verCenter"><view class="box row rowCenter verCenter curr">测试免费</view></view>
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">金手指倒斜边</text>
@@ -188,6 +186,20 @@
 					<view class="box row rowCenter verCenter">需要</view>
 				</view>
 			</view>
+		</view>
+		<view class="pcb-box">
+			<view class="pcb-input row">
+				<textarea class="t-area" placeholder="请填写工艺备注" placeholder-style="color:#CCCCCC;"></textarea>
+				<text class="limit">0/300</text>
+			</view>
+		</view>
+		<view class="btn-box row bothSide">
+			<view class="btn-1 row rowCenter verCenter">计算价格</view>
+			<view class="btn-2 row rowCenter verCenter">加入购物车</view>
+		</view>
+		<view class="tip row rowCenter">
+			<text class="t1">加入购物车表示已同意</text>
+			<text class="t2">《计价工艺免责声明》</text>
 		</view>
 	</view>
 </template>

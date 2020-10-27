@@ -1,1 +1,25 @@
 @import './font.scss';
+
+.layer-box {
+	position: relative;
+	min-width: 640rpx;
+	background: #ffffff;
+	box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+	border-radius: 16rpx;
+	padding-bottom: 16rpx;
+}
+
+.layer-title-box {
+	height: 98rpx;
+	font-size: 36rpx;
+	color: #323233;
+	font-weight: bold;
+	border-bottom: 1px solid #e7e7e7;
+}
+.layer-btn {
+	position: absolute;
+	right: 30rpx;
+	top: 40rpx;
+	font-size: 24rpx;
+	color: #008aff;
+}
