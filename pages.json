@@ -8,7 +8,7 @@
 	}, {
 		"path": "pages/user/index",
 		"style": {
-			"navigationBarTitleText": "个人中心"
+			"navigationBarTitleText": "订单管理"
 		}
 	},{
 		"path": "pages/user/login",
@@ -19,6 +19,11 @@
 		"path": "pages/cart/index",
 		"style": {
 			"navigationBarTitleText": "购物车"
+		}
+	},{
+		"path": "pages/user/logistics",
+		"style": {
+			"navigationBarTitleText": "物流"
 		}
 	}],
 	"globalStyle": {

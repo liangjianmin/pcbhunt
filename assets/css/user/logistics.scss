@@ -1,0 +1,102 @@
+.logistics {
+	.top {
+		height: 186rpx;
+		background: #008aff;
+		align-items: flex-end;
+		.box {
+			width: 702rpx;
+			height: 160rpx;
+			background: linear-gradient(225deg, #00ceff 0%, #00abff 100%);
+			box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+			border-radius: 8rpx 8rpx 0px 0px;
+			padding-left: 24rpx;
+			padding-right: 50rpx;
+			.t1 {
+				font-size: 28rpx;
+				color: #ffffff;
+				margin-bottom: 20rpx;
+			}
+			.t2 {
+				font-size: 28rpx;
+				color: #ffffff;
+			}
+			.pic {
+				width: 88rpx;
+				height: 88rpx;
+				image {
+					width: 88rpx;
+					height: 88rpx;
+				}
+			}
+		}
+	}
+	.kefu {
+		width: 702rpx;
+		height: 72rpx;
+		margin: 0 auto;
+		background: #ffffff;
+		border-radius: 0px 0px 8rpx 8rpx;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		.iconfont {
+			font-size: 36rpx;
+			color: #008aff;
+		}
+		.t1 {
+			font-size: 24rpx;
+			color: #323233;
+			margin-left: 10rpx;
+		}
+	}
+	.list {
+		width: 702rpx;
+		padding: 42rpx 0 40rpx 18rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		margin: 24rpx auto 0;
+		padding-left: 34rpx;
+		.box {
+			position: relative;
+			border-left: 4rpx solid #e5e5e5;
+			padding-bottom: 62rpx;
+			padding-left: 28rpx;
+			&:last-child{
+				border-left: none;
+			}
+			.circle{
+				position: absolute;
+				top: 7rpx;
+				left: -14rpx;
+				width: 24rpx;
+				height: 24rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/02d50abe82717a1f09ad0572fbb785c6.png') no-repeat center;
+				background-size: cover;
+			}
+			.icontongyi {
+				position: absolute;
+				left: -19rpx;
+				top: -4rpx;
+				font-size: 37rpx;
+				color: #008aff;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #999999;
+				line-height: 40rpx;
+				margin-bottom: 16rpx;
+				font-weight: bold;
+			}
+			.t2 {
+				font-size: 24rpx;
+				color: #999999;
+			}
+			&.curr{
+				padding-bottom: 58rpx;
+				.t1{
+					color: #323233;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
