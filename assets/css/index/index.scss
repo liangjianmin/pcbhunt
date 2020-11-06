@@ -80,6 +80,8 @@
 					margin-right: 16rpx;
 					white-space: nowrap;
 					text-align: center;
+					font-size: 24rpx;
+					color: #323233;
 					&.curr {
 						background: #e7f4ff;
 						border: 2rpx solid #008aff;
@@ -137,15 +139,30 @@
 			color: #ffffff;
 		}
 	}
-	.tip{
+	.tip {
 		padding-bottom: 30rpx;
-		.t1{
+		.t1 {
 			font-size: 22rpx;
 			color: #999999;
 		}
-		.t2{
+		.t2 {
 			font-size: 22rpx;
-			color: #008AFF;
+			color: #008aff;
+		}
+	}
+}
+
+.layer-box {
+	width: 640rpx;
+	text-align: center;
+	.txt {
+		padding: 24rpx 28rpx 0 20rpx;
+		text-align: left;
+		text {
+			color: #666;
+			font-size: 24rpx;
+			line-height: 40rpx;
+			margin-bottom: 24rpx;
 		}
 	}
 }

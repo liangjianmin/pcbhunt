@@ -82,6 +82,24 @@
 						<image src="../../static/48h.png" mode="aspectFill" class="im"></image>
 					</view>
 				</view>
+				<navigator class="status3 row rowCenter verCenter" url="/pages/user/logistics" hover-class="none">查看物流</navigator>
+			</view>
+			<view class="box row">
+				<view class="time column rowCenter">
+					<text class="t1 row rowCenter verCenter">下单</text>
+					<text class="t2 row rowCenter verCenter">07-15</text>
+				</view>
+				<view class="txt column">
+					<text class="t1">订单包：39994949224</text>
+					<view>
+						<text class="t2">金额：300.00</text>
+						<text class="t3">子订单：3</text>
+					</view>
+					<view class="bar row verCenter">
+						<text class="t4">预计交货：2020-10-20 18:00</text>
+						<image src="../../static/48h.png" mode="aspectFill" class="im"></image>
+					</view>
+				</view>
 				<view class="status1 row rowCenter verCenter">审单完成</view>
 			</view>
 			<view class="box row">

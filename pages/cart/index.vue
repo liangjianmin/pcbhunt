@@ -124,7 +124,7 @@
 				<text class="t3">¥</text>
 				<text class="t4">1199.00</text>
 			</view>
-			<view class="next row rowCenter verCenter">下一步</view>
+			<view class="next row rowCenter verCenter" @click="submit">下一步</view>
 		</view>
 		<!-- 明细信息 -->
 		<uni-popup ref="detail" type="center">
@@ -219,6 +219,11 @@ export default {
 	onShow() {},
 	methods: {
 		getData() {},
+		submit(){
+			uni.navigateTo({
+				url:'/pages/user/order'
+			})
+		},
 		detail(){
 			this.$refs.detail.open();
 		},

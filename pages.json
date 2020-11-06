@@ -25,6 +25,36 @@
 		"style": {
 			"navigationBarTitleText": "物流"
 		}
+	},{
+		"path": "pages/user/order",
+		"style": {
+			"navigationBarTitleText": "计价结果"
+		}
+	},{
+		"path": "pages/user/address",
+		"style": {
+			"navigationBarTitleText": "地址"
+		}
+	},{
+		"path": "pages/user/addAddress",
+		"style": {
+			"navigationBarTitleText": "地址"
+		}
+	},{
+		"path": "pages/user/express",
+		"style": {
+			"navigationBarTitleText": "快递"
+		}
+	},{
+		"path": "pages/user/coupon",
+		"style": {
+			"navigationBarTitleText": "优惠券"
+		}
+	},{
+		"path": "pages/user/status",
+		"style": {
+			"navigationBarTitleText": "支付结果"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

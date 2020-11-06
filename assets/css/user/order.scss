@@ -1,0 +1,259 @@
+.order-box {
+	background: #f7f8fa;
+	padding-bottom: 142rpx;
+	min-height: 100%;
+	.order-address {
+		height: 188rpx;
+		background: #ffffff;
+		padding: 0 30rpx 0 30rpx;
+		.top {
+			width: 100%;
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+				font-weight: bold;
+			}
+			.default {
+				width: 64rpx;
+				height: 36rpx;
+				background: #fa5151;
+				border-radius: 6rpx;
+				font-size: 20rpx;
+				color: #ffffff;
+			}
+			.iconfont {
+				margin-left: 20rpx;
+				font-size: 24rpx;
+				color: #999;
+			}
+		}
+		.text {
+			margin-top: 22rpx;
+			font-size: 24rpx;
+			color: #999999;
+			line-height: 34rpx;
+		}
+	}
+	.tab {
+		margin-top: 20rpx;
+		background: #ffffff;
+		border-bottom: 1px solid #eeeeee;
+		.box {
+			position: relative;
+			height: 84rpx;
+			font-size: 32rpx;
+			color: #323233;
+			&.curr {
+				color: #008aff;
+				font-weight: bold;
+				&::after {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					width: 70rpx;
+					height: 6rpx;
+					background: #008aff;
+					border-radius: 3rpx;
+					margin: 0 auto;
+					content: '';
+				}
+			}
+		}
+	}
+	.list {
+		margin-top: 20rpx;
+		.box {
+			background: #ffffff;
+			margin: 0 24rpx 20rpx 24rpx;
+			border-radius: 8rpx;
+			.top {
+				padding: 0 24rpx;
+				height: 80rpx;
+				border-bottom: 1px solid #e7e7e7;
+				.t1 {
+					font-size: 28rpx;
+					color: #323233;
+					font-weight: bold;
+				}
+				.t2 {
+					font-size: 28rpx;
+					color: #323233;
+				}
+			}
+			.wrap {
+				padding: 40rpx 24rpx 40rpx;
+				margin-left: 24rpx;
+				border-bottom: 1px solid #e7e7e7;
+				.t1 {
+					font-size: 24rpx;
+					color: #666666;
+					line-height: 34rpx;
+					margin-bottom: 24rpx;
+				}
+				.t2 {
+					font-size: 28rpx;
+					color: #323233;
+					line-height: 40rpx;
+				}
+				.mb {
+					margin-bottom: 24rpx;
+				}
+				.price {
+					font-size: 24rpx;
+					color: #ff6010;
+				}
+				.pricenum {
+					font-size: 32rpx;
+					color: #ff6010;
+					font-weight: bold;
+					margin-left: 6rpx;
+				}
+			}
+			.coupon {
+				padding: 0 24rpx;
+				height: 88rpx;
+				.t1 {
+					font-size: 28rpx;
+					color: #323233;
+				}
+				.t2 {
+					font-size: 28rpx;
+					color: #666666;
+				}
+				.iconfont {
+					font-size: 24rpx;
+					margin-left: 12rpx;
+					color: #999;
+				}
+			}
+		}
+	}
+	.show-data {
+		margin: 0 24rpx 20rpx 24rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		.box {
+			margin-left: 24rpx;
+			border-bottom: 1px solid #e7e7e7;
+			padding: 0 24rpx 0 0;
+			height: 88rpx;
+			&:last-child {
+				border-bottom: none;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+			}
+			.t2 {
+				font-size: 28rpx;
+				color: #666666;
+			}
+			.bg {
+				width: 234rpx;
+				height: 44rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/2190cfbc2d9dd0fe82daa6e0aa5981bf.png') no-repeat center;
+				background-size: cover;
+				font-size: 22rpx;
+				color: #008aff;
+				margin-right: 20rpx;
+			}
+			.iconfont {
+				font-size: 24rpx;
+				margin-left: 12rpx;
+				color: #999;
+			}
+		}
+	}
+	.textarea-box {
+		position: relative;
+		margin: 0 24rpx 20rpx 24rpx;
+		background: #ffffff;
+		.txt {
+			position: absolute;
+			right: 16rpx;
+			bottom: 16rpx;
+			font-size: 20rpx;
+			color: #cccccc;
+		}
+		textarea {
+			width: 100%;
+			height: 200rpx;
+			display: block;
+			background: #ffffff;
+			box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+			border-radius: 8rpx;
+			padding-top: 24rpx;
+			padding-left: 24rpx;
+			font-size: 28rpx;
+			box-sizing: border-box;
+		}
+	}
+	.pay {
+		margin: 0 24rpx 20rpx 24rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		.box {
+			margin-left: 24rpx;
+			border-bottom: 1px solid #e7e7e7;
+			padding: 0 24rpx 0 0;
+			height: 88rpx;
+			&:last-child {
+				border-bottom: none;
+			}
+			.iconiconpayzhifubao1 {
+				font-size: 48rpx;
+				color: #00a2ea;
+				margin-right: 24rpx;
+			}
+			.iconiconpayzhifubao {
+				font-size: 48rpx;
+				color: #3cb431;
+				margin-right: 24rpx;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+			}
+			.icon1ElementRadioOn {
+				font-size: 28rpx;
+				color: #008aff;
+			}
+		}
+	}
+	.btn-box {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 112rpx;
+		background: #ffffff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.1);
+		padding: 0 30rpx;
+		.t1 {
+			font-size: 24rpx;
+			color: #999999;
+		}
+		.t2 {
+			font-size: 24rpx;
+			color: #ff6010;
+			margin-left: 12rpx;
+		}
+		.t3 {
+			font-size: 36rpx;
+			color: #ff6010;
+			font-weight: bold;
+		}
+		.btn {
+			width: 280rpx;
+			height: 72rpx;
+			background: #008aff;
+			box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+			border-radius: 44rpx;
+			font-size: 28rpx;
+			color: #ffffff;
+		}
+	}
+}

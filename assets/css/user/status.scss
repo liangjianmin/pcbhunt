@@ -1,0 +1,77 @@
+.status-box {
+	min-height: 100%;
+	background: #f7f8fa;
+	padding-bottom: 100rpx;
+	.text-bar {
+		background: #ffffff;
+		padding: 64rpx 0 42rpx 0;
+		text-align: center;
+		.iconShape {
+			font-size: 128rpx;
+			color: #ff3b30;
+			margin-bottom: 20rpx;
+		}
+		.iconwait{
+			font-size: 128rpx;
+			color: #00B578;
+			margin-bottom: 20rpx;
+		}
+		.iconsucess{
+			font-size: 128rpx;
+			color: #008aff;
+			margin-bottom: 20rpx;
+		}
+		.t1 {
+			font-size: 36rpx;
+			color: #323233;
+			margin-bottom: 44rpx;
+			font-weight: bold;
+		}
+		.t2 {
+			font-size: 26rpx;
+			color: #666666;
+			margin-bottom: 16rpx;
+		}
+		.t3 {
+			font-size: 26rpx;
+			color: #666666;
+		}
+	}
+	.btn-box {
+		margin-top: 30rpx; 
+		.btn1 {
+			width: 702rpx;
+			height: 88rpx;
+			background: #008aff;
+			box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+			border-radius: 44rpx;
+			font-size: 32rpx;
+			color: #fff;
+			margin: 0 auto;
+		}
+		.btn2 {
+			width: 702rpx;
+			height: 88rpx;
+			background: #ffffff;
+			border-radius: 44rpx;
+			border: 2rpx solid #008aff;
+			font-size: 32rpx;
+			color: #008aff;
+			margin: 40rpx auto 0;
+		}
+	}
+	.text{
+		width: 672rpx;
+		margin-top: 140rpx;
+		margin-left: 30rpx;
+		.t1{
+			font-size: 24rpx;
+			color: #666666;
+		}
+		.t2{
+			margin-top: 20rpx;
+			font-size: 24rpx;
+			color: #666666;
+		}
+	}
+}

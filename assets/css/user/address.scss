@@ -1,0 +1,61 @@
+.address {
+	min-height: 100%;
+	background: #f7f8fa;
+	padding-top: 24rpx;
+	.list {
+		margin: 0 24rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+
+		.box {
+			margin-left: 24rpx;
+			border-bottom: 1px solid #e7e7e7;
+			padding: 0 24rpx 0 0;
+			height: 154rpx;
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+				font-weight: bold;
+			}
+			.t2 {
+				font-size: 28rpx;
+				color: #323233;
+				font-weight: bold;
+				margin-left: 20rpx;
+			}
+			.t3 {
+				margin-top: 24rpx;
+				font-size: 24rpx;
+				color: #999999;
+			}
+			.iconiconaddressedit {
+				font-size: 32rpx;
+				color: #666;
+				margin-left: 20rpx;
+			}
+			.icon1ElementRadioOn {
+				font-size: 28rpx;
+				color: #008aff;
+				display: none;
+			}
+			&:last-child {
+				border-bottom: none;
+			}
+			&.curr {
+				.icon1ElementRadioOn {
+					display: block;
+				}
+			}
+		}
+	}
+	.btn {
+		margin: 30rpx 24rpx 0 24rpx;
+		height: 88rpx;
+		background: #008aff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+		border-radius: 44rpx;
+		font-size: 32rpx;
+		color: #ffffff;
+	}
+}

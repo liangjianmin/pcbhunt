@@ -11,6 +11,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.iconsucess:before {
+  content: "\e6c3";
+}
+
+.iconwait:before {
+  content: "\e6c4";
+}
+
+.iconiconaddressedit:before {
+  content: "\e6c2";
+}
+
+.icon1ElementRadioOn:before {
+  content: "\e6bf";
+}
+
+.iconiconpayzhifubao1:before {
+  content: "\e6c0";
+}
+
+.iconiconpayzhifubao:before {
+  content: "\e6c1";
+}
+
 .iconiconoderkefu:before {
   content: "\e6bd";
 }
@@ -38,3 +62,4 @@
 .iconiconloginpassword:before {
   content: "\e6af";
 }
+

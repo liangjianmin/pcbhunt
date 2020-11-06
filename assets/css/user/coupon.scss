@@ -1,0 +1,139 @@
+.coupon-box {
+	min-height: 100%;
+	background: #f7f8fa;
+	.tab {
+		border: 1px solid #eeeeee;
+		height: 84rpx;
+		background: #ffffff;
+		.box {
+			position: relative;
+			height: 84rpx;
+			font-size: 32rpx;
+			color: #323233;
+			text-align: center;
+			&.curr {
+				color: #008aff;
+				font-weight: 500;
+				&::after {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					margin: 0 auto;
+					width: 70rpx;
+					height: 6rpx;
+					background: #008aff;
+					border-radius: 3rpx;
+					content: '';
+				}
+			}
+		}
+	}
+	.list {
+		margin: 24rpx 24rpx 0 24rpx;
+		.box {
+			position: relative;
+			background: #ffffff;
+			margin-bottom: 20rpx;
+			height: 266rpx;
+			box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+			.price {
+				width: 215rpx;
+				height: 266rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/b5d3ae4b7ff635a7d045f8505f348d10.png') no-repeat center;
+				background-size: cover;
+				.wrap {
+					align-items: flex-end;
+				}
+				.t1 {
+					font-size: 48rpx;
+					color: #ffffff;
+					font-weight: bold;
+				}
+				.t2 {
+					font-size: 96rpx;
+					color: #ffffff;
+					font-weight: bold;
+					line-height: 103rpx;
+				}
+				.t3 {
+					margin-top: 8rpx;
+					font-size: 24rpx;
+					color: #ffffff;
+				}
+			}
+			.text {
+				margin-left: 18rpx;
+				.t1 {
+					font-size: 32rpx;
+					color: #323233;
+					font-weight: bold;
+					margin-bottom: 20rpx;
+				}
+				.t2 {
+					font-size: 24rpx;
+					color: #999999;
+					margin-bottom: 20rpx;
+				}
+				.t3 {
+					font-size: 24rpx;
+					color: #008aff;
+				}
+				.btn {
+					margin-left: 30rpx;
+					width: 156rpx;
+					height: 54rpx;
+					background: #ffffff;
+					border-radius: 27rpx;
+					border: 2rpx solid #008aff;
+					font-size: 24rpx;
+					color: #008aff;
+				}
+			}
+			.status1 {
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 116rpx;
+				height: 48rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/f6d81a8ca3a33b057387f1505cd31a2b.png') no-repeat center;
+				background-size: cover;
+				font-size: 24rpx;
+				color: #ffffff;
+			}
+			.status2 {
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 116rpx;
+				height: 48rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/a36cc589fa94b40de863fc97cf924529.png') no-repeat center;
+				background-size: cover;
+				font-size: 24rpx;
+				color: #ffffff;
+			}
+			.status3 {
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 116rpx;
+				height: 48rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/98323b854a8058aa04f5dea47a398e6a.png') no-repeat center;
+				background-size: cover;
+				font-size: 24rpx;
+				color: #ffffff;
+			}
+			&.disabled{
+				.price{
+					background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/63c110b8beaa7dbcf08a7e15af60e784.png') no-repeat center;
+					background-size: cover;
+				}
+				.text{
+					.btn{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

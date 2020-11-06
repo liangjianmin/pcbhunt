@@ -1,0 +1,48 @@
+.express {
+	min-height: 100%;
+	background: #f7f8fa;
+	padding-top: 24rpx;
+	.list {
+		margin: 0 24rpx;
+
+		.box {
+			padding: 0 24rpx 0 24rpx;
+			height: 158rpx;
+			background: #FFFFFF;
+			box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+			border-radius: 8rpx;
+			margin-bottom: 24rpx;
+			.t1 {
+				font-size: 32rpx;
+				color: #323233;
+				font-weight: bold;
+				margin-bottom: 20rpx;
+			}
+			.t2 {
+				font-size: 24rpx;
+				color: #666666;
+				margin-right: 60rpx;
+			}
+			.t3 {
+				font-size: 24rpx;
+				color: #666666;
+			}
+			.iconiconaddressedit {
+				font-size: 32rpx;
+				color: #666;
+				margin-left: 20rpx;
+			}
+			.icon1ElementRadioOn {
+				font-size: 28rpx;
+				color: #008aff;
+				display: none;
+			}
+			&.curr {
+				border: 2rpx solid #008AFF;
+				.icon1ElementRadioOn {
+					display: block;
+				}
+			}
+		}
+	}
+}
