@@ -55,6 +55,11 @@
 		"style": {
 			"navigationBarTitleText": "支付结果"
 		}
+	},{
+		"path": "pages/index/param",
+		"style": {
+			"navigationBarTitleText": "计价"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

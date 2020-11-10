@@ -20,6 +20,11 @@
 	.pcb-box {
 		padding-left: 30rpx;
 		border-bottom: 20rpx solid #f7f8fa;
+		.tip {
+			height: 66rpx;
+			font-size: 24rpx;
+			color: #999999;
+		}
 		.pcb-input {
 			position: relative;
 			border-bottom: 1px solid #e7e7e7;
@@ -116,6 +121,26 @@
 				bottom: 20rpx;
 				font-size: 24rpx;
 				color: #ccc;
+			}
+		}
+	}
+	.pcb-sel {
+		background-color: #f7f8fa;
+		padding-left: 30rpx;
+		border-bottom: 20rpx solid #f7f8fa;
+		.pcb-sel-box {
+			padding: 24rpx 0;
+			padding-right: 30rpx;
+			&.bor {
+				border-bottom: 1px dashed #cccccc;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+			}
+			.t2 {
+				font-size: 28rpx;
+				color: #666666;
 			}
 		}
 	}

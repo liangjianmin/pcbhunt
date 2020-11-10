@@ -31,20 +31,13 @@
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板子层数</text>
 				<view class="wrap list row">
-					<view class="box row rowCenter verCenter">1</view>
-					<view class="box row rowCenter verCenter">2</view>
-					<view class="box row rowCenter verCenter curr">4</view>
+					<view @click="tab(index, 'BoardLayers')" class="box row rowCenter verCenter" :class="{ curr: BoardLayersIndex == index }" v-for="(item, index) in BoardLayers" :key="index">{{ item }}</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
 				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter">0.8</view>
-					<view class="box row rowCenter verCenter">1.0</view>
-					<view class="box row rowCenter verCenter curr">1.2</view>
-					<view class="box row rowCenter verCenter">1.6</view>
-					<view class="box row rowCenter verCenter">2.0</view>
-					<view class="box row rowCenter verCenter">2.4</view>
+					<view @click="tab(index, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: BoardThicknessIndex == index }" v-for="(item, index) in BoardThickness" :key="index">{{ item }}</view>
 				</view>
 			</view>
 		</view>
@@ -58,9 +51,65 @@
 			<view class="pcb-input row  h2">
 				<text class="label">出货方式</text>
 				<view class="wrap list row mb2">
-					<view class="box row rowCenter verCenter">单片资料单片出货</view>
-					<view class="box row rowCenter verCenter curr">按客户资料拼板出货</view>
-					<view class="box row rowCenter verCenter">猎板代拼</view>
+					<view @click="tab(index, 'PcbUnitSel')" class="box row rowCenter verCenter" :class="{ curr: PcbUnitSelIndex == index }" v-for="(item, index) in PcbUnitSel" :key="index">{{ item }}</view>
+				</view>
+			</view>
+			<!-- 按客户资料拼板出货参数 -->
+			<template v-if="PcbUnitSelShows">
+				<view class="pcb-input row verCenter h1">
+					<text class="label">拼版方式</text>
+					<view class="wrap input-type1 row bothSide verCenter">
+						<view class="row verCenter">
+							<input type="text" placeholder="请输入" class="w1" placeholder-style="color:#cccccc;" />
+							<text class="txt">X</text>
+							<input type="text" placeholder="请输入" class="w1" placeholder-style="color:#cccccc;" />
+						</view>
+						<text class="unit">PCS</text>
+					</view>
+				</view>
+				<text class="tip row verCenter">* 工厂按 5 SET = 5单片(pcs) 制作</text>
+			</template>
+		</view>
+		<!-- 分隔方式 -->
+		<view class="pcb-box" v-if="LayerVCutShow">
+			<view class="pcb-input row verCenter h1">
+				<text class="label">分割方式</text>
+				<view class="wrap list row verCenter nowrap">
+					<view class="box row rowCenter verCenter">无</view>
+					<view class="box row rowCenter verCenter">V割</view>
+					<view class="box row rowCenter verCenter curr">V锣槽</view>
+					<view class="box row rowCenter verCenter" style="margin-right: 0;">V割+锣槽</view>
+				</view>
+			</view>
+		</view>
+		<!-- 猎板代拼参数显示 -->
+		<view class="pcb-sel" v-if="PcbUnitSelShow">
+			<view class="wrap">
+				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">拼版方式</text>
+					<text class="t2">2x1</text>
+				</view>
+				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">工艺边</text>
+					<text class="t2">左5mm右4mm</text>
+				</view>
+				<view class="pcb-sel-box row bothSide verCenter bor">
+					<text class="t1">单片数量</text>
+					<text class="t2">150PCS</text>
+				</view>
+			</view>
+			<view class="wrap">
+				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">分割方式</text>
+					<text class="t2">V割+落槽</text>
+				</view>
+				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">垂直槽间距</text>
+					<text class="t2">2mm</text>
+				</view>
+				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">水平槽间距</text>
+					<text class="t2">0mm</text>
 				</view>
 			</view>
 		</view>
@@ -223,7 +272,16 @@ export default {
 	data() {
 		return {
 			index: 0,
-			array: ['5', '10', '15', '20']
+			array: ['5', '10', '15', '20'],
+			PcbUnitSelShow: false,
+			PcbUnitSelShows: false,
+			LayerVCutShow: false,
+			BoardLayers: [1, 2, 4],
+			BoardLayersIndex: 0,
+			BoardThickness: [0.8, 1.0, 1.2, 1.6, 2.0, 2.4],
+			BoardThicknessIndex: 0,
+			PcbUnitSel: ['单片资料单片出货', '按客户资料拼板出货', '猎板代拼'],
+			PcbUnitSelIndex: 0
 		};
 	},
 	onLoad(options) {},
@@ -234,6 +292,32 @@ export default {
 	methods: {
 		bindPickerChange() {},
 		getData() {},
+		tab(index, type) {
+			if (type == 'PcbUnitSel') {
+				//出货方式
+				this.PcbUnitSelIndex = index;
+
+				this.PcbUnitSelShow = false;
+				this.PcbUnitSelShows = false;
+				this.LayerVCutShow = false;
+
+				if (index == 0) {
+					this.LayerVCutShow = true;
+				} else if (index == 1) {
+					this.PcbUnitSelShows = true;
+					this.LayerVCutShow = true;
+				} else if (index == 2) {
+					this.PcbUnitSelShow = true;
+					uni.navigateTo({
+						url: '/pages/index/param'
+					});
+				}
+			} else if (type == 'BoardThickness') {
+				this.BoardThicknessIndex = index;
+			} else if (type == 'BoardLayers') {
+				this.BoardLayersIndex = index;
+			}
+		},
 		tip() {
 			this.$refs.pop.open();
 		},
