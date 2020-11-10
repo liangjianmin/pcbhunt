@@ -18,13 +18,15 @@
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板子数量</text>
-				<view class="wrap input-type1 row bothSide verCenter">
-					<view class="row verCenter"><input type="text" placeholder="请选择" placeholder-style="color:#cccccc;" /></view>
-					<view class="unit row rowCenter verCenter">
-						<text class="t1">PCS</text>
-						<text class="iconfont iconyoujiantou"></text>
+				<picker class="pick-box" @change="bindPickerChange" :value="index" :range="array">
+					<view class="pick-wrap input-type1 row bothSide verCenter">
+						<view class="row verCenter"><input type="text" placeholder="请选择" placeholder-style="color:#cccccc;" /></view>
+						<view class="unit row rowCenter verCenter">
+							<text class="t1">PCS</text>
+							<text class="iconfont iconyoujiantou"></text>
+						</view>
 					</view>
-				</view>
+				</picker>
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板子层数</text>
@@ -54,34 +56,20 @@
 				</view>
 			</view>
 			<view class="pcb-input row  h2">
-				<text class="label">拼版款数</text>
+				<text class="label">出货方式</text>
 				<view class="wrap list row mb2">
 					<view class="box row rowCenter verCenter">单片资料单片出货</view>
 					<view class="box row rowCenter verCenter curr">按客户资料拼板出货</view>
 					<view class="box row rowCenter verCenter">猎板代拼</view>
 				</view>
 			</view>
-			<view class="pcb-input row verCenter h1">
-				<text class="label">拼版方式</text>
-				<view class="wrap input-type1 row bothSide verCenter">
-					<view class="row verCenter">
-						<input type="text" placeholder="请输入" class="w1" placeholder-style="color:#cccccc;" />
-						<text class="txt">X</text>
-						<input type="text" placeholder="请输入" class="w1" placeholder-style="color:#cccccc;" />
-					</view>
-					<text class="unit">PCS</text>
-				</view>
-			</view>
-			<text class="tip row verCenter">* 工厂按 5 SET = 5单片(pcs) 制作</text>
 		</view>
 		<view class="pcb-box">
 			<view class="pcb-input row verCenter h1">
-				<text class="label">分割方式</text>
+				<text class="label">接受打叉板</text>
 				<view class="wrap list row verCenter nowrap">
-					<view class="box row rowCenter verCenter">无</view>
-					<view class="box row rowCenter verCenter curr">V割</view>
-					<view class="box row rowCenter verCenter">锣槽</view>
-					<view class="box row rowCenter verCenter">V割+锣槽</view>
+					<view class="box row rowCenter verCenter">接受</view>
+					<view class="box row rowCenter verCenter curr">不接受</view>
 				</view>
 			</view>
 			<view class="pcb-input row verCenter h1">
@@ -118,6 +106,8 @@
 					<view class="box row rowCenter verCenter">0.4mm</view>
 				</view>
 			</view>
+		</view>
+		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">阻焊颜色</text>
 				<view class="wrap list row mb">
@@ -136,6 +126,8 @@
 					<view class="box row rowCenter verCenter">icon绿色</view>
 				</view>
 			</view>
+		</view>
+		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">焊盘喷镀</text>
 				<view class="wrap list row mb">
@@ -193,8 +185,12 @@
 				<text class="limit">0/300</text>
 			</view>
 		</view>
-		<view class="btn-box row bothSide">
-			<view class="btn-1 row rowCenter verCenter">计算价格</view>
+		<view class="btn-box row bothSide verCenter">
+			<view class="text row">
+				<text class="price-text">应付总额</text>
+				<text class="unit-text">¥</text>
+				<text class="num">1199.00</text>
+			</view>
 			<view class="btn-2 row rowCenter verCenter" @click="joinCar()">加入购物车</view>
 		</view>
 		<view class="tip row rowCenter">
@@ -225,7 +221,10 @@ import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 
 export default {
 	data() {
-		return {};
+		return {
+			index: 0,
+			array: ['5', '10', '15', '20']
+		};
 	},
 	onLoad(options) {},
 	onShow() {},
@@ -233,11 +232,12 @@ export default {
 		this.refresh();
 	},
 	methods: {
+		bindPickerChange() {},
 		getData() {},
-		tip(){
+		tip() {
 			this.$refs.pop.open();
 		},
-		close(){
+		close() {
 			this.$refs.pop.close();
 		},
 		joinCar() {

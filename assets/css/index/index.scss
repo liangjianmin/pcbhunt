@@ -20,11 +20,6 @@
 	.pcb-box {
 		padding-left: 30rpx;
 		border-bottom: 20rpx solid #f7f8fa;
-		.tip {
-			height: 66rpx;
-			font-size: 24rpx;
-			color: #999999;
-		}
 		.pcb-input {
 			position: relative;
 			border-bottom: 1px solid #e7e7e7;
@@ -44,8 +39,14 @@
 				color: #323233;
 				font-size: 28rpx;
 			}
-			.wrap {
+			.pick-box {
 				width: calc(100% - 100rpx);
+			}
+			.pick-wrap {
+				width: 100%;
+			}
+			.wrap {
+				width: calc(100% - 192rpx);
 			}
 			.input-type1 {
 				.w1 {
@@ -120,6 +121,27 @@
 	}
 	.btn-box {
 		padding: 24rpx 30rpx 40rpx 30rpx;
+		.text {
+			align-items: flex-end;
+			.price-text {
+				font-size: 24rpx;
+				color: #999999;
+				line-height: 34rpx;
+			}
+			.unit-text {
+				font-size: 24rpx;
+				color: #ff6010;
+				margin-left: 12rpx;
+				margin-right: 4rpx;
+				line-height: 34rpx;
+			}
+			.num {
+				font-size: 36rpx;
+				color: #ff6010;
+				font-weight: bold;
+				line-height: 36rpx;
+			}
+		}
 		.btn-1 {
 			width: 334rpx;
 			height: 88rpx;
