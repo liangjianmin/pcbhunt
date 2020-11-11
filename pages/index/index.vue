@@ -37,7 +37,7 @@
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
 				<view class="wrap list row mb">
-					<view @click="tab(item.Value, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardThickness == item.Value }" v-for="(item, index) in BoardThicknessValues" :key="index">{{ item.Title }}</view>
+					<view @click="tab(item.Value, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardThickness == item.Value,disabled:disabledBoardThickness(item.Value) } " v-for="(item, index) in BoardThicknessValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 		</view>
@@ -274,18 +274,18 @@ export default {
 			index: 0,
 			array: ['5', '10', '15', '20'],
 			BoardThicknessValues:[
-				{Title:'0.6',Value:'0.6'},
-				{Title:'0.8',Value:'0.8'},
-				{Title:'1.0',Value:'1.0'},
-				{Title:'1.2',Value:'1.2'},
-				{Title:'1.6',Value:'1.6'},
-				{Title:'2.0',Value:'2.0'},
-				{Title:'2.4',Value:'2.4'},
+				{Title:'0.6',Value:0.6},
+				{Title:'0.8',Value:0.8},
+				{Title:'1.0',Value:1.0},
+				{Title:'1.2',Value:1.2},
+				{Title:'1.6',Value:1.6},
+				{Title:'2.0',Value:2.0},
+				{Title:'2.4',Value:2.4},
 			],
 			BoardLayersValues:[
-				{Title:'1',Value:'1'},
-				{Title:'2',Value:'2'},
-				{Title:'4',Value:'4'},
+				{Title:'1',Value:1},
+				{Title:'2',Value:2},
+				{Title:'4',Value:4},
 			],
 			PcbUnitSelShow: false,
 			PcbUnitSelShows: false,
@@ -355,6 +355,9 @@ export default {
 				return  [0.8,1.0,1.2,1.6,2.0];
 			}
 		},
+		getIsSupportThickness: function () {
+			return !(this.getSupportThickness.indexOf(this.QuoteObj.BoardThickness)==-1);
+		},
 		getSupportBoardLayer: function () {
 			if(this.QuoteObj.BoardType==10)
 				return  [1,2,4];
@@ -391,7 +394,8 @@ export default {
 		'QuoteObj.BoardLayers':function(val)
 		{	
 			console.log('watchBoardLayers:'+val);
-			if(this.getSupportThickness.indexOf(this.QuoteObj.BoardThickness)==-1)
+			console.log(this.getIsSupportThickness);
+			if(this.getIsSupportThickness==false)
 			{
 				this.QuoteObj.BoardThickness=1.6;
 			}
@@ -416,6 +420,12 @@ export default {
 	methods: {
 		bindPickerChange() {},
 		getData() {},
+		disabledBoardThickness(val){
+			console.log(val);
+			console.log(this.getSupportThickness);
+			console.log(this.getSupportThickness.indexOf(val));
+			return (this.getSupportThickness.indexOf(val)==-1);
+		},
 		tab(index, type) {
 			console.log(index);
 			console.log(type);

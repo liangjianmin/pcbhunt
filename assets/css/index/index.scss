@@ -81,8 +81,8 @@
 				.box {
 					padding: 0 30rpx;
 					height: 52rpx;
-					background: #f2f2f2;
 					border-radius: 28rpx;
+					border: 2rpx solid #E1E1E1;
 					margin-right: 16rpx;
 					white-space: nowrap;
 					text-align: center;
@@ -92,6 +92,11 @@
 						background: #e7f4ff;
 						border: 2rpx solid #008aff;
 						color: #008aff;
+					}
+					&.disabled {
+						border: 2rpx solid transparent; 
+						color: #999;
+						background: #F2F2F2; 
 					}
 				}
 				&.mb {

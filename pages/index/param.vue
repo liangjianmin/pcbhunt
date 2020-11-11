@@ -25,9 +25,9 @@
 			<view class="pcb-input h1">
 				<view class="input-type1 row verCenter">
 					<text class="t1">垂直槽间距</text>
-					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 					<text class="t1">水平槽间距</text>
-					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 				</view>
 			</view>
 		</view>
@@ -35,16 +35,16 @@
 			<view class="pcb-input h1">
 				<view class="input-type1 row verCenter">
 					<text class="t1">拼板数量</text>
-					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 					<text class="t1">单片数量</text>
-					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+					<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 				</view>
 			</view>
 			<view class="pcb-input h1">
 				<view class="input-type2 row verCenter bothSide">
 					<view class="row verCenter">
 						<text class="t1">拼板</text>
-						<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+						<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 					</view>
 					<text class="t2">（纵列片数）PCS</text>
 				</view>
@@ -53,7 +53,7 @@
 				<view class="input-type2 row verCenter bothSide">
 					<view class="row verCenter">
 						<text class="t1">拼板</text>
-						<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp"/>
+						<input type="text" value="" placeholder="请输入" placeholder-style="color:#CCCCCC;" class="inp" />
 					</view>
 					<text class="t2">（横列片数）PCS</text>
 				</view>
@@ -62,7 +62,7 @@
 		<view class="pcb-boxs">
 			<view class="title-bar row bothSide verCenter">
 				<text class="t1">拼板尺寸</text>
-				<text class="t2">查看拼板效果图</text>
+				<text class="t2" @click="view()">查看拼板效果图</text>
 			</view>
 			<view class="text">
 				<view class="t1">单个板子尺寸</view>
@@ -86,17 +86,36 @@
 			</view>
 		</view>
 		<view class="bottom-text">
-			*如果您对我们的拼板方式有疑问，请联系我们的在线<text>客服人员</text>
+			*如果您对我们的拼板方式有疑问，请联系我们的在线
+			<text>客服人员</text>
 		</view>
 		<view class="btn-box row bothSide verCenter">
 			<navigator url="/pages/index/index" hover-class="none" class="btn-1 row rowCenter verCenter">返回计价</navigator>
 			<view class="btn-2 row rowCenter verCenter">保存</view>
 		</view>
+		<uni-popup ref="pop" type="center">
+			<view class="layer-box">
+				<view class="layer-title-box row verCenter rowCenter">
+					<text class="title">拼板效果图(单位:cm)</text>
+				</view>
+				<view class="pic">
+					<image src="http://img.ichunt.com/images/ichunt/minProgram/pcb/178e29273d79b6a0dd8fc35f37a91bd0.png" mode="aspectFill" class="im"></image>
+				</view>
+				<view class="txt-show">
+					<text class="t1">*如果您对我们的拼板方式有疑问，请联系我们的在线</text>
+					<text class="t2">客服人员</text>
+				</view>
+				<view class="close row rowCenter verCenter" @click="close()">关闭</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 import { API } from '@/util/api.js';
+import uniPopup from '@/components/uni-popup/uni-popup.vue';
+import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue';
+import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 
 export default {
 	data() {
@@ -108,6 +127,12 @@ export default {
 	onLoad(options) {},
 	onShow() {},
 	methods: {
+		close(){
+			this.$refs.pop.close();
+		},
+		view(){
+			this.$refs.pop.open();
+		},
 		tab(index, type) {
 			if (type == 'LayerEdgeRail') {
 				this.LayerEdgeRailIndex = index;
@@ -117,7 +142,8 @@ export default {
 				this.BoardLayersIndex = index;
 			}
 		}
-	}
+	},
+	components: { uniPopup, uniPopupMessage, uniPopupDialog }
 };
 </script>
 
