@@ -1,9 +1,5 @@
 <template>
 	<view class="h-index">
-		<view class="prompt row verCenter">
-			<text class="iconfont iconnotice"></text>
-			<text class="text">限时折扣:满500元95折, 满1000元93折,满1500元9折</text>
-		</view>
 		<view class="pcb-box">
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板子尺寸</text>
@@ -27,26 +23,34 @@
 				</view>
 			</view>
 			<view class="pcb-input row verCenter h1">
+				<text class="label">板材类型</text>
+				<view class="wrap list row">
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardType==10 }" @click="changeBoardType(10)">FR-4</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardType==40 }" @click="changeBoardType(40)">CEM-1</view>
+				</view>
+			</view>
+			
+		</view>
+		<view class="pcb-box">
+			<view class="pcb-input row verCenter h1">
 				<text class="label">板子层数</text>
 				<view class="wrap list row">
-					<view class="box row rowCenter verCenter">1</view>
-					<view class="box row rowCenter verCenter">2</view>
-					<view class="box row rowCenter verCenter curr">4</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardLayers==1 }" @click="changeLayer(1)">1</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardLayers==2 }" @click="changeLayer(2)">2</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardLayers==4 }" @click="changeLayer(4)">4</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
 				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter">0.8</view>
-					<view class="box row rowCenter verCenter">1.0</view>
-					<view class="box row rowCenter verCenter curr">1.2</view>
-					<view class="box row rowCenter verCenter">1.6</view>
-					<view class="box row rowCenter verCenter">2.0</view>
-					<view class="box row rowCenter verCenter">2.4</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==0.8 }" @click="changeBoardThickness(0.8)">0.8</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==1.0 }" @click="changeBoardThickness(1.0)">1.0</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==1.2 }" @click="changeBoardThickness(1.2)">1.2</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==1.6 }" @click="changeBoardThickness(1.6)">1.6</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==2.0 }" @click="changeBoardThickness(2.0)">2.0</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:BoardThickness==2.4 }" @click="changeBoardThickness(2.4)">2.4</view>
 				</view>
 			</view>
-		</view>
-		<view class="pcb-box">
 			<view class="pcb-input row verCenter h1">
 				<text class="label">拼版款数</text>
 				<view class="wrap input-type1 row bothSide verCenter">
@@ -54,11 +58,11 @@
 				</view>
 			</view>
 			<view class="pcb-input row  h2">
-				<text class="label">拼版款数</text>
+				<text class="label">出货方式</text>
 				<view class="wrap list row mb2">
-					<view class="box row rowCenter verCenter">单片资料单片出货</view>
-					<view class="box row rowCenter verCenter curr">按客户资料拼板出货</view>
-					<view class="box row rowCenter verCenter">猎板代拼</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:PcbUnitSel==10 }" @click="changePcbUnitSel(10)">单片资料单片出货</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:PcbUnitSel==20 }" @click="changePcbUnitSel(20)">按客户资料拼板出货</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:PcbUnitSel==30 }" @click="changePcbUnitSel(30)">猎板代拼</view>
 				</view>
 			</view>
 			<view class="pcb-input row verCenter h1">
@@ -78,24 +82,18 @@
 			<view class="pcb-input row verCenter h1">
 				<text class="label">分割方式</text>
 				<view class="wrap list row verCenter nowrap">
-					<view class="box row rowCenter verCenter">无</view>
-					<view class="box row rowCenter verCenter curr">V割</view>
-					<view class="box row rowCenter verCenter">锣槽</view>
-					<view class="box row rowCenter verCenter">V割+锣槽</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:VCut==10 }" @click="changeVCut(10)">无</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:VCut==20 }" @click="changeVCut(20)">V割</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:VCut==30 }" @click="changeVCut(30)">锣槽</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:VCut==40 }" @click="changeVCut(40)">V割+锣槽</view>
 				</view>
 			</view>
-			<view class="pcb-input row verCenter h1">
-				<text class="label">板材类型</text>
-				<view class="wrap list row">
-					<view class="box row rowCenter verCenter">FR-4</view>
-					<view class="box row rowCenter verCenter curr">CEM-1</view>
-				</view>
-			</view>
+			
 			<view class="pcb-input row verCenter h1">
 				<text class="label">铜箔厚度</text>
 				<view class="wrap list row type1">
-					<view class="box row rowCenter verCenter">1/1oz</view>
-					<view class="box row rowCenter verCenter curr">2/2oz</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:CopperThickness==1 }" @click="changeCopperThickness(1)">1/1oz</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:CopperThickness==2 }" @click="changeCopperThickness(2)">2/2oz</view>
 				</view>
 			</view>
 		</view>
@@ -103,10 +101,10 @@
 			<view class="pcb-input row h2">
 				<text class="label">最小线宽/线距</text>
 				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter curr">4/4mil</view>
-					<view class="box row rowCenter verCenter">5/5mil</view>
-					<view class="box row rowCenter verCenter">6/6mil</view>
-					<view class="box row rowCenter verCenter">8/8mil</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:LineWeight==4 }" @click="changeLineWeight(4)">4/4mil</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:LineWeight==5 }" @click="changeLineWeight(5)">5/5mil</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:LineWeight==6 }" @click="changeLineWeight(6)">6/6mil</view>
+					<view class="box row rowCenter verCenter" v-bind:class="{ curr:LineWeight==8 }" @click="changeLineWeight(8)">8/8mil</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
@@ -224,28 +222,160 @@ import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue';
 import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 
 export default {
+	
 	data() {
-		return {};
+		return {
+			PcbUnit: 10,
+			SetType: 0,
+			PcbUnitSel:10,
+			BoardWidth:0,
+			BoardHeight:0,
+			PanelWayX:1,
+			PanelWayY:1,
+			VCut:10,
+			EdgeRail: 10,
+			EdgeRailWidth:0,
+			GrooveWidth:0,
+			GrooveHeight: 0,
+			Num:0,
+			BoardLayers:2,
+			PcbKinds:1,
+			BoardType:10,
+			BoardThickness:1.6,
+			CopperThickness:1,
+			InnerCopperThickness:1,
+			LineWeight:8,
+			Vias:0.4,
+			SolderColor:10,
+			FontColor:30,
+			SolderColorBottom:10,
+			FontColorBottom:30,
+			SurfaceFinish:20,
+			ImGoldThinckness:1,
+			SolderCover:10,
+			TestType:10,
+			Goldfinger:false,
+			ImpedanceSize:"",
+			PCBFileConfirm:false,
+			FR4Tg:"TG130",
+			AcceptCrossed:true,
+			Note:"",
+			IsImpedanceReport:false,
+			IsBGA:true,
+			BoardBrand:10,
+			IsNeedShipReport:false
+		};
 	},
-	onLoad(options) {},
-	onShow() {},
+	onLoad(options) {console.log('onLoad');},
+	onShow() {console.log('onShow');},
 	onPullDownRefresh() {
 		this.refresh();
 	},
+	computed: {
+		// 计算属性的 getter
+		getSupportThickness: function () {
+			if(this.BoardLayers==1)
+				return  [1.0,1.2,1.6];
+			else if(this.BoardLayers==2){
+				return  [0.6,0.8,1.0,1.2,1.6,2.0,2.4];
+			}else if(this.BoardLayers==4){
+				return  [0.8,1.0,1.2,1.6,2.0];
+			}
+		},
+		getSupportBoardLayer: function () {
+			if(this.BoardType==10)
+				return  [1,2,4];
+			else if(this.BoardType==40){
+				return  [1];
+			}
+		},
+		getSupportCopperThickness: function () {
+			if(this.BoardLayers==1)
+				return  [1];
+			else if(this.BoardLayers==2){
+				return  [1,2];
+			}else if(this.BoardLayers==4){
+				return  [1,2];
+			}
+		},
+		getSupportLineWeight: function () {
+			if(this.CopperThickness==2)
+				return  [6,8];
+			else if(this.CopperThickness==1){
+				return  [4,5,6,8];
+			}
+		}
+	  },
+	watch: {
+	    BoardType: function (val) {
+	      if(val==40)
+			this.BoardLayers=1;
+	    },
+		BoardLayers:function(val)
+		{
+			if(this.getSupportThickness.indexOf(this.BoardThickness)==-1)
+			{
+				this.BoardThickness=1.6;
+			}
+			if(this.getSupportCopperThickness.indexOf(this.CopperThickness)==-1)
+			{
+				this.CopperThickness=1;
+			}
+			if(this.BoardLayers==4)
+				return this.InnerCopperThickness=0.5;
+			else if(this.BoardLayers==2||this.BoardLayers==1){
+				return  this.InnerCopperThickness=1;
+			}
+		},
+		CopperThickness:function(val){
+			if(this.getSupportLineWeight.indexOf(this.LineWeight)==-1)
+			{
+				this.LineWeight=8;
+			}
+		}
+	},
 	methods: {
-		getData() {},
+		getData() {
+			console.log('getData');
+		},
+		changeLayer(val){
+			this.BoardLayers=val;
+			console.log(this.getSupportThickness);
+		},
+		changeBoardThickness(val){
+			this.BoardThickness=val;
+		},
+		changePcbUnitSel(val){
+			this.PcbUnitSel=val;
+		},
+		changeVCut(val){
+			this.VCut=val;
+		},
+		changeBoardType(val){
+			this.BoardType=val;
+		},
+		changeCopperThickness(val){
+			this.CopperThickness=val;
+		},
+		changeLineWeight(val){
+			this.LineWeight=val;
+		},
 		tip(){
+			console.log('tip');
 			this.$refs.pop.open();
 		},
 		close(){
+			console.log('close');
 			this.$refs.pop.close();
 		},
 		joinCar() {
+			console.log('joinCar');
 			uni.navigateTo({
 				url: '/pages/user/login'
 			});
 		},
 		refresh() {
+			console.log('refresh');
 			uni.stopPullDownRefresh();
 			this.getData();
 		}
