@@ -37,7 +37,7 @@
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
 				<view class="wrap list row mb">
-					<view @click="tab(index, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: BoardThicknessIndex == index }" v-for="(item, index) in BoardThickness" :key="index">{{ item }}</view>
+					<view @click="tab(index, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: BoardThicknessIndex == index,disabled:index==3 }"   v-for="(item, index) in BoardThickness" :key="index">{{ item }}</view>
 				</view>
 			</view>
 		</view>
