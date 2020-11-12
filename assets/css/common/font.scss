@@ -11,6 +11,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icondetele:before {
+  content: "\e6cb";
+}
+
+.iconarrowzhankai1:before {
+  content: "\e6ca";
+}
+
+.iconarrowzhankai:before {
+  content: "\e6c9";
+}
+
 .iconiconxinxiupload:before {
   content: "\e6c8";
 }
@@ -66,4 +78,3 @@
 .iconiconloginpassword:before {
   content: "\e6af";
 }
-

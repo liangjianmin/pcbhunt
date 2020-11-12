@@ -1,14 +1,19 @@
 <template>
 	<view class="logistics">
-		<view class="top row rowCenter">
-			<view class="box row bothSide verCenter">
-				<view class="column">
-					<text class="t1">快递公司：顺丰快递</text>
-					<text class="t2">快递单号：5354158535132511</text>
-				</view>
-				<view class="pic">
-					<image src="../../static/sf.png" mode="aspectFill"></image>
-				</view>
+		<view class="tab row avarage verCenter">
+			<view class="box row verCenter curr">包裹一</view>
+			<view class="box row verCenter">包裹二</view>
+			<view class="box row verCenter">包裹三</view>
+			<view class="box row verCenter">包裹四</view>
+		</view>
+		<view class="top row bothSide verCenter">
+			<view class="column bothSide">
+				<text class="t1">快递公司：顺丰快递</text>
+				<text class="t2">快递单号：53541585351325</text>
+			</view>
+			<view class="column bothSide">
+				<text class="t1">发货数量：30000PCS</text>
+				<text class="t2">发货编号：HW9984123</text>
 			</view>
 		</view>	
 		<view class="kefu row rowCenter verCenter">
