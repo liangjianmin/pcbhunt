@@ -21,6 +21,11 @@
 										<text class="t1">尺寸：25.00*25.00cm</text>
 										<text class="t1">数量：300PCS</text>
 										<text class="t2">层数：2层</text>
+										<view class="t2">
+											<text>预估到手价：</text>
+											<text>￥</text>
+											<text>356.22</text>
+										</view>
 									</view>
 								</view>
 								<view class="right-bar column">

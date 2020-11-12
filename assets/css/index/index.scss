@@ -1,4 +1,5 @@
 .h-index {
+	padding-bottom: 150rpx;
 	.prompt {
 		height: 76rpx;
 		background: #fff9ed;
@@ -228,7 +229,13 @@
 		}
 	}
 	.btn-box {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		padding: 24rpx 30rpx 40rpx 30rpx;
+		background-color: #FFFFFF;
+		z-index: 1;
 		.text {
 			align-items: flex-end;
 			.price-text {
@@ -270,6 +277,7 @@
 		}
 	}
 	.tip {
+		padding-top: 40rpx;
 		padding-bottom: 30rpx;
 		.t1 {
 			font-size: 22rpx;
