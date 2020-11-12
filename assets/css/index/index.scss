@@ -186,7 +186,7 @@
 					}
 				}
 				&.mb6 {
-					.color-box{
+					.color-box {
 						&:nth-child(-n + 6) {
 							margin-bottom: 22rpx;
 						}
@@ -234,7 +234,8 @@
 		left: 0;
 		right: 0;
 		padding: 24rpx 30rpx 40rpx 30rpx;
-		background-color: #FFFFFF;
+		background-color: #ffffff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.1);
 		z-index: 1;
 		.text {
 			align-items: flex-end;
