@@ -36,8 +36,8 @@
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
-				<view class="wrap list row mb">
-					<view @click="tab(index, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: BoardThicknessIndex == index,disabled:index==3 }"   v-for="(item, index) in BoardThickness" :key="index">{{ item }}</view>
+				<view class="wrap list row mb4">
+					<view @click="tab(index, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: BoardThicknessIndex == index, disabled: index == 3 }" v-for="(item, index) in BoardThickness" :key="index">{{ item }}</view>
 				</view>
 			</view>
 		</view>
@@ -50,7 +50,7 @@
 			</view>
 			<view class="pcb-input row  h2">
 				<text class="label">出货方式</text>
-				<view class="wrap list row mb2">
+				<view class="wrap list row mb1">
 					<view @click="tab(index, 'PcbUnitSel')" class="box row rowCenter verCenter" :class="{ curr: PcbUnitSelIndex == index }" v-for="(item, index) in PcbUnitSel" :key="index">{{ item }}</view>
 				</view>
 			</view>
@@ -139,7 +139,7 @@
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">最小线宽/线距</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view class="box row rowCenter verCenter curr">4/4mil</view>
 					<view class="box row rowCenter verCenter">5/5mil</view>
 					<view class="box row rowCenter verCenter">6/6mil</view>
@@ -148,7 +148,7 @@
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">最小孔径</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view class="box row rowCenter verCenter curr">0.25mm</view>
 					<view class="box row rowCenter verCenter">0.3mm</view>
 					<view class="box row rowCenter verCenter">0.35mm</view>
@@ -159,27 +159,59 @@
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">阻焊颜色</text>
-				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter curr">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
-					<view style="margin-right: 0;" class="box row rowCenter verCenter">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
+				<view class="wrap list row mb6">
+					<view class="color-box row rowCenter verCenter">
+						<text class="color1"></text>
+						<text class="t">绿色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color2"></text>
+						<text class="t">白色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color3"></text>
+						<text class="t">黑色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color4"></text>
+						<text class="t">蓝色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color5"></text>
+						<text class="t">黄色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color6"></text>
+						<text class="t">红色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color7"></text>
+						<text class="t">哑黑</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color8"></text>
+						<text class="t">哑绿</text>
+					</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">字符颜色</text>
-				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter curr">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
-					<view style="margin-right: 0;" class="box row rowCenter verCenter">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
+				<view class="wrap list row">				
+					<view class="color-box row rowCenter verCenter">
+						<text class="color2"></text>
+						<text class="t">白色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color3"></text>
+						<text class="t">黑色</text>
+					</view>
 				</view>
 			</view>
 		</view>
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">焊盘喷镀</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view class="box row rowCenter verCenter curr">无铅喷锡</view>
 					<view class="box row rowCenter verCenter">有铅喷锡</view>
 					<view class="box row rowCenter verCenter">沉金</view>
