@@ -36,8 +36,8 @@
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">板子厚度</text>
-				<view class="wrap list row mb">
-					<view @click="tab(item.Value, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardThickness == item.Value,disabled:disabledBoardThickness(item.Value) } " v-for="(item, index) in BoardThicknessValues" :key="index">{{ item.Title }}</view>
+				<view class="wrap list row mb4">
+					<view @click="tab(item.Value, 'BoardThickness')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardThickness == item.Value, disabled: disabledBoardThickness(item.Value) }" v-for="(item, index) in BoardThicknessValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 		</view>
@@ -50,7 +50,7 @@
 			</view>
 			<view class="pcb-input row  h2">
 				<text class="label">出货方式</text>
-				<view class="wrap list row mb2">
+				<view class="wrap list row mb1">
 					<view @click="tab(item.Value, 'PcbUnitSel')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.PcbUnitSel == item.Value }" v-for="(item, index) in PcbUnitSelValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
@@ -135,41 +135,74 @@
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">最小线宽/线距</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view @click="tab(item.Value, 'LineWeight')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.LineWeight == item.Value }" v-for="(item, index) in LineWeightValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">最小孔径</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view @click="tab(item.Value, 'Vias')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.Vias == item.Value }" v-for="(item, index) in ViasValues" :key="index">{{ item.Title }}</view>
+
 				</view>
 			</view>
 		</view>
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">阻焊颜色</text>
-				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter curr">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
-					<view style="margin-right: 0;" class="box row rowCenter verCenter">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
+				<view class="wrap list row mb6">
+					<view class="color-box row rowCenter verCenter">
+						<text class="color1"></text>
+						<text class="t">绿色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color2"></text>
+						<text class="t">白色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color3"></text>
+						<text class="t">黑色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color4"></text>
+						<text class="t">蓝色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color5"></text>
+						<text class="t">黄色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color6"></text>
+						<text class="t">红色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color7"></text>
+						<text class="t">哑黑</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color8"></text>
+						<text class="t">哑绿</text>
+					</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">字符颜色</text>
-				<view class="wrap list row mb">
-					<view class="box row rowCenter verCenter curr">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
-					<view style="margin-right: 0;" class="box row rowCenter verCenter">icon绿色</view>
-					<view class="box row rowCenter verCenter">icon绿色</view>
+				<view class="wrap list row">
+					<view class="color-box row rowCenter verCenter">
+						<text class="color2"></text>
+						<text class="t">白色</text>
+					</view>
+					<view class="color-box row rowCenter verCenter">
+						<text class="color3"></text>
+						<text class="t">黑色</text>
+					</view>
 				</view>
 			</view>
 		</view>
 		<view class="pcb-box">
 			<view class="pcb-input row h2">
 				<text class="label">焊盘喷镀</text>
-				<view class="wrap list row mb">
+				<view class="wrap list row mb3">
 					<view class="box row rowCenter verCenter curr">无铅喷锡</view>
 					<view class="box row rowCenter verCenter">有铅喷锡</view>
 					<view class="box row rowCenter verCenter">沉金</view>
@@ -374,6 +407,7 @@ export default {
 			],
 			PcbUnitSel30Show: false,
 			PcbUnitSel20Show: false,
+
 			LayerVCutShow: false,
 			BoardLayers: [1, 2, 4],
 			BoardLayersIndex: 0,
@@ -381,46 +415,46 @@ export default {
 			BoardThicknessIndex: 0,
 			PcbUnitSel: ['单片资料单片出货', '按客户资料拼板出货', '猎板代拼'],
 			PcbUnitSelIndex: 0,
-			QuoteObj:{
+			QuoteObj: {
 				PcbUnit: 10,
 				SetType: 0,
-				PcbUnitSel:10,
-				BoardWidth:0,
-				BoardHeight:0,
-				PanelWayX:1,
-				PanelWayY:1,
-				VCut:10,
+				PcbUnitSel: 10,
+				BoardWidth: 0,
+				BoardHeight: 0,
+				PanelWayX: 1,
+				PanelWayY: 1,
+				VCut: 10,
 				EdgeRail: 10,
-				EdgeRailWidth:0,
-				GrooveWidth:0,
+				EdgeRailWidth: 0,
+				GrooveWidth: 0,
 				GrooveHeight: 0,
-				Num:0,
-				BoardLayers:2,
-				PcbKinds:1,
-				BoardType:10,
-				BoardThickness:1.6,
-				CopperThickness:1,
-				InnerCopperThickness:1,
-				LineWeight:8,
-				Vias:0.4,
-				SolderColor:10,
-				FontColor:30,
-				SolderColorBottom:10,
-				FontColorBottom:30,
-				SurfaceFinish:20,
-				ImGoldThinckness:1,
-				SolderCover:10,
-				TestType:10,
-				Goldfinger:false,
-				ImpedanceSize:"",
-				PCBFileConfirm:false,
-				FR4Tg:"TG130",
-				AcceptCrossed:true,
-				Note:"",
-				IsImpedanceReport:false,
-				IsBGA:true,
-				BoardBrand:10,
-				IsNeedShipReport:false
+				Num: 0,
+				BoardLayers: 2,
+				PcbKinds: 1,
+				BoardType: 10,
+				BoardThickness: 1.6,
+				CopperThickness: 1,
+				InnerCopperThickness: 1,
+				LineWeight: 8,
+				Vias: 0.4,
+				SolderColor: 10,
+				FontColor: 30,
+				SolderColorBottom: 10,
+				FontColorBottom: 30,
+				SurfaceFinish: 20,
+				ImGoldThinckness: 1,
+				SolderCover: 10,
+				TestType: 10,
+				Goldfinger: false,
+				ImpedanceSize: '',
+				PCBFileConfirm: false,
+				FR4Tg: 'TG130',
+				AcceptCrossed: true,
+				Note: '',
+				IsImpedanceReport: false,
+				IsBGA: true,
+				BoardBrand: 10,
+				IsNeedShipReport: false
 			}
 		};
 	},
@@ -431,90 +465,80 @@ export default {
 	},
 	computed: {
 		// 计算属性的 getter
-		getSupportThickness: function () {
-			if(this.QuoteObj.BoardLayers==1)
-				return  [1.0,1.2,1.6];
-			else if(this.QuoteObj.BoardLayers==2){
-				return  [0.6,0.8,1.0,1.2,1.6,2.0,2.4];
-			}else if(this.QuoteObj.BoardLayers==4){
-				return  [0.8,1.0,1.2,1.6,2.0];
+		getSupportThickness: function() {
+			if (this.QuoteObj.BoardLayers == 1) return [1.0, 1.2, 1.6];
+			else if (this.QuoteObj.BoardLayers == 2) {
+				return [0.6, 0.8, 1.0, 1.2, 1.6, 2.0, 2.4];
+			} else if (this.QuoteObj.BoardLayers == 4) {
+				return [0.8, 1.0, 1.2, 1.6, 2.0];
 			}
 		},
-		getIsSupportThickness: function () {
-			return !(this.getSupportThickness.indexOf(this.QuoteObj.BoardThickness)==-1);
+		getIsSupportThickness: function() {
+			return !(this.getSupportThickness.indexOf(this.QuoteObj.BoardThickness) == -1);
 		},
-		getSupportBoardLayer: function () {
-			if(this.QuoteObj.BoardType==10)
-				return  [1,2,4];
-			else if(this.QuoteObj.BoardType==40){
-				return  [1];
+		getSupportBoardLayer: function() {
+			if (this.QuoteObj.BoardType == 10) return [1, 2, 4];
+			else if (this.QuoteObj.BoardType == 40) {
+				return [1];
 			}
 		},
-		getSupportCopperThickness: function () {
-			if(this.QuoteObj.BoardLayers==1)
-				return  [1];
-			else if(this.QuoteObj.BoardLayers==2){
-				return  [1,2];
-			}else if(this.QuoteObj.BoardLayers==4){
-				return  [1,2];
+		getSupportCopperThickness: function() {
+			if (this.QuoteObj.BoardLayers == 1) return [1];
+			else if (this.QuoteObj.BoardLayers == 2) {
+				return [1, 2];
+			} else if (this.QuoteObj.BoardLayers == 4) {
+				return [1, 2];
 			}
 		},
-		getSupportLineWeight: function () {
-			if(this.QuoteObj.CopperThickness==2)
-				return  [6,8];
-			else if(this.QuoteObj.CopperThickness==1){
-				return  [4,5,6,8];
+		getSupportLineWeight: function() {
+			if (this.QuoteObj.CopperThickness == 2) return [6, 8];
+			else if (this.QuoteObj.CopperThickness == 1) {
+				return [4, 5, 6, 8];
 			}
 		}
-	  },
+	},
 	watch: {
-		QuoteObj:function(val){
-			console.log('watch:'+val);
+		QuoteObj: function(val) {
+			console.log('watch:' + val);
 		},
-	    'QuoteObj.BoardType': function (old,val) {
+		'QuoteObj.BoardType': function(old, val) {
 			console.log('QuoteObj.BoardType');
-	      if(val==40)
-			this.QuoteObj.BoardLayers=1;
-	    },
-		'QuoteObj.BoardLayers':function(val)
-		{	
-			console.log('watchBoardLayers:'+val);
+			if (val == 40) this.QuoteObj.BoardLayers = 1;
+		},
+		'QuoteObj.BoardLayers': function(val) {
+			console.log('watchBoardLayers:' + val);
 			console.log(this.getIsSupportThickness);
-			if(this.getIsSupportThickness==false)
-			{
-				this.QuoteObj.BoardThickness=1.6;
+			if (this.getIsSupportThickness == false) {
+				this.QuoteObj.BoardThickness = 1.6;
 			}
-			if(this.getSupportCopperThickness.indexOf(this.QuoteObj.CopperThickness)==-1)
-			{
-				this.QuoteObj.CopperThickness=1;
+			if (this.getSupportCopperThickness.indexOf(this.QuoteObj.CopperThickness) == -1) {
+				this.QuoteObj.CopperThickness = 1;
 			}
-			if(this.QuoteObj.BoardLayers==4)
-				return this.QuoteObj.InnerCopperThickness=0.5;
-			else if(this.QuoteObj.BoardLayers==2||this.QuoteObj.BoardLayers==1){
-				return  this.QuoteObj.InnerCopperThickness=1;
+			if (this.QuoteObj.BoardLayers == 4) return (this.QuoteObj.InnerCopperThickness = 0.5);
+			else if (this.QuoteObj.BoardLayers == 2 || this.QuoteObj.BoardLayers == 1) {
+				return (this.QuoteObj.InnerCopperThickness = 1);
 			}
 		},
-		'QuoteObj.CopperThickness':function(val){
-			console.log('watch CopperThickness:'+val);
-			if(this.getSupportLineWeight.indexOf(this.LineWeight)==-1)
-			{
-				this.LineWeight=8;
+		'QuoteObj.CopperThickness': function(val) {
+			console.log('watch CopperThickness:' + val);
+			if (this.getSupportLineWeight.indexOf(this.LineWeight) == -1) {
+				this.LineWeight = 8;
 			}
 		}
 	},
 	methods: {
 		bindPickerChange() {},
 		getData() {},
-		disabledBoardThickness(val){
+		disabledBoardThickness(val) {
 			console.log(val);
 			console.log(this.getSupportThickness);
 			console.log(this.getSupportThickness.indexOf(val));
-			return (this.getSupportThickness.indexOf(val)==-1);
+			return this.getSupportThickness.indexOf(val) == -1;
 		},
 		tab(index, type) {
 			console.log(index);
 			console.log(type);
-			
+
 			if (type == 'PcbUnitSel') {
 				//出货方式
 				this.QuoteObj.PcbUnitSel = index;
@@ -527,6 +551,7 @@ export default {
 					//this.LayerVCutShow = true;
 				} else if (index == 30) {
 					this.PcbUnitSel30Show = true;
+
 					uni.navigateTo({
 						url: '/pages/index/param'
 					});
@@ -538,6 +563,7 @@ export default {
 			}
 			else if (type == 'BoardLayers') {
 				this.QuoteObj.BoardLayers=index;
+
 			}
 		},
 		tip() {

@@ -82,7 +82,7 @@
 					padding: 0 30rpx;
 					height: 52rpx;
 					border-radius: 28rpx;
-					border: 2rpx solid #E1E1E1;
+					border: 2rpx solid #e1e1e1;
 					margin-right: 16rpx;
 					white-space: nowrap;
 					text-align: center;
@@ -94,22 +94,100 @@
 						color: #008aff;
 					}
 					&.disabled {
-						border: 2rpx solid transparent; 
+						border: 2rpx solid transparent;
 						color: #999;
-						background: #F2F2F2; 
+						background: #f2f2f2;
 					}
 				}
-				&.mb {
+				.color-box {
+					padding: 0 30rpx;
+					height: 52rpx;
+					border-radius: 28rpx;
+					border: 2rpx solid #e1e1e1;
+					margin-right: 16rpx;
+					white-space: nowrap;
+					text-align: center;
+					font-size: 24rpx;
+					.color1 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #0a7d08;
+						border-radius: 28rpx;
+					}
+					.color2 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #ffffff;
+						border-radius: 28rpx;
+						border: 2rpx solid #e1e1e1;
+					}
+					.color3 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #000000;
+						border-radius: 28rpx;
+					}
+					.color4 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #1448db;
+						border-radius: 28rpx;
+					}
+					.color5 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #ffd302;
+						border-radius: 28rpx;
+					}
+					.color6 {
+						width: 32rpx;
+						height: 24rpx;
+						background: #dc1509;
+						border-radius: 28rpx;
+					}
+					.color7 {
+						width: 32rpx;
+						height: 24rpx;
+						background: linear-gradient(180deg, #838383 0%, #424242 100%);
+						border-radius: 28rpx;
+					}
+					.color8 {
+						width: 32rpx;
+						height: 24rpx;
+						background: linear-gradient(180deg, #79dbb9 0%, #32ab85 100%);
+						border-radius: 28rpx;
+					}
+					.t {
+						font-size: 24rpx;
+						color: #323233;
+						margin-left: 10rpx;
+					}
+				}
+				&.mb1 {
 					.box {
-						&:nth-child(-n + 4) {
-							margin-bottom: 26rpx;
+						&:nth-child(-n + 1) {
+							margin-bottom: 22rpx;
 						}
 					}
 				}
-				&.mb2 {
+				&.mb3 {
 					.box {
-						&:nth-child(-n + 1) {
-							margin-bottom: 26rpx;
+						&:nth-child(-n + 3) {
+							margin-bottom: 22rpx;
+						}
+					}
+				}
+				&.mb4 {
+					.box {
+						&:nth-child(-n + 4) {
+							margin-bottom: 22rpx;
+						}
+					}
+				}
+				&.mb6 {
+					.color-box{
+						&:nth-child(-n + 6) {
+							margin-bottom: 22rpx;
 						}
 					}
 				}
