@@ -1,4 +1,7 @@
 .cart-detail {
+	min-height: 100%;
+	background: #f7f8fa;
+	padding-bottom: 120rpx;
 	.prompt {
 		height: 76rpx;
 		background: #fff9ed;
@@ -52,6 +55,23 @@
 			}
 		}
 	}
+	.uploaddone{
+		margin: 20rpx 24rpx 0 24rpx;
+		height: 92rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		.t1 {
+			font-size: 28rpx;
+			color: #666;
+			padding-left: 24rpx;
+		}
+		.t2{
+			color: #008AFF;
+			font-size: 24rpx;
+			padding-right: 24rpx;
+		}
+	}
 	.upload {
 		margin: 20rpx 24rpx 0 24rpx;
 		height: 92rpx;
@@ -66,6 +86,47 @@
 			font-size: 28rpx;
 			color: #666;
 			margin-left: 10rpx;
+		}
+	}
+	.param-content {
+		margin: 20rpx 24rpx 0 24rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		.top {
+			height: 108rpx;
+			padding: 0 30rpx;
+			border-bottom: 1px solid #e7e7e7;
+			.t1 {
+				font-size: 36rpx;
+				color: #323233;
+				font-weight: bold;
+			}
+			.t2 {
+				font-size: 24rpx;
+				color: #008aff;
+			}
+		}
+		.box {
+			padding: 0 24rpx;
+			height: 92rpx;
+			background: #ffffff;
+			.t1 {
+				font-size: 32rpx;
+				color: #323233;
+			}
+			.t2 {
+				font-size: 32rpx;
+				color: #666;
+			}
+		}
+	}
+	.text-box {
+		padding: 24rpx;
+		text {
+			font-size: 24rpx;
+			color: #999;
+			line-height: 40rpx;
 		}
 	}
 	.btn-box {
