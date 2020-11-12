@@ -1,6 +1,7 @@
 .cart {
 	min-height: 100%;
 	background: #f7f8fa;
+	padding-bottom: 120rpx;
 	.prompt {
 		height: 76rpx;
 		background: #fff9ed;
@@ -74,6 +75,23 @@
 								font-size: 28rpx;
 								color: #323233;
 								line-height: 40rpx;
+								margin-bottom: 24rpx;
+							}
+							.t3{
+								font-size: 28rpx;
+								color: #323233;
+							}
+							.t4{
+								font-size: 24rpx;
+								color: #FF6010;
+							}
+							.t5{
+								font-size: 32rpx;
+								color: #FF6010;
+								font-weight: bold;
+							}
+							.dis{
+								color: #999;
 							}
 						}
 					}
@@ -85,15 +103,48 @@
 							font-size: 24rpx;
 							color: #999999;
 							margin-bottom: 24rpx;
+							white-space: nowrap;
 						}
 						.t2 {
 							font-size: 24rpx;
-							color: #ff6010;
+							color: #666666;
 						}
 						.t3 {
 							font-size: 32rpx;
-							color: #ff6010;
+							color: #666666;
 							font-weight: bold;
+						}
+						.time{
+							white-space: nowrap;
+							margin-bottom: 90rpx;
+						}
+						.disabled-text{
+							text-align: right;
+							.d-1{
+								font-size: 20rpx;
+								color: #999;
+								margin-bottom: 30rpx;
+							}
+							.d-2{
+								font-size: 24rpx;
+								color: #999;
+								margin-right: 6rpx;								
+							}
+							.d-3{
+								font-size: 32rpx;
+								color: #999;
+								font-weight: bold;
+							}
+						}
+						.txt{
+							font-size: 24rpx;
+							color: #FF6010;
+							margin-left: 14rpx;
+						}
+						.re-text{
+							font-size: 20rpx;
+							color: #666;
+							margin-bottom: 30rpx;
 						}
 						.btn {
 							width: 156rpx;
@@ -104,6 +155,16 @@
 							font-size: 24rpx;
 							color: #008aff;
 							margin-bottom: 70rpx;
+						}
+						.btn-re{
+							width: 156rpx;
+							height: 54rpx;
+							background: #ffffff;
+							border-radius: 27rpx;
+							border: 1px solid #008aff;
+							font-size: 24rpx;
+							color: #008aff;
+							margin-bottom: 12rpx;
 						}
 					}
 				}
