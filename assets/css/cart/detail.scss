@@ -1,3 +1,17 @@
 .cart-detail{
-	
+	.prompt {
+		height: 76rpx;
+		background: #fff9ed;
+		padding-left: 28rpx;
+		margin-bottom: 20rpx;
+		.iconfont {
+			font-size: 36rpx;
+			margin-right: 14rpx;
+			color: #ff6010;
+		}
+		.text {
+			font-size: 24rpx;
+			color: #ff6010;
+		}
+	}
 }

@@ -1,6 +1,9 @@
 <template>
 	<view class="cart-detail">
-		212
+		<view class="prompt row verCenter">
+			<text class="iconfont iconnotice"></text>
+			<text class="text">关于如何手机端上传文件教程，点击查看</text>
+		</view>
 	</view>
 </template>
 
