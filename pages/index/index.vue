@@ -51,11 +51,11 @@
 			<view class="pcb-input row  h2">
 				<text class="label">出货方式</text>
 				<view class="wrap list row mb1">
-					<view @click="tab(index, 'PcbUnitSel')" class="box row rowCenter verCenter" :class="{ curr: PcbUnitSelIndex == index }" v-for="(item, index) in PcbUnitSel" :key="index">{{ item }}</view>
+					<view @click="tab(item.Value, 'PcbUnitSel')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.PcbUnitSel == item.Value }" v-for="(item, index) in PcbUnitSelValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 			<!-- 按客户资料拼板出货参数 -->
-			<template v-if="PcbUnitSelShows">
+			<template v-if="PcbUnitSel20Show">
 				<view class="pcb-input row verCenter h1">
 					<text class="label">拼版方式</text>
 					<view class="wrap input-type1 row bothSide verCenter">
@@ -71,19 +71,23 @@
 			</template>
 		</view>
 		<!-- 分隔方式 -->
-		<view class="pcb-box" v-if="LayerVCutShow">
+		<view class="pcb-box" v-if="PcbUnitSel20Show">
 			<view class="pcb-input row verCenter h1">
 				<text class="label">分割方式</text>
 				<view class="wrap list row verCenter nowrap">
-					<view class="box row rowCenter verCenter">无</view>
-					<view class="box row rowCenter verCenter">V割</view>
-					<view class="box row rowCenter verCenter curr">V锣槽</view>
-					<view class="box row rowCenter verCenter" style="margin-right: 0;">V割+锣槽</view>
+					<view @click="tab(item.Value, 'VCut')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.VCut == item.Value }" v-for="(item, index) in VCutValues" :key="index">{{ item.Title }}</view>
+				</view>
+			</view>
+			<view class="pcb-input row verCenter h1" >
+				<text class="label">接受打叉板</text>
+				<view class="wrap list row verCenter nowrap">
+					<view @click="tab(item.Value, 'AcceptCrossed')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.AcceptCrossed == item.Value }" v-for="(item, index) in AcceptCrossedValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 		</view>
+		
 		<!-- 猎板代拼参数显示 -->
-		<view class="pcb-sel" v-if="PcbUnitSelShow">
+		<view class="pcb-sel" v-if="PcbUnitSel30Show">
 			<view class="wrap">
 				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">拼版方式</text>
@@ -114,25 +118,17 @@
 			</view>
 		</view>
 		<view class="pcb-box">
-			<view class="pcb-input row verCenter h1">
-				<text class="label">接受打叉板</text>
-				<view class="wrap list row verCenter nowrap">
-					<view class="box row rowCenter verCenter">接受</view>
-					<view class="box row rowCenter verCenter curr">不接受</view>
-				</view>
-			</view>
+			
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板材类型</text>
 				<view class="wrap list row">
-					<view class="box row rowCenter verCenter">FR-4</view>
-					<view class="box row rowCenter verCenter curr">CEM-1</view>
+					<view @click="tab(item.Value, 'BoardType')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardType == item.Value }" v-for="(item, index) in BoardTypeValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">铜箔厚度</text>
 				<view class="wrap list row type1">
-					<view class="box row rowCenter verCenter">1/1oz</view>
-					<view class="box row rowCenter verCenter curr">2/2oz</view>
+					<view @click="tab(item.Value, 'CopperThickness')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.CopperThickness == item.Value }" v-for="(item, index) in CopperThicknessValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 		</view>
@@ -140,19 +136,14 @@
 			<view class="pcb-input row h2">
 				<text class="label">最小线宽/线距</text>
 				<view class="wrap list row mb3">
-					<view class="box row rowCenter verCenter curr">4/4mil</view>
-					<view class="box row rowCenter verCenter">5/5mil</view>
-					<view class="box row rowCenter verCenter">6/6mil</view>
-					<view class="box row rowCenter verCenter">8/8mil</view>
+					<view @click="tab(item.Value, 'LineWeight')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.LineWeight == item.Value }" v-for="(item, index) in LineWeightValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 			<view class="pcb-input row h2">
 				<text class="label">最小孔径</text>
 				<view class="wrap list row mb3">
-					<view class="box row rowCenter verCenter curr">0.25mm</view>
-					<view class="box row rowCenter verCenter">0.3mm</view>
-					<view class="box row rowCenter verCenter">0.35mm</view>
-					<view class="box row rowCenter verCenter">0.4mm</view>
+					<view @click="tab(item.Value, 'Vias')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.Vias == item.Value }" v-for="(item, index) in ViasValues" :key="index">{{ item.Title }}</view>
+
 				</view>
 			</view>
 		</view>
@@ -305,10 +296,118 @@ export default {
 		return {
 			index: 0,
 			array: ['5', '10', '15', '20'],
-			BoardThicknessValues: [{ Title: '0.6', Value: 0.6 }, { Title: '0.8', Value: 0.8 }, { Title: '1.0', Value: 1.0 }, { Title: '1.2', Value: 1.2 }, { Title: '1.6', Value: 1.6 }, { Title: '2.0', Value: 2.0 }, { Title: '2.4', Value: 2.4 }],
-			BoardLayersValues: [{ Title: '1', Value: 1 }, { Title: '2', Value: 2 }, { Title: '4', Value: 4 }],
-			PcbUnitSelShow: false,
-			PcbUnitSelShows: false,
+			BoardThicknessValues:[
+				{Title:'0.6',Value:0.6},
+				{Title:'0.8',Value:0.8},
+				{Title:'1.0',Value:1.0},
+				{Title:'1.2',Value:1.2},
+				{Title:'1.6',Value:1.6},
+				{Title:'2.0',Value:2.0},
+				{Title:'2.4',Value:2.4},
+			],
+			BoardLayersValues:[
+				{Title:'1',Value:1},
+				{Title:'2',Value:2},
+				{Title:'4',Value:4},
+			],
+			PcbUnitSelValues:[
+				{Title:'单片资料单片出货',Value:10},
+				{Title:'按客户资料拼板出货',Value:20},
+				{Title:'猎板代拼',Value:30},
+			],
+			AcceptCrossedValues:[
+				{Title:'接受',Value:true},
+				{Title:'不接受',Value:false},
+			],
+			VCutValues:[
+				{Title:'无',Value:10},
+				{Title:'V割',Value:20},
+				{Title:'锣槽',Value:30},
+				{Title:'V割+锣槽',Value:40},
+			],
+			BoardTypeValues:[
+				{Title:'FR-4',Value:10},
+				{Title:'CEM-1',Value:40},
+			],
+			BoardBrandValues:[
+				{Title:'建滔A级',Value:10},
+				{Title:'不指定品牌',Value:100},
+			],
+			CopperThicknessValues:[
+				{Title:'1/1oz',Value:1},
+				{Title:'2/2oz',Value:2},
+			],
+			LineWeightValues:[
+				{Title:'4/4mil',Value:4},
+				{Title:'5/5mil',Value:5},
+				{Title:'6/6mil',Value:6},
+				{Title:'8/8mil↑',Value:8},
+			],
+			ViasValues:[
+				{Title:'0.2mm',Value:0.2},
+				{Title:'0.25mm',Value:0.25},
+				{Title:'0.3mm',Value:0.3},
+				{Title:'0.35mm',Value:0.35},
+				{Title:'0.4mm',Value:0.4},
+			],
+			SolderColorValues:[
+				{Title:'绿色',Value:10},
+				{Title:'白色',Value:30},
+				{Title:'黑色',Value:20},
+				{Title:'蓝色',Value:60},
+				{Title:'黄色',Value:40},
+				{Title:'红色',Value:50},
+				{Title:'哑黑',Value:70},
+				{Title:'哑绿',Value:80},
+			],
+			FontColorValues:[
+				{Title:'白色',Value:30},
+				{Title:'黑色',Value:20},
+			],
+			SurfaceFinishValues:[
+				{Title:'无铅喷锡',Value:10},
+				{Title:'有铅喷锡',Value:20},
+				{Title:'沉金',Value:30},
+				{Title:'OSP',Value:40},
+				{Title:'裸铜',Value:50},
+			],
+			ImGoldThincknessValues:[
+				{Title:'1u"',Value:1},
+				{Title:'2u"',Value:2},
+			],
+			GoldfingerValues:[
+				{Title:'不需要',Value:false},
+				{Title:'需要',Value:true},
+			],
+			SolderCoverValues:[
+				{Title:'AOI+飞针全测',Value:10},
+				{Title:'AOI+测试架',Value:20},
+				{Title:'飞针抽测',Value:30},
+			],
+			IsBGAValues:[
+				{Title:'无',Value:false},
+				{Title:'有',Value:true},
+			],
+			ImpedanceSizeValues:[
+				{Title:'无',Value:'无'},
+				{Title:'50Ω',Value:'50Ω'},
+				{Title:'100Ω',Value:'100Ω'},
+			],
+			IsImpedanceReportValues:[
+				{Title:'不需要',Value:false},
+				{Title:'需要',Value:true},
+			],
+			PCBFileConfirmValues:[
+				{Title:'不需要',Value:false},
+				{Title:'需要',Value:true},
+			],
+			IsNeedShipReportValues:[
+				{Title:'不需要',Value:false},
+				{Title:'需要',Value:true},
+			],
+			PcbUnitSel30Show: false,
+			PcbUnitSel20Show: false,
+
 			LayerVCutShow: false,
 			BoardLayers: [1, 2, 4],
 			BoardLayersIndex: 0,
@@ -442,27 +541,29 @@ export default {
 
 			if (type == 'PcbUnitSel') {
 				//出货方式
-				this.PcbUnitSelIndex = index;
-				this.PcbUnitSelShow = false;
-				this.PcbUnitSelShows = false;
+				this.QuoteObj.PcbUnitSel = index;
+				this.PcbUnitSel30Show = false;
+				this.PcbUnitSel20Show = false;
 				this.LayerVCutShow = false;
-				if (index == 0) {
-					this.LayerVCutShow = true;
-				} else if (index == 1) {
-					this.PcbUnitSelShows = true;
-					this.LayerVCutShow = true;
-				} else if (index == 2) {
-					this.PcbUnitSelShow = true;
+
+				 if (index == 20) {
+					this.PcbUnitSel20Show = true;
+					//this.LayerVCutShow = true;
+				} else if (index == 30) {
+					this.PcbUnitSel30Show = true;
+
 					uni.navigateTo({
 						url: '/pages/index/param'
 					});
 				}
 			} else if (type == 'BoardThickness') {
-				this.QuoteObj.BoardThickness = index;
-				this.BoardThicknessIndex = index;
-			} else if (type == 'BoardLayers') {
-				this.QuoteObj.BoardLayers = index;
-				this.BoardLayersIndex = index;
+				this.QuoteObj.BoardThickness=index;
+			} else if (type == 'VCut') {
+				this.QuoteObj.VCut=index;
+			}
+			else if (type == 'BoardLayers') {
+				this.QuoteObj.BoardLayers=index;
+
 			}
 		},
 		tip() {
