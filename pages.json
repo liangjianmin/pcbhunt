@@ -60,6 +60,11 @@
 		"style": {
 			"navigationBarTitleText": "计价"
 		}
+	},{
+		"path": "pages/cart/detail",
+		"style": {
+			"navigationBarTitleText": "计价详情页"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

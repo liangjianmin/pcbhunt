@@ -14,17 +14,17 @@
 								<view class="left-bar row verCenter">
 									<view class="iconfont icontongyi"></view>
 									<view class="text column">
-										<view class="tt">
+										<view class="tt row">
 											<text class="tt-a">20081200016</text>
-											<text class="tt-b" @click="detail()">明细</text>
+											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
 										</view>
 										<text class="t1">尺寸：25.00*25.00cm</text>
 										<text class="t1">数量：300PCS</text>
 										<text class="t2">层数：2层</text>
-										<view class="t2">
-											<text>预估到手价：</text>
-											<text>￥</text>
-											<text>356.22</text>
+										<view>
+											<text class="t3">预估到手价：</text>
+											<text class="t4">￥</text>
+											<text class="t5">356.22</text>
 										</view>
 									</view>
 								</view>
@@ -43,18 +43,24 @@
 								<view class="left-bar row verCenter">
 									<view class="iconfont icontongyi"></view>
 									<view class="text column">
-										<view class="tt">
+										<view class="tt row">
 											<text class="tt-a">20081200016</text>
-											<text class="tt-b">明细</text>
+											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
 										</view>
 										<text class="t1">尺寸：25.00*25.00cm</text>
 										<text class="t1">数量：300PCS</text>
 										<text class="t2">层数：2层</text>
+										<view>
+											<text class="t3">预估到手价：</text>
+											<text class="t4">￥</text>
+											<text class="t5">356.22</text>
+										</view>
 									</view>
 								</view>
 								<view class="right-bar column">
 									<text class="t1">更新时间:08-17 17:47</text>
-									<view class="btn row rowCenter verCenter">上传文件</view>
+									<view class="btn-re row rowCenter verCenter">重新上传</view>
+									<view class="re-text">珠海市猎板PCB打样.doc</view>
 									<view>
 										<text class="t2">￥</text>
 										<text class="t3">3,232.00</text>
@@ -72,15 +78,20 @@
 						<uni-swipe-action-item :right-options="options" @click="bindClick(item.id, item.unique)" @change="swipeChange($event, index)">
 							<view class="box row bothSide verCenter">
 								<view class="left-bar row verCenter">
-									<view class="default"></view>
+									<view class="iconfont icontongyi"></view>
 									<view class="text column">
-										<view class="tt">
+										<view class="tt row">
 											<text class="tt-a">20081200016</text>
-											<text class="tt-b">明细</text>
+											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
 										</view>
 										<text class="t1">尺寸：25.00*25.00cm</text>
 										<text class="t1">数量：300PCS</text>
 										<text class="t2">层数：2层</text>
+										<view>
+											<text class="t3">预估到手价：</text>
+											<text class="t4">￥</text>
+											<text class="t5">356.22</text>
+										</view>
 									</view>
 								</view>
 								<view class="right-bar column">
@@ -94,25 +105,30 @@
 							</view>
 						</uni-swipe-action-item>
 						<uni-swipe-action-item :right-options="options" @click="bindClick(item.id, item.unique)" @change="swipeChange($event, index)">
-							<view class="box row bothSide verCenter">
+							<view class="box row bothSide verCenter disabled">
 								<view class="left-bar row verCenter">
-									<view class="default"></view>
+									<view class="iconfont icontongyi"></view>
 									<view class="text column">
-										<view class="tt">
+										<view class="tt row">
 											<text class="tt-a">20081200016</text>
-											<text class="tt-b">明细</text>
+											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
 										</view>
-										<text class="t1">尺寸：25.00*25.00cm</text>
-										<text class="t1">数量：300PCS</text>
-										<text class="t2">层数：2层</text>
+										<text class="t1 dis">尺寸：25.00*25.00cm</text>
+										<text class="t1 dis">数量：300PCS</text>
+										<text class="t2 dis">层数：2层</text>
 									</view>
 								</view>
 								<view class="right-bar column">
-									<text class="t1">更新时间:08-17 17:47</text>
-									<view class="btn row rowCenter verCenter">上传文件</view>
-									<view>
-										<text class="t2">￥</text>
-										<text class="t3">3,232.00</text>
+									<view class="time">
+										<text class="t1">更新时间:08-17 17:47</text>
+										<text class="txt">失效</text>
+									</view>
+									<view class="disabled-text">
+										<view class="d-1">珠海市猎板PCB打样.doc</view>
+										<view>
+											<text class="d-2">￥</text>
+											<text class="d-3">3,232.00</text>
+										</view>
 									</view>
 								</view>
 							</view>
@@ -131,69 +147,6 @@
 			</view>
 			<view class="next row rowCenter verCenter" @click="submit">下一步</view>
 		</view>
-		<!-- 明细信息 -->
-		<uni-popup ref="detail" type="center">
-			<view class="layer-box">
-				<view class="layer-title-box row verCenter rowCenter">
-					<text class="title">明细信息</text>
-					<view class="layer-btn" @click="close()">确定</view>
-				</view>
-				<view class="car-detail">
-					<view class="box row bothSide">
-						<text class="t1">下单方式</text>
-						<text class="t2">猎板代拼</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">拼版款数</text>
-						<text class="t2">2</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">板子厚度</text>
-						<text class="t2">1.6mm</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">线宽/线距</text>
-						<text class="t2">4/4mil</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">最小孔径</text>
-						<text class="t2">0.25mm</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">阻焊颜色</text>
-						<text class="t2">绿色</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">字符颜色</text>
-						<text class="t2">白色</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">焊盘喷锡</text>
-						<text class="t2">有铅喷锡</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">金手指选项</text>
-						<text class="t2">不需要</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">测试选项</text>
-						<text class="t2">免费测试</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">BGA数量</text>
-						<text class="t2">无</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">阻抗控制</text>
-						<text class="t2">100Ω</text>
-					</view>
-					<view class="box row bothSide">
-						<text class="t1">生产确认稿</text>
-						<text class="t2">不需要</text>
-					</view>
-				</view>
-			</view>
-		</uni-popup>
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog title="操作确认提示"  content="是否将该计价移除购物车删除将无法找回" type="input" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
@@ -228,9 +181,6 @@ export default {
 			uni.navigateTo({
 				url:'/pages/user/order'
 			})
-		},
-		detail(){
-			this.$refs.detail.open();
 		},
 		bindClick(id, unique) {
 			this.$refs.popup.open();

@@ -1,33 +1,50 @@
 .logistics {
-	.top {
-		height: 186rpx;
-		background: #008aff;
-		align-items: flex-end;
+	min-height: 100%;
+	background: #F7F8FA;
+	.tab {
+		height: 84rpx;
+		background: #ffffff;
+		margin-bottom: 24rpx;
 		.box {
-			width: 702rpx;
-			height: 160rpx;
-			background: linear-gradient(225deg, #00ceff 0%, #00abff 100%);
-			box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
-			border-radius: 8rpx 8rpx 0px 0px;
-			padding-left: 24rpx;
-			padding-right: 50rpx;
-			.t1 {
-				font-size: 28rpx;
-				color: #ffffff;
-				margin-bottom: 20rpx;
-			}
-			.t2 {
-				font-size: 28rpx;
-				color: #ffffff;
-			}
-			.pic {
-				width: 88rpx;
-				height: 88rpx;
-				image {
-					width: 88rpx;
-					height: 88rpx;
+			position: relative;
+			height: 100%;
+			font-size: 32rpx;
+			color: #323233;
+			&.curr {
+				color: #008aff;
+				font-weight: 500;
+				&::after{
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					text-align: center;
+					width: 70rpx;
+					height: 6rpx;
+					background: #008AFF;
+					border-radius: 3rpx;
+					margin: 0 auto;
+					content: '';
 				}
 			}
+		}
+	}
+	.top {
+		width: 702rpx;
+		height: 152rpx;
+		background: linear-gradient(225deg, #00ceff 0%, #00abff 100%);
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx 8rpx 0px 0px;
+		margin: 0 auto;
+		padding: 0 24rpx;
+		.t1 {
+			font-size: 24rpx;
+			color: #ffffff;
+			margin-bottom: 24rpx;
+		}
+		.t2 {
+			font-size: 24rpx;
+			color: #ffffff;
 		}
 	}
 	.kefu {
@@ -60,10 +77,10 @@
 			border-left: 4rpx solid #e5e5e5;
 			padding-bottom: 62rpx;
 			padding-left: 28rpx;
-			&:last-child{
+			&:last-child {
 				border-left: none;
 			}
-			.circle{
+			.circle {
 				position: absolute;
 				top: 7rpx;
 				left: -14rpx;
@@ -90,9 +107,9 @@
 				font-size: 24rpx;
 				color: #999999;
 			}
-			&.curr{
+			&.curr {
 				padding-bottom: 58rpx;
-				.t1{
+				.t1 {
 					color: #323233;
 					font-weight: bold;
 				}
