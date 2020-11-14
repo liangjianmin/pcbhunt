@@ -121,7 +121,50 @@ export default {
 	data() {
 		return {
 			LayerEdgeRail: ['无', '上下', '左右', '四边'],
-			LayerEdgeRailIndex: 0
+			LayerEdgeRailIndex: 0,
+			QuoteObj: {
+				PcbUnit: 10,
+				SetType: 0,
+				PcbUnitSel: 10,
+				SingleBoardWidth: '',
+				SingleBoardHeight:'',
+				BoardWidth: '',
+				BoardHeight:'',
+				PanelWayX: 1,
+				PanelWayY: 1,
+				VCut: 20,
+				EdgeRail: 10,
+				EdgeRailWidth: 0,
+				GrooveWidth: 0,
+				GrooveHeight: 0,
+				Num: '',
+				BoardLayers: 2,
+				PcbKinds: 1,
+				BoardType: 10,
+				BoardThickness: 1.6,
+				CopperThickness: 1,
+				InnerCopperThickness: 1,
+				LineWeight: 8,
+				Vias: 0.4,
+				SolderColor: 10,
+				FontColor: 30,
+				SolderColorBottom: 10,
+				FontColorBottom: 30,
+				SurfaceFinish: 20,
+				ImGoldThinckness: 1,
+				SolderCover: 10,
+				TestType: 10,
+				Goldfinger: false,
+				ImpedanceSize: '无',
+				PCBFileConfirm: false,
+				FR4Tg: 'TG130',
+				AcceptCrossed: true,
+				Note: '',
+				IsImpedanceReport: false,
+				IsBGA: true,
+				BoardBrand: 10,
+				IsNeedShipReport: false
+			}
 		};
 	},
 	onLoad(option) {
@@ -132,7 +175,9 @@ export default {
 		  eventChannel.emit('someEvent', {data: 'test'});
 		  // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
 		  eventChannel.on('acceptDataFromOpenerPage', function(data) {
-		    console.log(data)
+		    console.log('accept from opener data');
+			 console.log(data)
+			 this.QuoteObj=data;
 		  })
 	},
 	onShow() {},
@@ -153,6 +198,7 @@ export default {
 			} else if (type == 'BoardLayers') {
 				this.BoardLayersIndex = index;
 			}
+			console.log(this.QuoteObj);
 		}
 	},
 	components: { uniPopup, uniPopupMessage, uniPopupDialog }

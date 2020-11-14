@@ -862,6 +862,8 @@
 						//this.LayerVCutShow = true;
 					} else if (index == 30) {
 						this.PcbUnitSel30Show = true;
+						 console.log(this.QuoteObj);
+						 var obj=this.QuoteObj;
 						uni.navigateTo({
 							url: '/pages/index/param'
 							,events: {
@@ -874,9 +876,8 @@
 							   }
 							 },
 							 success: function(res) {
-								 console.log(res);
 							   // 通过eventChannel向被打开页面传送数据
-							   res.eventChannel.emit('acceptDataFromOpenerPage', this.QuoteObj.PcbUnitSel);
+							   res.eventChannel.emit('acceptDataFromOpenerPage', obj);
 							}
 						});
 					}
