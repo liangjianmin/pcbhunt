@@ -9,9 +9,9 @@
 				<text class="label">板子尺寸</text>
 				<view class="wrap input-type1 row bothSide verCenter">
 					<view class="row verCenter">
-						<input type="text" placeholder="高度/y" v-model="QuoteObj.BoardHeight" class="w1" placeholder-style="color:#cccccc;" />
+						<input type="text" placeholder="高度/y" v-model="QuoteObj.SingleBoardHeight" class="w1" placeholder-style="color:#cccccc;" />
 						<text class="txt">X</text>
-						<input type="text" placeholder="宽度/x" v-model="QuoteObj.BoardWidth" class="w1" placeholder-style="color:#cccccc;" />
+						<input type="text" placeholder="宽度/x" v-model="QuoteObj.SingleBoardWidth" class="w1" placeholder-style="color:#cccccc;" />
 					</view>
 					<text class="unit">cm</text>
 				</view>
@@ -50,6 +50,13 @@
 				<text class="label">拼版款数</text>
 				<view class="wrap input-type1 row bothSide verCenter">
 					<view class="row verCenter"><input type="text" placeholder="请输入" v-model="QuoteObj.PcbKinds" placeholder-style="color:#cccccc;" /></view>
+				</view>
+			</view>
+			<view class="pcb-input row verCenter h1">
+				<text class="label">板材品牌</text>
+				<view class="wrap list row mb1">
+					<view @click="tab(item.Value, 'BoardBrand')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.BoardBrand == item.Value, disabled: dis(item.Value,'BoardBrand')  }"
+					 v-for="(item, index) in InitDatas.BoardBrandValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
 			<view class="pcb-input row  h2">
@@ -97,30 +104,34 @@
 		<view class="pcb-sel" v-if="PcbUnitSel30Show">
 			<view class="wrap">
 				<view class="pcb-sel-box row bothSide verCenter">
+					<text class="t1">拼板尺寸</text>
+					<text class="t2">{{QuoteObj.BoardHeight}}x{{QuoteObj.BoardWidth}}cm</text>
+				</view>
+				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">拼版方式</text>
-					<text class="t2">2x1</text>
+					<text class="t2">{{QuoteObj.PanelWayX}}x{{QuoteObj.PanelWayY}}</text>
 				</view>
 				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">工艺边</text>
-					<text class="t2">左5mm右4mm</text>
+					<text class="t2">{{QuoteObj.EdgeRailShow}}5mm</text>
 				</view>
 				<view class="pcb-sel-box row bothSide verCenter bor">
 					<text class="t1">单片数量</text>
-					<text class="t2">150PCS</text>
+					<text class="t2">{{TotalPcs}}PCS</text>
 				</view>
 			</view>
 			<view class="wrap">
 				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">分割方式</text>
-					<text class="t2">V割+落槽</text>
+					<text class="t2">{{VCutShow}}</text>
 				</view>
 				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">垂直槽间距</text>
-					<text class="t2">2mm</text>
+					<text class="t2">{{QuoteObj.GrooveHeight}}mm</text>
 				</view>
 				<view class="pcb-sel-box row bothSide verCenter">
 					<text class="t1">水平槽间距</text>
-					<text class="t2">0mm</text>
+					<text class="t2">{{QuoteObj.GrooveWidth}}mm</text>
 				</view>
 			</view>
 		</view>
@@ -605,6 +616,15 @@
 							Title: '需要',
 							Value: true
 						},
+					],
+					BoardBrandValues: [{
+							Title: '建滔A级',
+							Value: 10
+						},
+						{
+							Title: '不指定品牌',
+							Value: 100
+						},
 					]
 				},
 				PcbUnitSel30Show: false,
@@ -655,7 +675,12 @@
 				}
 			};
 		},
-		onLoad(options) {},
+		onLoad(options) {
+			uni.$on('savepcbset', this.savepcbset);
+		},
+		onUnload(){
+			uni.$off('savepcbset');
+		},
 		onShow() {},
 		onPullDownRefresh() {
 			//this.refresh();
@@ -687,6 +712,26 @@
 			},
 			TotalPcs:function(){
 				return this.QuoteObj.Num*this.QuoteObj.PanelWayX*this.QuoteObj.PanelWayY;
+			},
+			EdgeRail:function(){
+				if(this.QuoteObj.EdgeRail==10)
+				return '无';
+				if(this.QuoteObj.EdgeRail==20)
+				return '上下';
+				if(this.QuoteObj.EdgeRail==30)
+				return '左右';
+				if(this.QuoteObj.EdgeRail==40)
+				return '四边';
+			},
+			VCutShow:function(){
+				if(this.QuoteObj.VCut==10)
+				return '无';
+				if(this.QuoteObj.VCut==20)
+				return 'V割';
+				if(this.QuoteObj.VCut==30)
+				return '锣槽';
+				if(this.QuoteObj.VCut==40)
+				return 'V割+锣槽';
 			}
 			
 		},
@@ -753,19 +798,33 @@
 				if(val!='无')
 					this.QuoteObj.IsImpedanceReport=false;
 			},
-			'QuoteObj.BoardWidth': function(val) {
-				if(this.QuoteObj.PcbUnit==10)
-					this.QuoteObj.SingleBoardWidth=val;
+			'QuoteObj.SingleBoardWidth': function(val) {
+				if(this.QuoteObj.SetType!=20)
+					this.QuoteObj.BoardWidth=val;
+				else{
+					this.resetSize();
+				}
 			},
-			'QuoteObj.BoardHeight': function(val) {
-				if(this.QuoteObj.PcbUnit==10)
-					this.QuoteObj.SingleBoardHeight=val;
+			'QuoteObj.SingleBoardHeight': function(val) {
+				if(this.QuoteObj.SetType!=20)
+					this.QuoteObj.BoardHeight=val;
+				else{
+					this.resetSize();
+				}
 			},
 			'QuoteObj.SolderColor': function(val) {
 				if(this.QuoteObj.SolderColor==30)
 					this.QuoteObj.FontColor=20;
 				if(this.QuoteObj.SolderColor==20||this.QuoteObj.SolderColor==70)
 					this.QuoteObj.FontColor=30;
+			},
+			'QuoteObj.BoardType': function(val) {
+				if(this.QuoteObj.BoardType!=10&&this.QuoteObj.BoardLayers!=1)
+					this.QuoteObj.BoardBrand=10;
+			},
+			'QuoteObj.BoardLayers': function(val) {
+				if(this.QuoteObj.BoardType!=10&&this.QuoteObj.BoardLayers!=1)
+					this.QuoteObj.BoardBrand=10;
 			},
 			M2Area:function(val){
 				if(val>10)
@@ -784,6 +843,46 @@
 				console.log(val);
 			},
 			getData() {},
+			resetSize(){
+				var edgeRail=this.QuoteObj.EdgeRail;
+				var edgeRailWidth=1;
+				var leftRight=0;
+				var upDown=0;
+				
+				if(edgeRail==30||edgeRail==40)
+				{
+				  leftRight=edgeRailWidth;
+				}
+				if(edgeRail==20||edgeRail==40)
+				{
+				  upDown=edgeRailWidth;
+				}
+				
+				 //水平槽间距
+				var grooveWidth= 0;
+				//垂直槽间距
+				var grooveHeight= 0;
+				var vcut=this.QuoteObj.VCut;
+				if(vcut==30||vcut==40)
+				{
+				 grooveWidth = (this.QuoteObj.GrooveWidth/10);
+				 grooveHeight = (this.QuoteObj.GrooveHeight/10);
+				}
+				
+				this.QuoteObj.BoardHeight=(this.QuoteObj.SingleBoardHeight*this.QuoteObj.PanelWayX)+upDown+grooveWidth*(this.QuoteObj.PanelWayX-1);
+				this.QuoteObj.BoardWidth=(this.QuoteObj.SingleBoardWidth*this.QuoteObj.PanelWayY)+leftRight+grooveHeight*(this.QuoteObj.PanelWayY-1);
+				
+			},
+			savepcbset(data){
+				this.QuoteObj.Num=data.Num;
+				this.QuoteObj.PanelWayX=data.PanelWayX;
+				this.QuoteObj.PanelWayY=data.PanelWayY;
+				this.QuoteObj.VCut=data.VCut;
+				this.QuoteObj.EdgeRail=data.EdgeRail;
+				this.QuoteObj.GrooveHeight=data.GrooveHeight;
+				this.QuoteObj.GrooveWidth=data.GrooveWidth;
+				this.resetSize();
+			},
 			// 计算属性的 getter
 			getSupportThickness() {
 				if (this.QuoteObj.BoardLayers == 1) return [1.0, 1.2, 1.6];
@@ -824,6 +923,15 @@
 					return [30];
 				return values;
 			},
+			getSupportBoardBrand() {
+				var values=[30,20];
+				if(this.QuoteObj.BoardLayers==1&&this.QuoteObj.BoardType==10)
+					return [10,100];
+				else{
+					return [10];
+				}
+				return values;
+			},
 			getTestTypeShow(val){
 				if(this.QuoteObj.BoardLayers==1)
 				{
@@ -848,7 +956,9 @@
 				else if (type == "LineWeight")
 					return this.getSupportLineWeight().indexOf(val) == -1;	
 				else if (type == "FontColor")
-					return this.getSupportFontColor().indexOf(val) == -1;	
+					return this.getSupportFontColor().indexOf(val) == -1;
+				else if (type == "BoardBrand")
+				return this.getSupportBoardBrand().indexOf(val) == -1;
 			},
 			tab(index, type) {
 				if (type == 'PcbUnitSel') {
@@ -864,20 +974,12 @@
 						this.PcbUnitSel30Show = true;
 						 console.log(this.QuoteObj);
 						 var obj=this.QuoteObj;
+						 var option="num="+this.QuoteObj.Num+"&sh="+this.QuoteObj.SingleBoardHeight+"&sw="+this.QuoteObj.SingleBoardWidth+"&px="+this.QuoteObj.PanelWayX+"&py="+this.QuoteObj.PanelWayY+"&vcut="+this.QuoteObj.VCut+"&ea="+this.QuoteObj.EdgeRail+"&gw="+this.QuoteObj.GrooveHeight+"&gh="+this.QuoteObj.GrooveHeight;
+						 
 						uni.navigateTo({
-							url: '/pages/index/param'
-							,events: {
-							   // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-							   acceptDataFromOpenedPage: function(data) {
-							     console.log(data)
-							   },
-							   someEvent: function(data) {
-							     console.log(data)
-							   }
-							 },
-							 success: function(res) {
-							   // 通过eventChannel向被打开页面传送数据
-							   res.eventChannel.emit('acceptDataFromOpenerPage', obj);
+							url: '/pages/index/param?'+option
+							,success: function(res) {
+							  
 							}
 						});
 					}
@@ -912,7 +1014,11 @@
 			},
 			checkSubmit(){
 				if(this.QuoteObj.BoardHeight<=0||this.QuoteObj.BoardWidth<=0){
-				    alert('请填写正确的板子尺寸');
+				    uni.showToast({
+				        title: '请填写正确的板子尺寸',
+				        duration: 2000,
+						icon:'none'
+				    });
 				    if(this.QuoteObj.BoardHeight<=0)
 				    {
 				      $("#BoardHeight").focus();
@@ -925,12 +1031,20 @@
 				}
 				if(this.QuoteObj.PcbUnit==10){
 				    if ((Number(this.QuoteObj.BoardWidth) > 61 || Number(this.QuoteObj.BoardHeight) > 61)||(Number(this.QuoteObj.BoardWidth) > 50 && Number(this.QuoteObj.BoardHeight) > 50)) {
-				      alert('我司可生产最大长度为61*50cm,请重新输入!');
+				      uni.showToast({
+				          title: '我司可生产最大长度为61*50cm,请重新输入!',
+				          duration: 2000,
+							  icon:'none'
+				      });
 				      return false;
 				    }
 				}else {
 				    if (Number(this.QuoteObj.BoardWidth) > 48 || Number(this.QuoteObj.BoardHeight) > 48) {
-				      alert('拼版最大长度为48*48cm,请重新输入!');
+				       uni.showToast({
+						   title:'拼版最大长度为48*48cm,请重新输入!',
+				          duration: 2000,
+							  icon:'none'
+				      });
 				      return false;
 				    }
 				    else
@@ -939,39 +1053,64 @@
 				      {
 				        if (Number(this.QuoteObj.BoardWidth) < 6 || Number(this.QuoteObj.BoardHeight) <6 )
 				        {
-				          alert('拼版出货,采用V割工艺的拼版尺寸两边必须同时大于6cm');
+							uni.showToast({
+								title:'拼版出货,采用V割工艺的拼版尺寸两边必须同时大于6cm',
+							    duration: 2000,
+							  icon:'none'
+							});
 				          return false;
 				        }
 				      }
 					}
 				}
 				if(Number(this.QuoteObj.PcbKinds)==0){
-				        alert("请填写正确的拼版数量!!");
+						uni.showToast({
+							title:'请填写正确的拼版数量',
+						    duration: 2000,
+							  icon:'none'
+						});
 				        //$("#PcbKinds").focus();
 				        return false;
 				}
 				
 				 if((!((this.QuoteObj.BoardHeight>=10&&this.QuoteObj.BoardWidth>=3)||(this.QuoteObj.BoardHeight>=3&&this.QuoteObj.BoardWidth>=10)))&&this.QuoteObj.SurfaceFinish==40)
 				      {
-				          alert("osp工艺要求出货尺寸至少10cmx3cm");
+						  uni.showToast({
+						  	title:'osp工艺要求出货尺寸至少10cmx3cm',
+						      duration: 2000,
+							  icon:'none'
+						  });
 				          flag=false;
 				          return flag;
 				      }
 				      var viasPro= parseFloat(this.QuoteObj.BoardThickness)/parseFloat(this.QuoteObj.Vias);
 				      if(viasPro>8)
 				      {
-				        alert(this.QuoteObj.Vias+'mm孔径不能选择'+ parseFloat(this.QuoteObj.Vias)*8+'mm以上的板厚');
+						  var title=this.QuoteObj.Vias+'mm孔径不能选择'+ parseFloat(this.QuoteObj.Vias)*8+'mm以上的板厚';
+						  uni.showToast({
+						  	title:title,
+						      duration: 2000,
+							  icon:'none'
+						  });
 				        return false; 
 				      }
 				      if((this.QuoteObj.VCut==20||this.QuoteObj.VCut==40)&&this.QuoteObj.BoardThickness<=0.4)
 				      {
-				        alert('≤0.4mm板厚分割方式不支持V割');
+						  uni.showToast({
+						  	title:'≤0.4mm板厚分割方式不支持V割',
+						      duration: 2000,
+							  icon:'none'
+						  });
 				        return false;                                                                                                                 
 				      }
 				      //单片出货超小板最大数量不得超过1000 pcs
 				      if(this.QuoteObj.PcbUnitSel==10 && parseFloat(this.QuoteObj.BoardHeight)<=2&&parseFloat(this.QuoteObj.BoardWidth)<=2 && parseInt(this.QuoteObj.Num)>1000)
 				      {
-				        alert('超小板单片出货上限1000pcs、请选择猎板待拼出货！');
+						  uni.showToast({
+						  	title:'超小板单片出货上限1000pcs、请选择猎板待拼出货！',
+						      duration: 2000,
+							  icon:'none'
+						  });
 				        return false;     
 				      }
 					  
