@@ -1021,7 +1021,9 @@
 			joinCar() {
 
 				request(API.addToCart, 'Post', JSON.stringify(this.QuoteObj), true).then((response) => {
-
+					uni.redirectTo({
+						url: '/pages/cart/detail?id='+response.Message
+					});
 					//this.showCalResult(response);
 				}, function(res) {
 					uni.showToast({

@@ -20,7 +20,8 @@ const checkId_card=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
  * 请求封装
  */
 const request = (url = '', type = 'GET', params = {}, Loading) => {
-	const token = uni.getStorageSync('token');
+	const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIzOTE2ODgxNTM5NjcxNjU0NCIsIlVzZXJObyI6IkEyMDA0MiAgICAgIiwiVXNlck5hbWUiOiIxNTg1ODI5NDg4MiIsIm5iZiI6MTYwNTU5NDQ1NCwiZXhwIjoxNjA1NjgwODU0LCJpYXQiOjE2MDU1OTQ0NTR9.-4BTE_Lv7ARZGhPtdwJHTXEO7mzcKqYoRr4DfVjGWak";
+	// uni.getStorageSync('token');
 
 	let platform = undefined; //平台标志
 
@@ -41,16 +42,15 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 
 	const header = {
 		"Content-Type": "application/json; charset=utf-8",
-		"Authorization": token,
+		"Authorization": "Bearer "+token,
 		"platform": platform
 	};
-	console.log(params);
 	return new Promise((resolve, reject) => {
 		uni.request({
 			method: type,
 			url: url,
 			data: params,
-			header: header,
+			header:header,
 			dataType: 'json',
 		}).then((response) => {
 			uni.hideLoading();

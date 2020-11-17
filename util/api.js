@@ -15,6 +15,12 @@ const API = {
 	 * 加入购物车
 	 * **/
 	addToCart:API_BASE+"/api/Cart/AddPcbCart",
+	
+	/**
+	 * 购物车列表带明细
+	 * */
+	cartList:API_BASE+"/api/Cart/GetCartList",
+	
 }
 
 
