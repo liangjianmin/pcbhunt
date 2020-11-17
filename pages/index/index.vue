@@ -755,16 +755,7 @@
 
 		},
 		watch: {
-			QuoteObj: {
-				//监听参数变化 计价处理
-				handler: function(val) {
-					this.calPrice();
-				},
-				deep: true
-			},
-			'QuoteObj.BoardType': function(val, old) {
-				if (val == 40) this.QuoteObj.BoardLayers = 1;
-			},
+			
 			'QuoteObj.PcbUnitSel': function(val, old) {
 				if (val == 10)
 					this.QuoteObj.PcbUnit = 10;
@@ -777,6 +768,7 @@
 				}
 			},
 			'QuoteObj.BoardLayers': function(val) {
+				console.log('11111'+val);
 				if (this.getIsSupportThickness() == false) {
 					this.QuoteObj.BoardThickness = 1.6;
 				}
@@ -788,11 +780,12 @@
 				} else if (val == 2 || val == 1) {
 					(this.QuoteObj.InnerCopperThickness = 1);
 				}
-				console.log(val);
 				if (val == 1)
 					this.QuoteObj.TestType = 30;
 				else
 					this.QuoteObj.TestType = 10;
+				if (this.QuoteObj.BoardType != 10 && this.QuoteObj.BoardLayers != 1)
+					this.QuoteObj.BoardBrand = 10;
 			},
 			'QuoteObj.BoardThickness': function(val) {
 
@@ -837,11 +830,10 @@
 			'QuoteObj.BoardType': function(val) {
 				if (this.QuoteObj.BoardType != 10 && this.QuoteObj.BoardLayers != 1)
 					this.QuoteObj.BoardBrand = 10;
+				if (this.QuoteObj.BoardType == 40)
+					this.QuoteObj.BoardLayers = 1;
 			},
-			'QuoteObj.BoardLayers': function(val) {
-				if (this.QuoteObj.BoardType != 10 && this.QuoteObj.BoardLayers != 1)
-					this.QuoteObj.BoardBrand = 10;
-			},
+			
 			M2Area: function(val) {
 				if (val > 10)
 					this.QuoteObj.TestType = 20;
@@ -852,7 +844,15 @@
 						this.QuoteObj.TestType = 10;
 					}
 				}
-			}
+			},
+			QuoteObj: {
+				//监听参数变化 计价处理
+				handler: function(val) {
+					console.log('price')
+					this.calPrice();
+				},
+				deep: true
+			},
 		},
 		methods: {
 			bindPickerChange(val) {
@@ -996,7 +996,7 @@
 							uni.navigateTo({
 								url: '/pages/index/param?' + option,
 								success: function(res) {
-
+									
 								}
 							});
 						}
@@ -1163,7 +1163,6 @@
 			},
 			calPrice() {
 				var check = this.check();
-				console.log(check);
 				if (check == false)
 					return false;
 				else {
@@ -1188,9 +1187,9 @@
 				} else if (res.Data.IsLogin == false) {
 					this.CalResult.Title = '新客专享价';
 				} else if (res.Data.Cost.ProFee != res.Data.Cost.OrignProFee) {
-					this.CalResult.Title.text("预估到手价:");
+					this.CalResult.Title="预估到手价";
 				} else {
-					this.CalResult.Title.text("支付金额:");
+					this.CalResult.Title="支付金额:";
 				}
 			},
 			refresh() {
