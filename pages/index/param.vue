@@ -322,23 +322,14 @@ export default {
 					GrooveWidth:this.QuoteObj.GrooveWidth
 				}
 				);
-				
-				// const eventChannel = this.getOpenerEventChannel()
-				// eventChannel.emit('savepcbset',
-				// {
-				// 	Num: this.QuoteObj.Num,
-				// 	PanelWayX:this.QuoteObj.PanelWayX,
-				// 	PanelWayY:this.QuoteObj.PanelWayY,
-				// 	VCut:this.QuoteObj.VCut,
-				// 	EdgeRail:this.QuoteObj.EdgeRail,
-				// 	GrooveHeight:this.QuoteObj.GrooveHeight,
-				// 	GrooveWidth:this.QuoteObj.GrooveWidth
-				// },
-				// );
 				uni.navigateBack({
 				    delta: 1
 				})
 			}
+		},ret(){
+			uni.navigateBack({
+			    delta: 1
+			})
 		}
 	},
 	components: { uniPopup, uniPopupMessage, uniPopupDialog }

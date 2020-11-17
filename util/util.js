@@ -40,11 +40,11 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 	}
 
 	const header = {
-		"Content-Type": "applciation/json",
+		"Content-Type": "application/json; charset=utf-8",
 		"Authorization": token,
 		"platform": platform
 	};
-
+	console.log(params);
 	return new Promise((resolve, reject) => {
 		uni.request({
 			method: type,
@@ -55,20 +55,28 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 		}).then((response) => {
 			uni.hideLoading();
 			let [error, res] = response;
-			if (res.data.code === 10000) {
-				resolve(res.data);
-			} else if (res.data.code === 10003) {
-				//未登录状态
+			if(res.statusCode==401)
+			{
 				uni.redirectTo({
 					url: '/pages/user/login'
-				})
-			} else {
-				resolve(res.data);
+				});
+			}
+			else{
+				if (res.data.Code === 200) {
+					resolve(res.data);
+				} 
+				 else {
+					 reject(res.data);
+				}
 			}
 		}).catch(error => {
 			uni.hideLoading();
 			let [err, res] = error;
-			reject(err);
+				uni.showToast({
+					title:'系统错误',
+				    duration: 2000,
+					icon:'error'
+				});
 		})
 	});
 }
