@@ -95,6 +95,11 @@
     "h5" : {
         "router" : {
             "base" : ""
+        },
+        "template" : "template.h5.html",
+        "title" : "猎板网",
+        "devServer" : {
+            "port" : ""
         }
     }
 }

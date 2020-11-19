@@ -1,26 +1,24 @@
-const API_BASE = 'http://localhost:5001'
+const API_BASE = 'http://apitest.pcbhunt.com'
 
 
 const API = {
 	/**
-	 * 获取广告
-	 */
-	getBanner: API_BASE + '/index/getBanner',
-	/**
 	 * 计价接口
 	 * */
-	calPrice:API_BASE+"/api/Quote/CalPrice",
-	
+	calPrice: API_BASE + "/api/Quote/CalPrice",
 	/**
 	 * 加入购物车
 	 * **/
-	addToCart:API_BASE+"/api/Cart/AddPcbCart",
-	
+	addToCart: API_BASE + "/api/Cart/AddPcbCart",
 	/**
 	 * 购物车列表带明细
 	 * */
-	cartList:API_BASE+"/api/Cart/GetCartList",
-	
+	cartList: API_BASE + "/api/Cart/GetCartList",
+	/**
+	 * 短信登录发送验证码(滑块验证)
+	 * */
+	MessageSendValidCodeAfs: API_BASE + "/api/Member/MessageSendValidCodeAfs",
+
 }
 
 

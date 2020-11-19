@@ -43,6 +43,9 @@
 				color: #008aff;
 				border-left: 2rpx solid #eeeeee;
 				background: none;
+				&.code-curr {
+					color: #999;
+				}
 				&::after {
 					border: none;
 				}
@@ -109,7 +112,7 @@
 				height: 2rpx;
 				background: #d8d8d8;
 				border-radius: 5rpx;
-				content: ''; 
+				content: '';
 			}
 		}
 		.text {
@@ -122,3 +125,5 @@
 		}
 	}
 }
+
+
