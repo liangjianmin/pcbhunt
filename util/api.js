@@ -18,6 +18,10 @@ const API = {
 	 * 短信登录发送验证码(滑块验证)
 	 * */
 	MessageSendValidCodeAfs: API_BASE + "/api/Member/MessageSendValidCodeAfs",
+	/**
+	 * 短信登录注册
+	 * */
+	UserMessageLogin: API_BASE + "/api/Member/UserMessageLogin"
 
 }
 

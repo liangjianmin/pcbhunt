@@ -12,7 +12,7 @@
 			<view class="form-input row verCenter bothSide mb24">
 				<view class="row verCenter">
 					<text class="iconfont iconiconloginpassword"></text>
-					<input type="text" class="inp" placeholder="请输入短信验证码" placeholder-style="color:#ccc;" />
+					<input type="text" class="inp" placeholder="请输入短信验证码" placeholder-style="color:#ccc;" v-model="ValidCode" />
 				</view>
 				<button class="code" :value="codetext" @click="getCode()" :class="{ 'code-curr': codeactive }" :disabled="codeactive">{{ codetext }}</button>
 			</view>
@@ -20,7 +20,7 @@
 				<text class="iconfont icontongyi"></text>
 				<text class="text">同意《用户服务协议》</text>
 			</view>
-			<view class="btn row verCenter rowCenter" @click="submit">登录</view>
+			<view class="btn row verCenter rowCenter" :class="{ disabled: disabled }" @click="submit">登录</view>
 		</view>
 		<view class="ad"><image src="../../static/login／活动／banner1@2x.png" mode="aspectFill"></image></view>
 		<view class="about-box">
@@ -32,22 +32,63 @@
 <script type="text/javascript"></script>
 <script>
 import { API } from '@/util/api.js';
+import Util from '@/util/index.js';
 
 export default {
 	data() {
 		return {
 			Account: '',
+			ValidCode: '',
+			nc_token: '',
+			csessionid: '',
+			sig: '',
+			WebPromotion: '',
+			WebPromotiond: '',
 			smsCode: '',
 			codetext: '获取验证码',
 			codeactive: false,
-			nc_token: '',
-			csessionid: '',
-			sig: ''
+			disabled: true
 		};
 	},
-	onLoad(options) {},
+	onLoad(options) {
+		console.log(options);
+		//注册来源  15天缓存
+
+		var c = options.C || options.c;
+		var d = options.D || options.d;
+
+		if (c) {
+			this.WebPromotion = c;
+			if (!Util.getCookie('WebPromotion')) {
+				Util.setCookie('WebPromotion', c, 15);
+			}
+		}
+		if (d) {
+			this.WebPromotiond = d;
+			if (!Util.getCookie('WebPromotiond')) {
+				Util.setCookie('WebPromotiond', d, 15);
+			}
+		}
+	},
+	watch: {
+		Account(val) {
+			if (this.Account && this.ValidCode) {
+				this.disabled = false;
+			}else{
+				this.disabled = true;
+			}
+		},
+		ValidCode(val) {
+			if (this.Account && this.ValidCode) {
+				this.disabled = false;
+			}else{
+				this.disabled = true;
+			}
+		}
+	},
 	mounted() {
 		var self = this;
+
 		// #ifdef H5
 		this.$nextTick(() => {
 			var nc_token = ['FFFF0N00000000009674', new Date().getTime(), Math.random()].join(':');
@@ -64,7 +105,7 @@ export default {
 				//业务键字段，可为空。为便于线上问题的排查，建议您按照线上问题定位文档中推荐的方法配置该字段值。
 				trans: { key1: 'code200' },
 				//语言，默认值为cn（中文）。HTML5应用类型默认支持简体中文、繁体中文、英文语言。
-				is_Opt:0,
+				is_Opt: 0,
 				language: 'cn',
 				//内部网络请求的超时时间。一般情况建议保持默认值（10000ms）。
 				timeout: 10000,
@@ -125,7 +166,7 @@ export default {
 
 				return;
 			}
-			
+
 			if (!this.nc_token) {
 				uni.showModal({
 					title: '提示',
@@ -141,11 +182,17 @@ export default {
 					afs_nc_token: this.nc_token,
 					afs_nc_sessionid: this.csessionid,
 					afs_nc_sign: this.sig
-				},true).then(res => {
-						
+			},true).then(res => {
+				if (res.Code === 200) {
+					this.countdDown(); //倒计时开始
+				} else {
+					uni.showToast({
+						title: res.Message,
+						duration: 2000,
+						icon: 'none'
+					});
+				}
 			});
-		
-			this.countdDown(); //倒计时开始
 		},
 		countdDown() {
 			var me = this;
@@ -189,6 +236,26 @@ export default {
 				});
 				return;
 			}
+
+			this.request(API.UserMessageLogin,'POST',{
+					Mobile: this.Account,
+					ValidCode: this.ValidCode,
+					afs_nc_token: this.nc_token,
+					afs_nc_sessionid: this.csessionid,
+					afs_nc_sign: this.sig,
+					WebPromotion: this.WebPromotion,
+					WebPromotiond: this.WebPromotiond
+			},true).then(res => {
+				if (res.Code === 200) {
+					this.countdDown(); //倒计时开始
+				} else {
+					uni.showToast({
+						title: res.Message,
+						duration: 2000,
+						icon: 'none'
+					});
+				}
+			});
 		}
 	}
 };

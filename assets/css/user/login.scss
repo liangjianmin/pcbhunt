@@ -73,7 +73,9 @@
 			font-size: 32rpx;
 			color: #ffffff;
 			margin: 40rpx auto 0;
-			opacity: 0.4;
+			&.disabled{
+				opacity: 0.4;
+			}
 		}
 	}
 	.ad {

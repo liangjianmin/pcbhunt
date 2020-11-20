@@ -1,21 +1,4 @@
 import API_BASE from '../util/api.js'
-
-
-/**
- * 手机号码验证
- */
-const myreg = /^[1][1,3,2,4,5,7,8,9][0-9]{9}$/
-
-/**
- * 邮箱校验
- */
-const checkemail = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/
-
-/**
- * 身份证验证
- */
-const checkId_card=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-
 /**
  * 请求封装
  */
@@ -100,8 +83,5 @@ const getPlatform = () => {
 
 module.exports = {
 	request,
-	getPlatform,
-	myreg,
-	checkemail,
-	checkId_card
+	getPlatform
 }
