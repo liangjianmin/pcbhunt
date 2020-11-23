@@ -176,13 +176,19 @@ export default {
 
 				return;
 			}
-
+			
+			uni.showLoading({
+				title: ''
+			});
+			
 			this.request(API.MessageSendValidCodeAfs,'POST',{
 					Mobile: this.Account,
 					afs_nc_token: this.nc_token,
 					afs_nc_sessionid: this.csessionid,
 					afs_nc_sign: this.sig
-			},true).then(res => {
+			}).then(res => {
+				uni.hideLoading();
+				
 				if (res.Code === 200) {
 					this.countdDown(); //倒计时开始
 				} else {
@@ -236,7 +242,7 @@ export default {
 				});
 				return;
 			}
-
+			
 			this.request(API.UserMessageLogin,'POST',{
 					Mobile: this.Account,
 					ValidCode: this.ValidCode,
@@ -245,14 +251,14 @@ export default {
 					afs_nc_sign: this.sig,
 					WebPromotion: this.WebPromotion,
 					WebPromotiond: this.WebPromotiond
-			},true).then(res => {
+			}).then((res) => {
 				if (res.Code === 200) {
-					this.countdDown(); //倒计时开始
+					Util.setCookie('token',res.Data.Token);
 				} else {
 					uni.showToast({
+						icon:'warn',
 						title: res.Message,
-						duration: 2000,
-						icon: 'none'
+						duration: 200000
 					});
 				}
 			});
