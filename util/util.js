@@ -14,7 +14,8 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 	var token = Util.getCookie('token');
 	// #endif
 	
-	
+	if(token==null)
+		token="";
 	// #ifdef APP-PLUS
 	var platform = 'APP';
 	// #endif
@@ -32,7 +33,7 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 
 	const header = {
 		"Content-Type": "application/json; charset=utf-8",
-		"Authorization": "Bearer " + token
+		"Authorization": token!=""? "Bearer " + token:""
 	};
 	return new Promise((resolve, reject) => {
 		uni.request({
