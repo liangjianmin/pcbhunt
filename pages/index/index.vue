@@ -272,10 +272,19 @@
 			</view>
 		</view>
 		<view class="btn-box row bothSide verCenter">
-			<view class="text row">
-				<text class="price-text">{{CalResult.Title}}</text>
-				<text class="unit-text">¥</text>
-				<text class="num">{{CalResult.ProFee}}</text>
+			<view>
+				<view class="tt row">
+					<text class="t1">交期日期：2020-09-16</text>
+				</view>
+				<view class="text row">
+					<text class="price-text">{{CalResult.Title}}</text>
+					<text class="unit-text">¥</text>
+					<text class="num">{{CalResult.ProFee}}</text>
+				</view>
+				<view class="ttt row">
+					<text class="t1">原价：</text>
+					<text class="t2">￥129565</text>
+				</view>
 			</view>
 			<view class="btn-2 row rowCenter verCenter" @click="joinCar()">加入购物车</view>
 		</view>
@@ -1020,11 +1029,10 @@
 			},
 			joinCar() {
 
-				request(API.addToCart, 'Post', JSON.stringify(this.QuoteObj), true).then((response) => {
+				this.request(API.addToCart, 'Post', JSON.stringify(this.QuoteObj), true).then((response) => {
 					uni.redirectTo({
 						url: '/pages/cart/detail?id='+response.Message
 					});
-					//this.showCalResult(response);
 				}, function(res) {
 					uni.showToast({
 						title: res.Message,

@@ -174,9 +174,15 @@ export default {
 		};
 	},
 	onLoad(options) {},
-	onShow() {},
+	onShow() {
+		this.getData();
+	},
 	methods: {
-		getData() {},
+		getData() {
+			this.request(API.GetCartList, 'POST', {}).then(res => {
+				
+			});
+		},
 		submit(){
 			uni.navigateTo({
 				url:'/pages/user/order'

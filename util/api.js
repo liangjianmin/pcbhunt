@@ -21,7 +21,11 @@ const API = {
 	/**
 	 * 短信登录注册
 	 * */
-	UserMessageLogin: API_BASE + "/api/Member/UserMessageLogin"
+	UserMessageLogin: API_BASE + "/api/Member/UserMessageLogin",
+	/**
+	 * 获取购物车列表，带明细
+	 * */
+	GetCartList: API_BASE + "/api/Cart/GetCartList"
 
 }
 

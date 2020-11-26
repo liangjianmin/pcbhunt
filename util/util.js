@@ -1,19 +1,26 @@
 import API_BASE from '../util/api.js'
+import Util from '../util/index.js'
 /**
  * 请求封装
  */
 const request = (url = '', type = 'GET', params = {}, Loading) => {
-	const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIzOTE2ODgxNTM5NjcxNjU0NCIsIlVzZXJObyI6IkEyMDA0MiAgICAgIiwiVXNlck5hbWUiOiIxNTg1ODI5NDg4MiIsIm5iZiI6MTYwNTU5NDQ1NCwiZXhwIjoxNjA1NjgwODU0LCJpYXQiOjE2MDU1OTQ0NTR9.-4BTE_Lv7ARZGhPtdwJHTXEO7mzcKqYoRr4DfVjGWak";
-	// uni.getStorageSync('token');
-
-	let platform = undefined; //平台标志
-
+	
+	// #ifdef MP-WEIXIN
+	var token = uni.getStorageSync('token');
+	// #endif
+	
+	
+	// #ifdef H5
+	var token = Util.getCookie('token');
+	// #endif
+	
+	
 	// #ifdef APP-PLUS
-	platform = 'APP';
+	var platform = 'APP';
 	// #endif
 
 	// #ifdef MP-WEIXIN
-	platform = 'MP-WEIXIN';
+	var platform = 'MP-WEIXIN';
 	// #endif
 
 	//是否启动加载
@@ -25,8 +32,7 @@ const request = (url = '', type = 'GET', params = {}, Loading) => {
 
 	const header = {
 		"Content-Type": "application/json; charset=utf-8",
-		"Authorization": "Bearer " + token,
-		"platform": platform
+		"Authorization": "Bearer " + token
 	};
 	return new Promise((resolve, reject) => {
 		uni.request({
