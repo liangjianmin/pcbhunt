@@ -274,7 +274,7 @@
 		<view class="btn-box row bothSide verCenter">
 			<view>
 				<view class="tt row">
-					<text class="t1">交期日期：2020-09-16</text>
+					<text class="t1">交期日期：{{CalResult.SendDate}}</text>
 				</view>
 				<view class="text row">
 					<text class="price-text">{{CalResult.Title}}</text>
@@ -283,15 +283,15 @@
 				</view>
 				<view class="ttt row">
 					<text class="t1">原价：</text>
-					<text class="t2">￥129565</text>
+					<text class="t2">￥{{CalResult.OrignProFee}}</text>
 				</view>
 			</view>
 			<view class="btn-2 row rowCenter verCenter" @click="joinCar()">加入购物车</view>
 		</view>
-		<view class="tip row rowCenter">
+		<!-- <view class="tip row rowCenter">
 			<text class="t1">加入购物车表示已同意</text>
 			<text class="t2" @click="tip()">《计价工艺免责声明》</text>
-		</view>
+		</view> -->
 		<uni-popup ref="pop" type="center">
 			<view class="layer-box">
 				<view class="layer-title-box row verCenter rowCenter">
