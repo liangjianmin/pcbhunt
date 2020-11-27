@@ -48,7 +48,7 @@
 				width: calc(100% - 100rpx);
 			}
 			.pick-wrap {
-				width: 100%;
+				width: calc(100% - 100rpx);
 			}
 			.wrap {
 				width: calc(100% - 192rpx);
@@ -311,6 +311,10 @@
 	}
 }
 
+.pb0{
+	padding-bottom: 0;
+}
+
 .layer-box {
 	width: 640rpx;
 	text-align: center;
@@ -324,7 +328,71 @@
 			margin-bottom: 24rpx;
 		}
 	}
+	.qty-box{
+		padding-top: 30rpx;
+		.list{
+			flex-wrap: wrap;
+			padding: 0 24rpx;
+			.box{
+				flex: 0 0 25%;
+				margin-bottom: 46rpx;
+				.icon{
+					width: 28rpx;
+					height: 28rpx;
+					background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/c5466a8f823233677130d31aea66d53a.png') no-repeat center;
+					background-size: cover;
+				}
+				.num{
+					margin-left: 10rpx;
+					font-size: 32rpx;
+					color: #323233;
+				}
+				&.curr{
+					.icon{
+						background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/f72ebac115e966bb21b3dd11efaeb7da.png') no-repeat center;
+						background-size: cover;
+					}
+				}
+			}
+		}
+		.input-box{
+			width: 592rpx;
+			height: 80rpx;
+			background: #FFFFFF;
+			border: 2rpx solid #EEEEEE;
+			margin: 0 auto;
+			padding-left: 20rpx;
+			text{
+				font-size: 28rpx;
+				color: #323233;
+			}
+			.inp{
+				text-align: left;
+				padding-left: 20rpx;
+				font-size: 28rpx;
+			}
+		}
+		.btn{
+			margin-top: 30rpx;
+			border-top: 1px solid #E5E5E5;
+			height: 112rpx;
+			.btn-1{
+				height: 110rpx;
+				flex: 0  0 50%;
+				font-size: 32rpx;
+				color: #323233;
+				border-right: 1px solid #E5E5E5;
+			}
+			.btn-2{
+				height: 110rpx;
+				flex: 0  0 50%;
+				font-size: 34rpx;
+				color: #008AFF;
+			}
+		}
+	}
 }
+
 
 /*  #ifdef  MP-WEIXIN  */
 .h-index {

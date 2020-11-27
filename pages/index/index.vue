@@ -18,15 +18,13 @@
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板子数量</text>
-				<picker class="pick-box" @change="bindPickerChange" :value="index" :range="InitDatas.NumValues">
-					<view class="pick-wrap input-type1 row bothSide verCenter">
-						<view class="row verCenter"><input type="text" placeholder="请选择" v-model="QuoteObj.Num" placeholder-style="color:#cccccc;" /></view>
-						<view class="unit row rowCenter verCenter">
-							<text class="t1">{{this.PcbUnitShow}}</text>
-							<text class="iconfont iconyoujiantou"></text>
-						</view>
+				<view class="pick-wrap input-type1 row bothSide verCenter" @click="choiceQty()">
+					<view class="row verCenter"><input type="text" placeholder="请选择" disabled="disabled" v-model="QuoteObj.Num" placeholder-style="color:#cccccc;" /></view>
+					<view class="unit row rowCenter verCenter">
+						<text class="t1">{{this.PcbUnitShow}}</text>
+						<text class="iconfont iconyoujiantou"></text>
 					</view>
-				</picker>
+				</view>
 			</view>
 			<view class="pcb-input row verCenter h1">
 				<text class="label">板材类型</text>
@@ -303,6 +301,179 @@
 					<text>猎板以“让电子制造更高效”为企业使命，秉承“ 诚信为本，质量第一”的发展理念,为用户提供更优质的PCB定制服务。我们承诺：不流入不良品、不生产不良品、不流出不良品，用心做好每一块板。</text>
 					<text>猎板极速PCB智慧工厂年产能25万平方米，占地面积数万平方米，核心设备数量160+，员工人数200+，多层线路板工程师50+。猎板深知产品的交期和品质的重要性，坚持使用行业一线品牌设备
 						(台湾东台钻机、台湾竞铭自动沉铜、台湾竞铭电镀线等)，坚持优质的设备工艺配置，选用真空蚀刻、高解析光源灯组、进口西风精铣主轴.</text>
+				</view>
+			</view>
+		</uni-popup>
+		<uni-popup ref="qty" type="center">
+			<view class="layer-box pb0">
+				<view class="layer-title-box row verCenter rowCenter">
+					<text class="title">选择数量</text>
+				</view>
+				<view class="qty-box">
+					<scroll-view scroll-y="true" style="height: 540rpx;">
+						<view class="list row verCenter">
+							<view class="box curr row verCenter">
+								<text class="icon"></text>
+								<text class="num">5</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">10</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">15</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">20</text>
+							</view>
+							<view class="box  row verCenter">
+								<text class="icon"></text>
+								<text class="num">25</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">30</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">40</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">50</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">75</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">100</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">125</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">150</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">200</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">250</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">300</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">350</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">400</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">450</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">600</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">700</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">800</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">900</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">1000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">1500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">2000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">2500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">3000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">3500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">4000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">4500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">5000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">5500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">6000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">6500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">7000</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">7500</text>
+							</view>
+							<view class="box row verCenter">
+								<text class="icon"></text>
+								<text class="num">8000</text>
+							</view>
+						</view>
+					</scroll-view>
+					<view class="input-box row verCenter">
+						<text>其他数量</text>
+						<input type="text" value="" placeholder="请输入" class="inp" placeholder-style="color:#CCCCCC;"/>
+					</view>
+					<view class="btn row avarage verCenter">
+						<view class="btn-1 row rowCenter verCenter">取消</view>
+						<view class="btn-2 row rowCenter verCenter">确定</view>
+					</view>
 				</view>
 			</view>
 		</uni-popup>
@@ -866,6 +1037,9 @@
 		methods: {
 			bindPickerChange(val) {
 				console.log(val);
+			},
+			choiceQty(){
+				this.$refs.qty.open();
 			},
 			getData() {},
 			resetSize() {
