@@ -366,6 +366,9 @@
 						{
 							Title: '4',
 							Value: 4
+						},{
+							Title: '6',
+							Value: 6
 						},
 					],
 					PcbUnitSelValues: [{
@@ -777,7 +780,7 @@
 				}
 			},
 			'QuoteObj.BoardLayers': function(val) {
-				console.log('11111'+val);
+				//console.log('11111'+val);
 				if (this.getIsSupportThickness() == false) {
 					this.QuoteObj.BoardThickness = 1.6;
 				}
@@ -913,13 +916,15 @@
 					return [0.6, 0.8, 1.0, 1.2, 1.6, 2.0, 2.4];
 				} else if (this.QuoteObj.BoardLayers == 4) {
 					return [0.8, 1.0, 1.2, 1.6, 2.0];
+				}else if (this.QuoteObj.BoardLayers == 6) {
+					return [0.8, 1.0, 1.2, 1.6, 2.0];
 				}
 			},
 			getIsSupportThickness() {
 				return !(this.getSupportThickness().indexOf(this.QuoteObj.BoardThickness) == -1);
 			},
 			getSupportBoardLayer() {
-				if (this.QuoteObj.BoardType == 10) return [1, 2, 4];
+				if (this.QuoteObj.BoardType == 10) return [1, 2, 4, 6];
 				else if (this.QuoteObj.BoardType == 40) {
 					return [1];
 				}
@@ -930,6 +935,8 @@
 					return [1, 2];
 				} else if (this.QuoteObj.BoardLayers == 4) {
 					return [1, 2];
+				}else if (this.QuoteObj.BoardLayers == 6) {
+					return [1];
 				}
 			},
 			getSupportLineWeight() {
