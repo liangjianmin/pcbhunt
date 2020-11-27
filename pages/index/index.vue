@@ -272,7 +272,7 @@
 		<view class="btn-box row bothSide verCenter">
 			<view>
 				<view class="tt row">
-					<text class="t1">交期日期：2020-09-16</text>
+					<text class="t1">交期日期：{{CalResult.SendDate}}</text>
 				</view>
 				<view class="text row">
 					<text class="price-text">{{CalResult.Title}}</text>
@@ -281,15 +281,15 @@
 				</view>
 				<view class="ttt row">
 					<text class="t1">原价：</text>
-					<text class="t2">￥129565</text>
+					<text class="t2">￥{{CalResult.OrignProFee}}</text>
 				</view>
 			</view>
 			<view class="btn-2 row rowCenter verCenter" @click="joinCar()">加入购物车</view>
 		</view>
-		<view class="tip row rowCenter">
+		<!-- <view class="tip row rowCenter">
 			<text class="t1">加入购物车表示已同意</text>
 			<text class="t2" @click="tip()">《计价工艺免责声明》</text>
-		</view>
+		</view> -->
 		<uni-popup ref="pop" type="center">
 			<view class="layer-box">
 				<view class="layer-title-box row verCenter rowCenter">
@@ -537,6 +537,9 @@
 						{
 							Title: '4',
 							Value: 4
+						},{
+							Title: '6',
+							Value: 6
 						},
 					],
 					PcbUnitSelValues: [{
@@ -948,7 +951,7 @@
 				}
 			},
 			'QuoteObj.BoardLayers': function(val) {
-				console.log('11111'+val);
+				//console.log('11111'+val);
 				if (this.getIsSupportThickness() == false) {
 					this.QuoteObj.BoardThickness = 1.6;
 				}
@@ -1087,13 +1090,15 @@
 					return [0.6, 0.8, 1.0, 1.2, 1.6, 2.0, 2.4];
 				} else if (this.QuoteObj.BoardLayers == 4) {
 					return [0.8, 1.0, 1.2, 1.6, 2.0];
+				}else if (this.QuoteObj.BoardLayers == 6) {
+					return [0.8, 1.0, 1.2, 1.6, 2.0];
 				}
 			},
 			getIsSupportThickness() {
 				return !(this.getSupportThickness().indexOf(this.QuoteObj.BoardThickness) == -1);
 			},
 			getSupportBoardLayer() {
-				if (this.QuoteObj.BoardType == 10) return [1, 2, 4];
+				if (this.QuoteObj.BoardType == 10) return [1, 2, 4, 6];
 				else if (this.QuoteObj.BoardType == 40) {
 					return [1];
 				}
@@ -1104,6 +1109,8 @@
 					return [1, 2];
 				} else if (this.QuoteObj.BoardLayers == 4) {
 					return [1, 2];
+				}else if (this.QuoteObj.BoardLayers == 6) {
+					return [1];
 				}
 			},
 			getSupportLineWeight() {
