@@ -37,6 +37,9 @@ import Util from '@/util/index.js';
 export default {
 	data() {
 		return {
+			backpage: '',
+			backtype: '',
+			url: [],
 			Account: '',
 			ValidCode: '',
 			nc_token: '',
@@ -51,9 +54,17 @@ export default {
 		};
 	},
 	onLoad(options) {
-		console.log(options);
-		//注册来源  15天缓存
+		this.backpage = options.backpage;
+		this.backtype = options.backtype;
+		if (options) {
+			for (let i in options) {
+				if (i !== 'backpage' && i !== 'backtype') {
+					this.url.push('&' + i + '=' + options[i]);
+				}
+			}
+		}
 
+		//注册来源  15天缓存
 		var c = options.C || options.c;
 		var d = options.D || options.d;
 
@@ -74,14 +85,14 @@ export default {
 		Account(val) {
 			if (this.Account && this.ValidCode) {
 				this.disabled = false;
-			}else{
+			} else {
 				this.disabled = true;
 			}
 		},
 		ValidCode(val) {
 			if (this.Account && this.ValidCode) {
 				this.disabled = false;
-			}else{
+			} else {
 				this.disabled = true;
 			}
 		}
@@ -176,19 +187,19 @@ export default {
 
 				return;
 			}
-			
+
 			uni.showLoading({
 				title: ''
 			});
-			
-			this.request(API.MessageSendValidCodeAfs,'POST',{
-					Mobile: this.Account,
-					afs_nc_token: this.nc_token,
-					afs_nc_sessionid: this.csessionid,
-					afs_nc_sign: this.sig
+
+			this.request(API.MessageSendValidCodeAfs, 'POST', {
+				Mobile: this.Account,
+				afs_nc_token: this.nc_token,
+				afs_nc_sessionid: this.csessionid,
+				afs_nc_sign: this.sig
 			}).then(res => {
 				uni.hideLoading();
-				
+
 				if (res.Code === 200) {
 					this.countdDown(); //倒计时开始
 				} else {
@@ -242,21 +253,34 @@ export default {
 				});
 				return;
 			}
-			
-			this.request(API.UserMessageLogin,'POST',{
-					Mobile: this.Account,
-					ValidCode: this.ValidCode,
-					afs_nc_token: this.nc_token,
-					afs_nc_sessionid: this.csessionid,
-					afs_nc_sign: this.sig,
-					WebPromotion: this.WebPromotion,
-					WebPromotiond: this.WebPromotiond
-			}).then((res) => {
+
+			this.request(API.UserMessageLogin, 'POST', {
+				Mobile: this.Account,
+				ValidCode: this.ValidCode,
+				afs_nc_token: this.nc_token,
+				afs_nc_sessionid: this.csessionid,
+				afs_nc_sign: this.sig,
+				WebPromotion: this.WebPromotion,
+				WebPromotiond: this.WebPromotiond
+			}).then(res => {
 				if (res.Code === 200) {
-					Util.setCookie('token',res.Data.Token);
+					Util.setCookie('token', res.Data.Token);
+					if (this.backtype == 1) {
+						uni.reLaunch({
+							url: this.backpage + '?jump=1' + this.url.join('')
+						});
+					} else if (this.backtype == 2) {
+						uni.switchTab({
+							url: this.backpage
+						});
+					} else {
+						uni.switchTab({
+							url: '/pages/index/index'
+						});
+					}
 				} else {
 					uni.showToast({
-						icon:'warn',
+						icon: 'warn',
 						title: res.Message,
 						duration: 200000
 					});
