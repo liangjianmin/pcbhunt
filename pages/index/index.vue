@@ -840,7 +840,7 @@
 					EdgeRailWidth: 0,
 					GrooveWidth: 0,
 					GrooveHeight: 0,
-					Num: '5000',
+					Num: '',
 					BoardLayers: 2,
 					PcbKinds: 1,
 					BoardType: 10,
