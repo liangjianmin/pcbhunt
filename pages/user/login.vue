@@ -264,7 +264,15 @@ export default {
 				WebPromotiond: this.WebPromotiond
 			}).then(res => {
 				if (res.Code === 200) {
+					
+					// #ifdef H5
 					Util.setCookie('token', res.Data.Token);
+					// #endif
+					
+					// #ifdef MP-WEIXIN
+					uni.setStorage('token', res.Data.Token);
+					// #endif
+
 					if (this.backtype == 1) {
 						uni.reLaunch({
 							url: this.backpage + '?jump=1' + this.url.join('')

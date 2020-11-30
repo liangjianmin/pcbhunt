@@ -70,72 +70,7 @@
 						</uni-swipe-action-item>
 					</uni-swipe-action>
 				</view>
-			</view>
-			<view class="boxs">
-				<view class="title row verCenter">交期：2020-09-16 18:00</view>
-				<view class="data-box">
-					<uni-swipe-action>
-						<uni-swipe-action-item :right-options="options" @click="bindClick(item.id, item.unique)" @change="swipeChange($event, index)">
-							<view class="box row bothSide verCenter">
-								<view class="left-bar row verCenter">
-									<view class="iconfont icontongyi"></view>
-									<view class="text column">
-										<view class="tt row">
-											<text class="tt-a">20081200016</text>
-											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
-										</view>
-										<text class="t1">尺寸：25.00*25.00cm</text>
-										<text class="t1">数量：300PCS</text>
-										<text class="t2">层数：2层</text>
-										<view>
-											<text class="t3">预估到手价：</text>
-											<text class="t4">￥</text>
-											<text class="t5">356.22</text>
-										</view>
-									</view>
-								</view>
-								<view class="right-bar column">
-									<text class="t1">更新时间:08-17 17:47</text>
-									<view class="btn row rowCenter verCenter">上传文件</view>
-									<view>
-										<text class="t2">￥</text>
-										<text class="t3">3,232.00</text>
-									</view>
-								</view>
-							</view>
-						</uni-swipe-action-item>
-						<uni-swipe-action-item :right-options="options" @click="bindClick(item.id, item.unique)" @change="swipeChange($event, index)">
-							<view class="box row bothSide verCenter disabled">
-								<view class="left-bar row verCenter">
-									<view class="iconfont icontongyi"></view>
-									<view class="text column">
-										<view class="tt row">
-											<text class="tt-a">20081200016</text>
-											<navigator class="tt-b" url="/pages/cart/detail" hover-class="none">明细</navigator>
-										</view>
-										<text class="t1 dis">尺寸：25.00*25.00cm</text>
-										<text class="t1 dis">数量：300PCS</text>
-										<text class="t2 dis">层数：2层</text>
-									</view>
-								</view>
-								<view class="right-bar column">
-									<view class="time">
-										<text class="t1">更新时间:08-17 17:47</text>
-										<text class="txt">失效</text>
-									</view>
-									<view class="disabled-text">
-										<view class="d-1">珠海市猎板PCB打样.doc</view>
-										<view>
-											<text class="d-2">￥</text>
-											<text class="d-3">3,232.00</text>
-										</view>
-									</view>
-								</view>
-							</view>
-						</uni-swipe-action-item>
-					</uni-swipe-action>
-				</view>
-			</view>
+			</view>	
 		</view>
 		<view class="total-box row bothSide verCenter">
 			<view class="total row verCenter">
@@ -163,6 +98,7 @@ import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 export default {
 	data() {
 		return {
+			carartList:{},
 			options: [
 				{
 					text: '删除',
@@ -180,7 +116,9 @@ export default {
 	methods: {
 		getData() {
 			this.request(API.GetCartList, 'POST', {}).then(res => {
-				
+				if(res.Code === 200){
+					this.carartList=res.Data;
+				}
 			});
 		},
 		submit(){
