@@ -1,7 +1,7 @@
 .cart {
 	min-height: 100%;
 	background: #f7f8fa;
-	padding-bottom: 120rpx;
+	
 	.prompt {
 		height: 76rpx;
 		background: #fff9ed;
@@ -29,6 +29,8 @@
 				border-radius: 8rpx 8rpx 0px 0px;
 				padding-left: 24rpx;
 				font-weight: bold;
+				font-size: 28rpx;
+				color: #323233;
 			}
 			.data-box {
 				width: 100%;
@@ -145,6 +147,7 @@
 							font-size: 20rpx;
 							color: #666;
 							margin-bottom: 30rpx;
+							white-space: nowrap;
 						}
 						.btn {
 							width: 156rpx;
@@ -155,6 +158,7 @@
 							font-size: 24rpx;
 							color: #008aff;
 							margin-bottom: 70rpx;
+							margin-right: 0;
 						}
 						.btn-re{
 							width: 156rpx;
@@ -183,7 +187,6 @@
 	.total-box {
 		position: fixed;
 		left: 0;
-		bottom: 0;
 		width: 100%;
 		height: 112rpx;
 		padding: 0 30rpx 0 30rpx;
@@ -246,3 +249,24 @@
 		}
 	}
 }
+
+
+
+/*  #ifdef  MP-WEIXIN  */
+.cart{
+	padding-bottom: 120rpx;
+}
+.total-box {
+	bottom: 0;
+}
+
+/*  #endif  */
+
+/*  #ifdef  H5  */
+.cart{
+	padding-bottom: 220rpx;
+}
+.total-box {
+	bottom: 102rpx;
+}
+/*  #endif  */ 

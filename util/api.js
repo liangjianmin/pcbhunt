@@ -26,7 +26,11 @@ const API = {
 	/**
 	 * 获取购物车列表，带明细
 	 * */
-	GetCartList: API_BASE + "/api/Cart/GetCartList"
+	GetCartList: API_BASE + "/api/Cart/GetCartList",
+	/**
+	 * 上传附件
+	 * */
+	UploadCartFile: API_BASE + "/api/Cart/UploadCartFile"
 
 }
 
