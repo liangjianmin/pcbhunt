@@ -237,7 +237,7 @@
 			<view class="pcb-input row verCenter h1">
 				<text class="label">阻抗控制</text>
 				<view class="wrap list row verCenter">
-					<view @click="tab(item.Value, 'ImpedanceSize')" :val="item.Value" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.ImpedanceSize == item.Value }"
+					<view @click="tab(item.Value, 'ImpedanceSize')" :val="item.Value" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.ImpedanceSizeArr.indexOf(item.Value) != -1  }"
 					 v-for="(item, index) in InitDatas.ImpedanceSizeValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
@@ -312,167 +312,20 @@
 				<view class="qty-box">
 					<scroll-view scroll-y="true" style="height: 540rpx;">
 						<view class="list row verCenter">
-							<view class="box curr row verCenter">
-								<text class="icon"></text>
-								<text class="num">5</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">10</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">15</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">20</text>
-							</view>
-							<view class="box  row verCenter">
-								<text class="icon"></text>
-								<text class="num">25</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">30</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">40</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">50</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">75</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">100</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">125</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">150</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">200</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">250</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">300</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">350</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">400</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">450</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">600</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">700</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">800</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">900</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">1000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">1500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">2000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">2500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">3000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">3500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">4000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">4500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">5000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">5500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">6000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">6500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">7000</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">7500</text>
-							</view>
-							<view class="box row verCenter">
-								<text class="icon"></text>
-								<text class="num">8000</text>
+							<view @click="selnum(item,'sel')" class="box row verCenter" :val="item" :class="{ curr: QuoteObj.Num == item }"
+							 v-for="(item, index) in InitDatas.BoardNumValues" :key="index">
+							 <text class="icon"></text>
+							 <text class="num">{{ item }}</text>
 							</view>
 						</view>
 					</scroll-view>
 					<view class="input-box row verCenter">
 						<text>其他数量</text>
-						<input type="text" value="" placeholder="请输入" class="inp" placeholder-style="color:#CCCCCC;"/>
+						<input type="text" value="" v-model="InputNum" placeholder="请输入" class="inp" placeholder-style="color:#CCCCCC;"/>
 					</view>
 					<view class="btn row avarage verCenter">
-						<view class="btn-1 row rowCenter verCenter">取消</view>
-						<view class="btn-2 row rowCenter verCenter">确定</view>
+						<view class="btn-1 row rowCenter verCenter" @click="selnum(0,'close')">取消</view>
+						<view class="btn-2 row rowCenter verCenter" @click="selnum(0,'input')">确定</view>
 					</view>
 				</view>
 			</view>
@@ -777,12 +630,24 @@
 							Value: ''
 						},
 						{
+							Title: '45Ω',
+							Value: '45'
+						},
+						{
 							Title: '50Ω',
-							Value: '50Ω'
+							Value: '50'
+						},
+						{
+							Title: '90Ω',
+							Value: '90'
 						},
 						{
 							Title: '100Ω',
-							Value: '100Ω'
+							Value: '100'
+						},
+						{
+							Title: '110Ω',
+							Value: '110'
 						},
 					],
 					IsImpedanceReportValues: [{
@@ -820,11 +685,20 @@
 							Title: '不指定品牌',
 							Value: 100
 						},
-					]
+					],
+					BoardNumValues:[5,10,15,20,25,30,
+									40,50,75,100,125,
+									150,200,250,300,350,
+									400,450,500,600,700,
+									800,900,1000,1500,2000,
+									2500,3000,3500,4000,4500,
+									5000,5500,6000,6500,7000,
+									7500,8000]
 				},
 				PcbUnitSel30Show: false,
 				PcbUnitSel20Show: false,
 				IsImpedanceReportShow: false,
+				InputNum:'',
 				QuoteObj: {
 					PcbUnit: 10,
 					SetType: 0,
@@ -859,6 +733,7 @@
 					TestType: 10,
 					Goldfinger: false,
 					ImpedanceSize: '',
+					ImpedanceSizeArr:[''],
 					PCBFileConfirm: false,
 					FR4Tg: 'TG130',
 					AcceptCrossed: true,
@@ -888,8 +763,11 @@
 			//this.refresh();
 		},
 		computed: {
+			// ImpedanceSize:function(){
+			// 	return this.QuoteObj.ImpedanceSizeArr.join(',');
+			// },
 			getImpedanceReportShow: function() {
-				if (this.QuoteObj.ImpedanceSize == "") {
+				if (this.QuoteObj.ImpedanceSizeArr.indexOf('') != -1) {
 					return false;
 				} else {
 					return true;
@@ -938,7 +816,6 @@
 
 		},
 		watch: {
-			
 			'QuoteObj.PcbUnitSel': function(val, old) {
 				if (val == 10)
 					this.QuoteObj.PcbUnit = 10;
@@ -985,10 +862,6 @@
 			'QuoteObj.SurfaceFinish': function(val) {
 				if (val != 30) //金手指默认沉金工艺
 					this.QuoteObj.Goldfinger = false;
-			},
-			'QuoteObj.ImpedanceSize': function(val) {
-				if (val != '无')
-					this.QuoteObj.IsImpedanceReport = false;
 			},
 			'QuoteObj.SingleBoardWidth': function(val) {
 				if (this.QuoteObj.SetType != 20)
@@ -1043,6 +916,28 @@
 			},
 			choiceQty(){
 				this.$refs.qty.open();
+			},
+			selnum(val,key){
+				if(key=='sel'){
+				this.QuoteObj.Num=val;
+				this.$refs.qty.close();
+				}else if(key=='input'){
+					if(this.InputNum<500||this.InputNum%50!==0)
+					{
+						 uni.showToast({
+						 	title: '自定义数量必须满足>500并且是50的倍数！',
+						 	duration: 2000,
+						 	icon: 'none'
+						 });
+						return;
+					}else{
+						this.QuoteObj.Num=this.InputNum;
+						this.$refs.qty.close();
+					}
+				}
+				else if(key=='close'){
+					this.$refs.qty.close();
+				}
 			},
 			getData() {},
 			resetSize() {
@@ -1164,6 +1059,7 @@
 					return this.getSupportBoardBrand().indexOf(val) == -1;
 			},
 			tab(index, type) {
+				console.log(type);
 				if (type == 'PcbUnitSel') {
 					//出货方式
 						this.PcbUnitSel30Show = false;
@@ -1193,7 +1089,31 @@
 					} else {
 						this.QuoteObj.PcbUnitSel = index;
 					}
-				} else {
+				}else if(type=='ImpedanceSize'){
+					if(index=='')
+						this.QuoteObj.ImpedanceSizeArr=[''];
+					else{
+						this.QuoteObj.ImpedanceSizeArr.forEach((item,index2,array)=>{
+							if(item==''){
+								this.QuoteObj.ImpedanceSizeArr.splice(index2,1);
+							}
+						})
+						
+						if(this.QuoteObj.ImpedanceSizeArr.indexOf(index) != -1){
+							this.QuoteObj.ImpedanceSizeArr.forEach((item,index2,array)=>{
+								if(item==index){
+									this.QuoteObj.ImpedanceSizeArr.splice(index2,1);
+								}
+							})
+							
+						}else{
+							this.QuoteObj.ImpedanceSizeArr.push(index);
+						}
+					}
+					this.QuoteObj.ImpedanceSize=(this.QuoteObj.ImpedanceSizeArr.join(','));
+					console.log(this.QuoteObj.ImpedanceSize);
+				}
+				 else {
 					for (var name in this.QuoteObj) {
 						if (name == type) {
 							console.log(name + '=' + index);
