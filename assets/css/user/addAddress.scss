@@ -14,12 +14,19 @@
 				color: #323233;
 				margin-right: 80rpx;
 			}
-			.wrap{
+			.wrap {
 				flex: 0 0 504rpx;
-				input{
+				.xb1{
 					font-size: 28rpx;
 				}
-				.iconfont{
+				.xb2{
+					color:#CCCCCC;
+					font-size: 28rpx;
+				}
+				input {
+					font-size: 28rpx;
+				}
+				.iconfont {
 					font-size: 22rpx;
 					color: #999;
 				}
@@ -29,20 +36,28 @@
 			}
 		}
 	}
-	.default{
+	.default {
 		margin-top: 36rpx;
 		margin-left: 30rpx;
-		.iconfont{
+		.iconfont {
 			font-size: 28rpx;
-			color: #008AFF;
+			color: #008aff;
 		}
-		.t1{
+		.t1 {
 			margin-left: 12rpx;
 			font-size: 28rpx;
 			color: #323233;
 		}
+		.disabled {
+			width: 20rpx;
+			height: 20rpx;
+			border: 1px solid #666666;
+			font-size: 0;
+			border-radius: 50%;
+			background: #FFFFFF;
+		}
 	}
-	.btn{
+	.btn {
 		margin: 40rpx 24rpx 0 24rpx;
 		height: 88rpx;
 		background: #008aff;

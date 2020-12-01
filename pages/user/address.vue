@@ -1,49 +1,16 @@
 <template>
 	<view class="address">
-		<view class="list">
-			<view class="box row bothSide verCenter curr">
+		<view class="list" v-if="allAddress.length > 0">
+			<view class="box row bothSide verCenter" :class="{curr:active==index}" v-for="(item,index) in allAddress" :key="index" @click="tab(index,allAddress[index].Id)">
 				<view class="column">
 					<view>
-						<text class="t1">张双合</text>
-						<text class="t2">152*****3912</text>
+						<text class="t1">{{item.ContactName}}</text>
+						<text class="t2">{{item.ContactMobile}}</text>
 						<text class="iconfont iconiconaddressedit"></text>
 					</view>
-					<text class="t3">浙江省杭州市拱墅区相符街道xxxxxxxC座1601</text>
+					<text class="t3">{{item.ProvinceName}}{{item.CityName}}{{item.AreaName}}{{item.Address}}</text>
 				</view>
-				<text class="iconfont icon1ElementRadioOn"></text>
-			</view>
-			<view class="box row bothSide verCenter">
-				<view class="column">
-					<view>
-						<text class="t1">张双合</text>
-						<text class="t2">152*****3912</text>
-						<text class="iconfont iconiconaddressedit"></text>
-					</view>
-					<text class="t3">浙江省杭州市拱墅区相符街道xxxxxxxC座1601</text>
-				</view>
-				<text class="iconfont icon1ElementRadioOn"></text>
-			</view>
-			<view class="box row bothSide verCenter">
-				<view class="column">
-					<view>
-						<text class="t1">张双合</text>
-						<text class="t2">152*****3912</text>
-						<text class="iconfont iconiconaddressedit"></text>
-					</view>
-					<text class="t3">浙江省杭州市拱墅区相符街道xxxxxxxC座1601</text>
-				</view>
-				<text class="iconfont icon1ElementRadioOn"></text>
-			</view>
-			<view class="box row bothSide verCenter">
-				<view class="column">
-					<view>
-						<text class="t1">张双合</text>
-						<text class="t2">152*****3912</text>
-						<text class="iconfont iconiconaddressedit"></text>
-					</view>
-					<text class="t3">浙江省杭州市拱墅区相符街道xxxxxxxC座1601</text>
-				</view>
-				<text class="iconfont icon1ElementRadioOn"></text>
+				<text class="iconfont icon1ElementRadioOn" v-if="item.IsDefault"></text>
 			</view>
 		</view>
 		<navigator class="btn row rowCenter verCenter" url="/pages/user/addAddress" hover-class="none">添加新收货人</navigator>
@@ -54,10 +21,42 @@
 import { API } from '@/util/api.js';
 export default {
 	data() {
-		return {}; 
+		return {
+			allAddress:[],
+			active:0
+		};
 	},
 	onLoad(options) {},
-	methods: {}
+	onShow() {
+		this.getData();
+	},
+	methods: {
+		getData() {
+			this.request(API.GetAllAddress, 'GET', {},true).then(res => {
+				if (res.Code === 200) {
+					this.allAddress = res.Data;
+				}
+			});
+		},
+		tab(index,Id){
+			this.active=index;
+			this.request(API.UptDefault, 'POST', {Id:Id},true).then(res => {
+				if (res.Code === 200) {
+					uni.showToast({
+						title: '设置成功',
+						icon: 'success',
+						duration: 2000
+					});
+				} else {
+					uni.showToast({
+						title: res.Message,
+						icon: 'none',
+						duration: 2000
+					});
+				}
+			});
+		}
+	}
 };
 </script>
 
