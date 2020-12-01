@@ -2,6 +2,20 @@
 	background: #f7f8fa;
 	padding-bottom: 142rpx;
 	min-height: 100%;
+	.order-address-empty {
+		height: 100rpx;
+		background: #ffffff;
+		padding: 0 30rpx 0 30rpx;
+		.t1 {
+			font-size: 28rpx;
+			color: #323233;
+			font-weight: bold;
+		}
+		.iconfont {
+			font-size: 24rpx;
+			color: #999;
+		}
+	}
 	.order-address {
 		height: 188rpx;
 		background: #ffffff;
@@ -32,6 +46,8 @@
 			font-size: 24rpx;
 			color: #999999;
 			line-height: 34rpx;
+			width: 100%;
+			text-align: left;
 		}
 	}
 	.tab {

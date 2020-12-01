@@ -1,14 +1,18 @@
 <template>
 	<view class="order-box">
-		<navigator class="order-address column rowCenter verCenter" url="/pages/user/address" hover-class="none">
+		<navigator v-if="recommendAddress.ContactMobile" class="order-address column rowCenter verCenter" url="/pages/user/address" hover-class="none">
 			<view class="top row bothSide verCenter">
-				<text class="t1">张双合 152*****3912</text>
+				<text class="t1">{{ recommendAddress.ContactName }} {{ recommendAddress.ContactMobile }}</text>
 				<view class="row verCenter">
 					<text class="default row rowCenter verCenter">默认</text>
 					<text class="iconfont iconyoujiantou"></text>
 				</view>
 			</view>
-			<view class="text">浙江省杭州市拱墅区祥符街勾庄道杭行路666号万达广场C座1601室</view>
+			<view class="text">{{ recommendAddress.ProvinceName }}{{ recommendAddress.CityName }}{{ recommendAddress.AreaName }}{{ recommendAddress.Address }}</view>
+		</navigator>
+		<navigator v-else class="order-address-empty row verCenter bothSide" url="/pages/user/address" hover-class="none">
+			<text class="t1">请选择收货地址</text>
+			<text class="iconfont iconyoujiantou"></text>
 		</navigator>
 		<view class="tab row avarage verCenter">
 			<view class="box row rowCenter verCenter curr">分开发货(速度快)</view>
@@ -144,9 +148,7 @@
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">发货单选项</text>
-				<view>
-					<switch checked  class="switch" color="#008AFF"/>
-				</view>
+				<view><switch checked class="switch" color="#008AFF" /></view>
 			</view>
 		</view>
 		<view class="textarea-box">
@@ -183,10 +185,23 @@
 import { API } from '@/util/api.js';
 export default {
 	data() {
-		return {};
+		return {
+			recommendAddress: {}
+		};
 	},
 	onLoad(options) {},
-	methods: {}
+	onShow() {
+		this.getData();
+	},
+	methods: {
+		getData() {
+			this.request(API.GetRecommendAddress, 'GET', {}, true).then(res => {
+				if (res.Code === 200) {
+					this.recommendAddress = res.Data;
+				}
+			});
+		}
+	}
 };
 </script>
 

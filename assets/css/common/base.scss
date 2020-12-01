@@ -23,3 +23,19 @@
 	font-size: 24rpx;
 	color: #008aff;
 }
+
+.no-data-box{
+	text-align: center;
+}
+.no-data-box .bg{
+	width: 180rpx;
+	height: 155rpx;
+	background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/178e29273d79b6a0dd8fc35f37a91bd0.png') no-repeat center;
+	background-size: cover;
+	margin: 0 auto;
+}
+
+.no-data-box .text{
+	font-size: 32rpx;
+	color: #666;
+}

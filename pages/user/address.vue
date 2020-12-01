@@ -13,6 +13,12 @@
 				<text class="iconfont icon1ElementRadioOn" v-if="item.IsDefault"></text>
 			</view>
 		</view>
+		<template v-else>
+			<view class="no-data-box column rowCenter">
+				<view class="bg"></view>
+				<text class="text">很抱歉，暂无数据</text>
+			</view>
+		</template>
 		<navigator class="btn row rowCenter verCenter" url="/pages/user/addAddress" hover-class="none">添加新收货人</navigator>
 	</view>
 </template>
