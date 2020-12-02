@@ -61,6 +61,16 @@
 			"navigationBarTitleText": "计价"
 		}
 	},{
+		"path": "pages/user/contacts",
+		"style": {
+			"navigationBarTitleText": "联系人"
+		}
+	},{
+		"path": "pages/user/pay",
+		"style": {
+			"navigationBarTitleText": "支付"
+		}
+	},{
 		"path": "pages/cart/detail",
 		"style": {
 			"navigationBarTitleText": "计价详情页"

@@ -1,0 +1,49 @@
+.add-address {
+	min-height: 100%;
+	background: #f7f8fa;
+	.list {
+		background: #ffffff;
+		.box {
+			margin-left: 24rpx;
+			border-bottom: 1px solid #e7e7e7;
+			padding: 0 24rpx 0 0;
+			height: 100rpx;
+			.t1 {
+				width: 140rpx;
+				font-size: 28rpx;
+				color: #323233;
+				margin-right: 52rpx;
+				white-space: nowrap;
+			}
+			.wrap {
+				flex: 0 0 504rpx;
+				.xb1{
+					font-size: 28rpx;
+				}
+				.xb2{
+					color:#CCCCCC;
+					font-size: 28rpx;
+				}
+				input {
+					font-size: 28rpx;
+				}
+				.iconfont {
+					font-size: 22rpx;
+					color: #999;
+				}
+			}
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+	.btn {
+		margin: 40rpx 24rpx 0 24rpx;
+		height: 88rpx;
+		background: #008aff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+		border-radius: 44rpx;
+		font-size: 32rpx;
+		color: #ffffff;
+	}
+}

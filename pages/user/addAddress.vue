@@ -15,7 +15,6 @@
 					<picker mode="multiSelector" @change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange" :value="multiIndex" :range="multiArray" range-key="ClassName">
 						<view class="xb1" v-if="provinceName != '' || cityName != '' || areaName != ''">{{ provinceName }} {{ cityName }} {{ areaName }}</view>
 						<view class="xb2" v-else>选中所在省份、城市、区县</view>
-						<!-- <input type="text" placeholder="选中所在省份、城市、区县" placeholder-style="color:#CCCCCC;" disabled="disabled"/> -->
 					</picker>
 				</view>
 			</view>
@@ -95,7 +94,7 @@ export default {
 			}
 		},
 		getProvince() {
-			this.request(API.GetProvinceList, 'GET', {}, true).then(res => {
+			this.request(API.GetProvinceCityList, 'GET', {ParId:0}, true).then(res => {
 				if (res.Code === 200) {
 					this.province = res.Data;
 					this.$set(this.multiArray, 0, this.province);
@@ -104,7 +103,7 @@ export default {
 			});
 		},
 		getCity(proviceId) {
-			this.request(API.GetCityList, 'GET', {
+			this.request(API.GetProvinceCityList, 'GET', {
 				ParId: proviceId
 			}).then(res => {
 				if (res.Code == 200) {
@@ -115,7 +114,7 @@ export default {
 			});
 		},
 		getArea(cityId) {
-			this.request(API.GetAreaList, 'GET', {
+			this.request(API.GetProvinceCityList, 'GET', {
 				ParId: cityId
 			}).then(res => {
 				if (res.Code == 200) {

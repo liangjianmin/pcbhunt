@@ -17,7 +17,7 @@
 										<view class="text column">
 											<view class="tt row">
 												<text class="tt-a">{{ v.CartNo }}</text>
-												<navigator class="tt-b" :url="'/pages/cart/detail?id='+v.Id" hover-class="none">明细</navigator>
+												<navigator class="tt-b" :url="'/pages/cart/detail?id=' + v.Id" hover-class="none">明细</navigator>
 											</view>
 											<text class="t1">尺寸：{{ v.Cart_DetailPCB.BoardWidth }}*{{ v.Cart_DetailPCB.BoardHeight }}cm</text>
 											<text class="t1">数量：{{ v.Num }}PCS</text>
@@ -131,11 +131,16 @@ export default {
 				for (let i = 0; i < this.cartList.length; i++) {
 					this.cartList[i].CartList.map(item => this.$set(item, 'checked', false));
 				}
+
 				this.allFlag = false;
 				this.totalPrice = 0.0;
+				this.idList = [];
 			} else {
 				for (let i = 0; i < this.cartList.length; i++) {
 					this.cartList[i].CartList.map(item => this.$set(item, 'checked', true));
+					for (let j = 0; j < this.cartList[i].CartList.length; j++) {
+						this.idList.push(this.cartList[i].CartList[j].Id);
+					}
 				}
 
 				this.allFlag = true;
@@ -215,8 +220,17 @@ export default {
 			// #endif
 		},
 		submit() {
+			if (this.idList.length <= 0) {
+				uni.showToast({
+					title: '请选择商品',
+					icon: 'none',
+					duration: 2000
+				});
+
+				return false;
+			}
 			uni.navigateTo({
-				url: '/pages/user/order'
+				url: '/pages/user/order?idList='+this.idList.join(',')
 			});
 		},
 		bindClick(id, unique) {

@@ -1,5 +1,5 @@
 <template>
-	<view class="cart-detail">
+	<view class="cart-detail"  v-if="cartList[0]">
 		<view class="prompt row verCenter">
 			<text class="iconfont iconnotice"></text>
 			<text class="text">关于如何手机端上传文件教程，点击查看</text>
@@ -21,98 +21,98 @@
 				<text class="t1">层数：{{ cartList[0].CartList[0].Cart_DetailPCB.BoardLayers }}层</text>
 			</view>
 		</view>
-		<view class="upload row rowCenter verCenter">
+		<view class="uploaddone row bothSide verCenter" v-if="cartList[0].CartList[0].Cart_DetailPCB.PcbFilePath" @click="uploadFilesFun(cartList[0].CartList[0].Id)">
+			<text class="t1">{{ cartList[0].CartList[0].Cart_DetailPCB.PcbFileName }}</text>
+			<text class="t2">重新上传</text>
+		</view>
+		<view class="upload row rowCenter verCenter" v-else  @click="uploadFilesFun(cartList[0].CartList[0].Id)">
 			<text class="iconfont iconiconxinxiupload"></text>
 			<text class="t1">上传工程文件</text>
-		</view>
-		<view class="uploaddone row bothSide verCenter">
-			<text class="t1">蓝牙功放板20200916.zip</text>
-			<text class="t2">重新上传</text>
 		</view>
 		<view class="param-content">
 			<view class="top row bothSide verCenter">
 				<text class="t1">参数详情</text>
-				<text class="t2">返回修改</text>
+				<navigator class="t2" open-type="switchTab" url="/pages/cart/index" hover-class="none">返回修改</navigator>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">出货方式</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.PcbUnitShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.PcbUnitShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">拼版款数</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.PcbKinds }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.PcbKinds }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">板子厚度</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.BoardThickness }}mm</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.BoardThickness }}mm</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">铜厚(内/外)</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.InnerCopperThickness }}oz/{{ CartResponse[0].CartList[0].Cart_DetailPCB.CopperThickness }}oz</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.InnerCopperThickness }}oz/{{ cartList[0].CartList[0].Cart_DetailPCB.CopperThickness }}oz</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">线宽/线距</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.LineWeight }}/{{ CartResponse[0].CartList[0].Cart_DetailPCB.LineWeight }}mil</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.LineWeight }}/{{ cartList[0].CartList[0].Cart_DetailPCB.LineWeight }}mil</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">板材</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.BoardTypeShow }}({{ CartResponse[0].CartList[0].Cart_DetailPCB.BoardBrandShow }})</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.BoardTypeShow }}({{ cartList[0].CartList[0].Cart_DetailPCB.BoardBrandShow }})</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">最小孔径</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.Vias }}mm</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.Vias }}mm</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">阻焊颜色</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.SolderColorShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.SolderColorShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">字符颜色</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.FontColorShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.FontColorShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">焊盘喷锡</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.SurfaceFinishShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.SurfaceFinishShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">测试选项</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.TestTypeShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.TestTypeShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">金手指倒斜边</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.Goldfinger == true ? '需要' : '不需要' }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.Goldfinger == true ? '需要' : '不需要' }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">BGA数量</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.IsBGA == true ? '有' : '无' }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.IsBGA == true ? '有' : '无' }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">阻抗控制</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.ImpedanceSize }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.ImpedanceSize }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">阻抗报告</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.IsImpedanceReport == true ? '需要' : '不需要' }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.IsImpedanceReport == true ? '需要' : '不需要' }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">工艺边参数</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.EdgeRailShow }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.EdgeRailShow }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">槽间距</text>
-				<text class="t2">垂直{{ CartResponse[0].CartList[0].Cart_DetailPCB.GrooveHeight }}mm 水平{{ CartResponse[0].CartList[0].Cart_DetailPCB.GrooveWidth }}mm</text>
+				<text class="t2">垂直{{ cartList[0].CartList[0].Cart_DetailPCB.GrooveHeight || '' }}mm 水平{{ cartList[0].CartList[0].Cart_DetailPCB.GrooveWidth || '' }}mm</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">生产确认稿</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.PCBFileConfirm == true ? '是' : '否' }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.PCBFileConfirm == true ? '是' : '否' }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">出货报告</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.IsNeedShipReport == true ? '需要' : '不需要' }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.IsNeedShipReport == true ? '需要' : '不需要' }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">工艺备注</text>
-				<text class="t2">{{ CartResponse[0].CartList[0].Cart_DetailPCB.Note }}</text>
+				<text class="t2">{{ cartList[0].CartList[0].Cart_DetailPCB.Note }}</text>
 			</view>
 		</view>
 		<view class="text-box column">
@@ -124,7 +124,7 @@
 			<view class="text row">
 				<text class="price-text">商品总额</text>
 				<text class="unit-text">¥</text>
-				<text class="num">1199.00</text>
+				<text class="num">{{ cartList[0].CartList[0].ProFee }}</text>
 			</view>
 			<navigator class="btn-1 row rowCenter verCenter" open-type="switchTab" url="/pages/cart/index" hover-class="none">返回购物车</navigator>
 		</view>
@@ -137,17 +137,16 @@ import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue';
 import uniPopup from '@/components/uni-popup/uni-popup.vue';
 import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue';
 import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
+import Util from '@/util/index.js';
 
 export default {
 	data() {
 		return {
-			id: '',
 			idList: [],
 			cartList: []
 		};
 	},
 	onLoad(options) {
-		this.id = options.id;
 		this.idList.push(options.id);
 	},
 	onShow() {
@@ -160,6 +159,44 @@ export default {
 					this.cartList = res.Data;
 				}
 			});
+		},
+		uploadFilesFun(id) {
+			// #ifdef H5
+			var self = this;
+			var x = document.createElement('input');
+			x.setAttribute('type', 'file');
+			x.click();
+			x.onchange = function() {
+				var file = this.files[0];
+				var formdata = new FormData();
+				formdata.append('file', file);
+				var token = Util.getCookie('token');
+				const header = {
+					Authorization: token != '' ? 'Bearer ' + token : ''
+				};
+
+				$.ajax({
+					url: 'http://apitest.pcbhunt.com/api/Cart/UploadCartFile?CartId=' + id,
+					type: 'POST',
+					data: formdata,
+					headers: header,
+					contentType: false,
+					processData: false,
+					success: function(res) {
+						if (res.Code === 200) {
+							uni.showToast({
+								title: '上传成功',
+								icon: 'success',
+								duration: 2000
+							});
+							setTimeout(() => {
+								self.getData();
+							}, 2000);
+						}
+					}
+				});
+			};
+			// #endif
 		}
 	},
 	components: { uniSwipeAction, uniPopup, uniPopupMessage, uniPopupDialog }

@@ -70,10 +70,27 @@
 import { API } from '@/util/api.js';
 export default {
 	data() {
-		return {};
+		return {
+			IdList: [''],
+			UsedCouponId: []
+		};
 	},
-	onLoad(options) {},
-	methods: {}
+	onLoad(options) {
+		this.IdList = options.IdList.split(',');
+		this.UsedCouponId = options.UsedCouponId.split(',');
+	},
+	onShow() {
+		this.getData();
+	},
+	methods: {
+		getData() {
+			this.request(API.GetCanUseCoupon, 'POST', { IdList: this.IdList, UsedCouponId: this.UsedCouponId }, true).then(res => {
+				if (res.Code === 200) {
+					this.shipPriceList = res.Data;
+				}
+			});
+		}
+	}
 };
 </script>
 

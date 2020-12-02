@@ -1,0 +1,95 @@
+.pay-box {
+	padding-top: 22rpx;
+	.pay {
+		margin: 0 24rpx 24rpx 24rpx;
+		background: #ffffff;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		.box {
+			margin-left: 24rpx;
+			border-bottom: 1px solid #e7e7e7;
+			padding: 0 24rpx 0 0;
+			height: 88rpx;
+			&:last-child {
+				border-bottom: none;
+			}
+			.iconiconpayzhifubao1 {
+				font-size: 48rpx;
+				color: #00a2ea;
+				margin-right: 24rpx;
+			}
+			.iconiconpayzhifubao {
+				font-size: 48rpx;
+				color: #3cb431;
+				margin-right: 24rpx;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #323233;
+			}
+			.icon1ElementRadioOn {
+				font-size: 28rpx;
+				color: #008aff;
+				display: none;
+			}
+			&.curr{
+				.icon1ElementRadioOn{
+					display: block;
+				}
+			}
+		}
+	}
+	.tip {
+		height: 92rpx;
+		background: #f0f0f2;
+		border-radius: 8rpx;
+		margin: 0 24rpx 24rpx;
+		padding-left: 24rpx;
+		.iconfont {
+			font-size: 48rpx;
+			color: #FE7A32;
+			margin-right: 24rpx;
+		}
+		.t1 {
+			font-size: 28rpx;
+			color: #323233;
+		}
+		.t2 {
+			font-size: 28rpx;
+			color: #999;
+		}
+	}
+	.btn-box {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 112rpx;
+		background: #ffffff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.1);
+		padding: 0 30rpx;
+		.t1 {
+			font-size: 24rpx;
+			color: #999999;
+		}
+		.t2 {
+			font-size: 24rpx;
+			color: #ff6010;
+			margin-left: 12rpx;
+		}
+		.t3 {
+			font-size: 36rpx;
+			color: #ff6010;
+			font-weight: bold;
+		}
+		.btn {
+			width: 280rpx;
+			height: 72rpx;
+			background: #008aff;
+			box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+			border-radius: 44rpx;
+			font-size: 28rpx;
+			color: #ffffff;
+		}
+	}
+}

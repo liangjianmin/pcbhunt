@@ -125,9 +125,13 @@
 					font-weight: bold;
 					margin-left: 6rpx;
 				}
+				.flex-end{
+					align-items: flex-end;
+				}
 			}
 			.coupon {
-				padding: 0 24rpx;
+				padding: 0 24rpx 0 0;
+				margin-left: 24rpx;
 				height: 88rpx;
 				.t1 {
 					font-size: 28rpx;
@@ -136,6 +140,11 @@
 				.t2 {
 					font-size: 28rpx;
 					color: #666666;
+				}
+				.num{
+					color: #FF6010;
+					font-size: 28rpx;
+					margin-right: 4rpx;
 				}
 				.iconfont {
 					font-size: 24rpx;
@@ -204,39 +213,6 @@
 			padding-left: 24rpx;
 			font-size: 28rpx;
 			box-sizing: border-box;
-		}
-	}
-	.pay {
-		margin: 0 24rpx 20rpx 24rpx;
-		background: #ffffff;
-		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
-		border-radius: 8rpx;
-		.box {
-			margin-left: 24rpx;
-			border-bottom: 1px solid #e7e7e7;
-			padding: 0 24rpx 0 0;
-			height: 88rpx;
-			&:last-child {
-				border-bottom: none;
-			}
-			.iconiconpayzhifubao1 {
-				font-size: 48rpx;
-				color: #00a2ea;
-				margin-right: 24rpx;
-			}
-			.iconiconpayzhifubao {
-				font-size: 48rpx;
-				color: #3cb431;
-				margin-right: 24rpx;
-			}
-			.t1 {
-				font-size: 28rpx;
-				color: #323233;
-			}
-			.icon1ElementRadioOn {
-				font-size: 28rpx;
-				color: #008aff;
-			}
 		}
 	}
 	.btn-box {

@@ -56,17 +56,34 @@ const API = {
 	 * */
 	UptDefault: API_BASE + "/api/MbInfo/UptDefault",
 	/**
-	 * 获取省份数据
+	 * 获取省市区数据
 	 * */
-	GetProvinceList: API_BASE + "/api/Ship/GetProvinceList",
+	GetProvinceCityList: API_BASE + "/api/Ship/GetProvinceCityList",
 	/**
-	 * 获取城市数据
+	 * 获取指定物流公司物流价格
 	 * */
-	GetCityList: API_BASE + "/api/Ship/GetCityList",
+	GetShipPrice: API_BASE + "/api/Ship/GetShipPrice",
 	/**
-	 * 获取地区数据
+	 * 获取物流公司价格列表
 	 * */
-	GetAreaList: API_BASE + "/api/Ship/GetAreaList"
+	GetShipPriceList: API_BASE + "/api/Ship/GetShipPriceList",
+	/**
+	 * 获取中文的省市区地址
+	 * */
+	GetChineseDistricts: API_BASE + "/api/Ship/GetChineseDistricts",
+	/**
+	 * 获取优惠券限定的规则条件
+	 * */
+	GetChineseDistricts: API_BASE + "/api/Coupon/GetVerifyParamsByCoupon",
+	/**
+	 * 获取优惠券列表
+	 * */
+	GetCanUseCoupon: API_BASE + "/api/Coupon/GetCanUseCoupon",
+	/**
+	 * 提交订单
+	 * */
+	SubmitV2: API_BASE + "/api/Order/SubmitV2"
+
 }
 
 
