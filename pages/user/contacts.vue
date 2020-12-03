@@ -32,7 +32,7 @@ export default {
 	},
 	onLoad(options) {
 		 // #ifdef H5
-		 this.ContactNameTech = Util.getCookie('ContactNameTech');
+		 this.ContactNameTech = decodeURI(Util.getCookie('ContactNameTech'));
 		 this.ContactMobileTech = Util.getCookie('ContactMobileTech');
 		 this.ContactQQTech = Util.getCookie('ContactQQTech');
 		 // #endif
@@ -83,7 +83,7 @@ export default {
 			}
 			
 			// #ifdef H5
-			Util.setCookie('ContactNameTech', this.ContactQQTech);
+			Util.setCookie('ContactNameTech', this.ContactNameTech);
 			Util.setCookie('ContactMobileTech', this.ContactMobileTech);
 			Util.setCookie('ContactQQTech', this.ContactQQTech);
 			// #endif

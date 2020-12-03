@@ -15,7 +15,7 @@
 		<template v-else>
 			<view class="no-data-box column rowCenter">
 				<view class="bg"></view>
-				<text class="text">很抱歉，暂无数据</text>
+				<text class="text">很抱歉，暂无优惠券</text>
 			</view>
 		</template>
 	</view>
@@ -54,7 +54,9 @@ export default {
 
 		// #ifdef H5
 		try {
-			this.express = JSON.parse(Util.getCookie('express'));
+			if (JSON.parse(Util.getCookie('express'))) {
+				this.express = JSON.parse(Util.getCookie('express'));
+			}
 		} catch (e) {
 			// error
 		}
@@ -63,14 +65,16 @@ export default {
 
 		// #ifdef MP-WEIXIN
 		try {
-			this.express = JSON.parse(uni.getStorageSync('express'));
+			if (JSON.parse(uni.getStorageSync('express'))) {
+				this.express = JSON.parse(uni.getStorageSync('express'));
+			}
 		} catch (e) {
 			// error
 		}
 		// #endif
 
 		if (this.express.length <= 0) {
-			for (var i = 0; i < this.length; i++) {
+			for (let i = 0; i < this.length; i++) {
 				this.express.push({
 					ShipId: '',
 					ShipName: ''
@@ -83,6 +87,7 @@ export default {
 	},
 	methods: {
 		tab(index, ShipName, ShipId) {
+			this.active = index;
 			this.$set(this.express[this.index], 'ShipName', ShipName);
 			this.$set(this.express[this.index], 'ShipId', ShipId);
 
@@ -94,10 +99,11 @@ export default {
 			uni.setStorageSync('express', JSON.stringify(this.express));
 			// #endif
 
-			this.active = index;
-			uni.navigateBack({
-				delta: 1
-			});
+			setTimeout(() => {
+				uni.navigateBack({
+					delta: 1
+				});
+			}, 500);
 		},
 		getData() {
 			this.request(API.GetShipPriceList, 'GET', this.form, true).then(res => {

@@ -27,7 +27,7 @@ export default {
 				return arr[1];
 			}
 		}
-		return null;
+		return '';
 	},
 	/**
 	 * 删除cookie

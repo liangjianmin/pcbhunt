@@ -8,8 +8,7 @@
 			<view class="btn">搜索</view>
 		</view>
 		<view class="tab row avarage verCenter">
-			<view class="box curr row rowCenter verCenter">确认中(5)</view>
-			<view class="box row rowCenter verCenter">已下单(5)</view>
+			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index"  class="box  row rowCenter verCenter">{{item}}(5)</view>
 		</view>
 		<view class="list">
 			<view class="wrap">
@@ -70,9 +69,7 @@
 							<text class="t1">订单包：G584826</text>
 							<text class="t2">2020/07/20 18:00</text>
 						</view>
-						<view class="r">
-							<navigator class="link row rowCenter verCenter" url="/pages/user/logistics" hover-class="none">查看物流</navigator>
-						</view>
+						<view class="r"><navigator class="link row rowCenter verCenter" url="/pages/user/logistics" hover-class="none">查看物流</navigator></view>
 					</view>
 					<view class="li">
 						<view class="d1 row bothSide verCenter">
@@ -192,10 +189,34 @@
 import { API } from '@/util/api.js';
 export default {
 	data() {
-		return {};
+		return {
+			active: 0,
+			itemtext: ['确认中', '已下单'],
+			isAvisible: 'block',
+			isBvisible: 'none'
+		};
 	},
 	onLoad(options) {},
-	methods: {}
+	methods: {
+		getData() {
+			this.request(API.GetCanUseCoupon, 'POST', {}, true).then(res => {
+				if (res.Code === 200) {
+					this.canUseCoupon = res.Data;
+				}
+			});
+		},
+		tab(index) {
+			this.active = index;
+			this.isAvisible = 'none';
+			this.isBvisible = 'none';
+			if (index == 0) {
+				index == 0 ? (this.isAvisible = 'block') : (this.isAvisible = 'none');
+			} else if (index == 1) {
+				index == 1 ? (this.isBvisible = 'block') : (this.isBvisible = 'none');
+			}
+			this.getData();
+		}
+	}
 };
 </script>
 

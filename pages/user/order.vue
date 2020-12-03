@@ -38,7 +38,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="coupon row bothSide verCenter" style="border-bottom: 1px solid #e7e7e7;" @click="toCoupon(item.CartList)">
+				<view class="coupon row bothSide verCenter" style="border-bottom: 1px solid #e7e7e7;" @click="toCoupon(item.CartList, index)">
 					<text class="t1">优惠券明细</text>
 					<view class="row verCenter">
 						<text class="num">5</text>
@@ -49,7 +49,7 @@
 				<navigator v-if="IsMerge" class="coupon row bothSide verCenter" hover-class="none" @click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, item.CartDatas.TotalWeight, item.CartList, index)">
 					<text class="t1">快递物流</text>
 					<view class="row verCenter">
-						<text class="t2">{{ item.CartDatas.TotalWeight }}KG </text>
+						<text class="t2">{{ item.CartDatas.TotalWeight }}KG</text>
 						<text class="t2" v-if="express.length > 0">{{ express[index].ShipName }}</text>
 						<text class="iconfont iconyoujiantou"></text>
 					</view>
@@ -75,29 +75,22 @@
 		<view class="show-data column">
 			<view class="box row bothSide verCenter">
 				<text class="t1">商品合计</text>
-				<text class="t2">￥198.00</text>
+				<text class="t2">￥{{ orderFeeDetail.AllFee || 0.00 }}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">运费</text>
 				<view class="row verCenter">
-					<text class="bg row verCenter rowCenter">满300元免基础邮费</text>
-					<text class="t2">￥0.00</text>
+					<!-- <text class="bg row verCenter rowCenter">满300元免基础邮费</text> -->
+					<text class="t2">￥{{ orderFeeDetail.shipfee || 0.00 }}</text>
 				</view>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">优惠券金额</text>
-				<text class="t2">￥0.00</text>
+				<text class="t2">￥{{orderFeeDetail.OffFee || 0.00}}</text>
 			</view>
 			<view class="box row bothSide verCenter">
 				<text class="t1">税费</text>
-				<text class="t2">￥0.00</text>
-			</view>
-			<view class="box row bothSide verCenter">
-				<text class="t1">活动优惠</text>
-				<view class="row verCenter">
-					<text class="bg row verCenter rowCenter">移动端首单减免8元</text>
-					<text class="t2">￥0.00</text>
-				</view>
+				<text class="t2">￥{{orderFeeDetail.TaxFee || 0.00}}</text>
 			</view>
 		</view>
 		<view class="show-data column">
@@ -118,7 +111,7 @@
 			<view class="row verCenter">
 				<text class="t1">应付总额</text>
 				<text class="t2">¥</text>
-				<text class="t3">{{ totalPrice }}</text>
+				<text class="t3">{{ orderFeeDetail.AllFee || 0.00 }}</text>
 			</view>
 			<view class="btn row rowCenter verCenter" @click="submit()">提交订单</view>
 		</view>
@@ -135,7 +128,6 @@ export default {
 			recommendAddress: {},
 			cartList: [],
 			IsMerge: true,
-			totalPrice: 0.0,
 			itemtext: ['分开发货(速度快)', '合并发货(最实惠)'],
 			active: 0,
 			isAvisible: 'block',
@@ -150,25 +142,39 @@ export default {
 			ShipId: [],
 			idList: '',
 			length: 0,
-			express: []
+			express: [],
+			orderFeeDetail:{}
 		};
 	},
 	onLoad(options) {
 		this.idList = options.idList.split(',');
-	},
-	onShow() {
-		this.getData();
-		this.getRecommendAddress();
 
 		// #ifdef H5
-		this.ContactNameTech = Util.getCookie('ContactNameTech');
+		Util.delCookie('ContactNameTech');
+		Util.delCookie('ContactMobileTech');
+		Util.delCookie('ContactQQTech');
+		Util.delCookie('express');
+		// #endif
+
+		// #ifdef MP-WEIXIN
+		uni.removeStorageSync('ContactNameTech');
+		uni.removeStorageSync('ContactMobileTech');
+		uni.removeStorageSync('ContactQQTech');
+		uni.removeStorageSync('express');
+		// #endif
+	},
+	onShow() {
+		this.getRecommendAddress();
+		this.getData();
+
+		// #ifdef H5
+		this.ContactNameTech = decodeURIComponent(Util.getCookie('ContactNameTech'));
 		this.ContactMobileTech = Util.getCookie('ContactMobileTech');
 		this.ContactQQTech = Util.getCookie('ContactQQTech');
 		try {
-			this.express = JSON.parse(Util.getCookie('express'));
-		} catch (e) {
-			// error
-		}
+			//物流
+			this.express = JSON.parse(decodeURIComponent(Util.getCookie('express')));
+		} catch (e) {}
 		// #endif
 
 		// #ifdef MP-WEIXIN
@@ -176,13 +182,51 @@ export default {
 		this.ContactMobileTech = uni.getStorageSync('ContactMobileTech') || '';
 		this.ContactQQTech = uni.getStorageSync('ContactQQTech') || '';
 		try {
+			//物流
 			this.express = JSON.parse(uni.getStorageSync('express'));
-		} catch (e) {
-			// error
-		}
+		} catch (e) {}
 		// #endif
 	},
 	methods: {
+		updateParam() {
+			//更新CartIdList参数
+			var temp = [];
+			for (var i = 0; i < this.length; i++) {
+				temp.push([]);
+				this.form.push({
+					AddrId: this.AddrId,
+					ShipId: '',
+					CartIdList: [],
+					ContactNameTech: this.ContactNameTech,
+					ContactMobileTech: this.ContactMobileTech,
+					ContactQQTech: this.ContactQQTech,
+					IsNeedInvoice: true,
+					IsShipNote: this.IsShipNote,
+					Note: this.Note,
+					CouponId: 0
+				});
+				for (let j = 0; j < this.cartList[i].CartList.length; j++) {
+					temp[i].push(this.cartList[i].CartList[j].Id);
+					this.$set(this.form[i], 'CartIdList', temp[i]);
+				}
+			}
+
+			//更新物流参数
+			if (this.express.length > 0) {
+				for (let i = 0; i < this.form.length; i++) {
+					this.$set(this.form[i], 'ShipId', this.express[i].ShipId);
+				}
+			}
+
+			this.getOrderFeeDetail(); //获取订单费用明细
+		},
+		getOrderFeeDetail() {
+			this.request(API.GetOrderFeeDetail, 'POST', this.form, true).then(res => {
+				if (res.Code === 200) {
+					this.orderFeeDetail=res.Data;
+				}
+			});
+		},
 		getRecommendAddress() {
 			this.request(API.GetRecommendAddress, 'GET', {}, true).then(res => {
 				if (res.Code === 200) {
@@ -194,29 +238,12 @@ export default {
 		getData() {
 			this.request(API.GetCartList, 'POST', { IsMerge: this.IsMerge, idList: this.idList }).then(res => {
 				this.form = [];
-				this.totalPrice = 0;
+				
 
 				if (res.Code === 200) {
 					this.cartList = res.Data;
 					this.length = this.cartList.length;
-					var tempArr = [];
-					for (let i = 0; i < this.cartList.length; i++) {
-						this.form.push({
-							AddrId: this.AddrId,
-							ShipId: '',
-							CartIdList: [],
-							ContactNameTech: this.ContactNameTech,
-							ContactMobileTech: this.ContactMobileTech,
-							ContactQQTech: this.ContactQQTech,
-							IsNeedInvoice: true,
-							IsShipNote: this.IsShipNote,
-							Note: this.Note,
-							CouponId: ''
-						});
-						for (let j = 0; j < this.cartList[i].CartList.length; j++) {
-							this.totalPrice += this.cartList[i].CartList[j].ProFee * 1;
-						}
-					}
+					this.updateParam();
 				}
 			});
 		},
@@ -241,13 +268,13 @@ export default {
 			}
 			this.getData();
 		},
-		toCoupon(obj) {
+		toCoupon(obj, index) {
 			var arr = [];
 			for (let i = 0; i < obj.length; i++) {
 				arr.push(obj[i].Id);
 			}
 			uni.navigateTo({
-				url: '/pages/user/coupon?IdList=' + arr.join(',') + '&UsedCouponId=' + this.UsedCouponId
+				url: '/pages/user/coupon?IdList=' + arr.join(',') + '&UsedCouponId=' + this.UsedCouponId + '&length=' + this.length + '&index=' + index
 			});
 		},
 		toLogistics(ProvinceID, CityId, AreaId, Weight, obj, index) {

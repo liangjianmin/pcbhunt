@@ -82,7 +82,11 @@ const API = {
 	/**
 	 * 提交订单
 	 * */
-	SubmitV2: API_BASE + "/api/Order/SubmitV2"
+	SubmitV2: API_BASE + "/api/Order/SubmitV2",
+	/**
+	 * 获取订单费用明细
+	 * */
+	GetOrderFeeDetail: API_BASE + "/api/Order/GetOrderFeeDetail"
 
 }
 
