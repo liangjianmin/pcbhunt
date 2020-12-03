@@ -41,9 +41,16 @@
 				<view class="coupon row bothSide verCenter" style="border-bottom: 1px solid #e7e7e7;" @click="toCoupon(item.CartList, index)">
 					<text class="t1">优惠券明细</text>
 					<view class="row verCenter">
-						<template v-if="coupon[index].CouponId">
-							<text class="num">-￥{{ coupon[index].DisAmount }}</text>
-							<text class="iconfont iconyoujiantou"></text>
+						<template v-if="coupon.length > 0">
+							<template v-if="coupon[index].CouponId">
+								<text class="num">-￥{{ coupon[index].DisAmount }}</text>
+								<text class="iconfont iconyoujiantou"></text>
+							</template>
+							<template v-else>
+								<text class="num">0</text>
+								<text class="t2">张可用</text>
+								<text class="iconfont iconyoujiantou"></text>
+							</template>
 						</template>
 						<template v-else>
 							<text class="num">0</text>
@@ -153,8 +160,13 @@ export default {
 			orderFeeDetail: {}
 		};
 	},
+	watch:{
+		
+	},
 	onLoad(options) {
-		this.idList = options.idList.split(',');
+		if(options.idList){
+			this.idList = options.idList.split(',');
+		}
 
 		// #ifdef H5
 		Util.delCookie('ContactNameTech');
@@ -182,9 +194,14 @@ export default {
 		this.ContactQQTech = Util.getCookie('ContactQQTech');
 		try {
 			//物流
-			this.express = JSON.parse(decodeURIComponent(Util.getCookie('express')));
+			if(Util.getCookie('express')){
+				this.express = JSON.parse(decodeURIComponent(Util.getCookie('express')));
+			}
+
 			//优惠券
-			this.coupon = JSON.parse(decodeURIComponent(Util.getCookie('coupon')));
+			if(Util.getCookie('coupon')){
+				this.coupon = JSON.parse(decodeURIComponent(Util.getCookie('coupon')));
+			}
 		} catch (e) {}
 		// #endif
 
@@ -299,18 +316,18 @@ export default {
 				this.IsMerge = false;
 				index == 1 ? (this.isBvisible = 'block') : (this.isBvisible = 'none');
 			}
-			
+
 			//恢复选择的物流
 			// #ifdef H5
 			Util.delCookie('express');
 			// #endif
-			
+
 			// #ifdef MP-WEIXIN
 			uni.removeStorageSync('express');
 			// #endif
 			this.express=[];
-			
-			
+
+
 			this.getData();
 		},
 		toCoupon(obj, index) {

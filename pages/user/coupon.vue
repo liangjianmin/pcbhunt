@@ -1,9 +1,9 @@
 <template>
-	<view class="coupon-box">
+	<view class="coupon-box"  v-if="canUseCoupon">
 		<view class="tab row avarage verCenter">
 			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box row rowCenter verCenter">{{ item }}</view>
 		</view>
-		<view class="list" :style="{ display: isAvisible }" v-if="canUseCoupon">
+		<view class="list" :style="{ display: isAvisible }" v-if="canUseCoupon.PCBCanUseCouponList">
 			<template v-if="canUseCoupon.PCBCanUseCouponList.length > 0">
 				<view class="box row verCenter" @click="filterCoupon(item.Id,item.DisAmount,index)" v-for="(item, index) in canUseCoupon.PCBCanUseCouponList" :key="index">
 					<view class="price column rowCenter">
@@ -32,7 +32,7 @@
 				</view>
 			</template>
 		</view>
-		<view class="list" :style="{ display: isBvisible }" v-if="canUseCoupon">
+		<view class="list" :style="{ display: isBvisible }" v-if="canUseCoupon.PCBCannotUseCouponList">
 			<template v-if="canUseCoupon.PCBCannotUseCouponList.length > 0">
 				<view class="box row verCenter disabled" v-for="(item, index) in canUseCoupon.PCBCannotUseCouponList" :key="index">
 					<view class="price column rowCenter">
@@ -66,6 +66,8 @@
 
 <script>
 import { API } from '@/util/api.js';
+import Util from '@/util/index.js';
+
 export default {
 	data() {
 		return {

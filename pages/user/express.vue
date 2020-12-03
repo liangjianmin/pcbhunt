@@ -55,8 +55,8 @@ export default {
 
 		// #ifdef H5
 		try {
-			if (JSON.parse(Util.getCookie('express'))) {
-				this.express = JSON.parse(Util.getCookie('express'));
+			if (Util.getCookie('express')) {
+				this.express = JSON.parse(decodeURIComponent(Util.getCookie('express')));
 			}
 		} catch (e) {
 			// error
@@ -66,7 +66,7 @@ export default {
 
 		// #ifdef MP-WEIXIN
 		try {
-			if (JSON.parse(uni.getStorageSync('express'))) {
+			if (uni.getStorageSync('express')) {
 				this.express = JSON.parse(uni.getStorageSync('express'));
 			}
 		} catch (e) {
@@ -89,6 +89,7 @@ export default {
 	methods: {
 		tab(index, ShipName, ShipId) {
 			this.active = index;
+			
 			this.$set(this.express[this.index], 'ShipName', ShipName);
 			this.$set(this.express[this.index], 'ShipId', ShipId);
 
