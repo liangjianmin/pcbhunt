@@ -95,7 +95,7 @@ export default {
 		// #ifdef H5
 		try {
 			if (JSON.parse(Util.getCookie('coupon'))) {
-				this.coupon = JSON.parse(Util.getCookie('coupon'));
+				this.coupon = JSON.parse(decodeURIComponent(Util.getCookie('coupon')));	
 			}
 		} catch (e) {
 			// error
