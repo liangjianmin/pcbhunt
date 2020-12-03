@@ -80,8 +80,13 @@ export default {
 		};
 	},
 	onLoad(options) {
-		console.log(options);
 		this.IdList = options.IdList.split(',');
+		
+		//更新已使用优惠券id
+		if(options.UsedCouponId){
+			this.UsedCouponId = options.UsedCouponId.split(',');	
+		}
+		
 		this.length = options.length * 1;
 		this.index = options.index * 1;
 		
@@ -109,24 +114,19 @@ export default {
 		if (this.coupon.length <= 0) {
 			for (let i = 0; i < this.length; i++) {
 				this.coupon.push({
-					CouponId: '',
+					CouponId: 0,
 					DisAmount: ''
 				});
 			}
-		}
-		
-		
-		if (options.UsedCouponId) {
-			this.UsedCouponId = options.UsedCouponId.split(',');
 		}
 	},
 	onShow() {
 		this.getData();
 	},
 	methods: {
-		filterCoupon(Id,DisAmount,index){
-			this.$set(this.coupon[index], 'CouponId', Id);
-			this.$set(this.coupon[index], 'DisAmount', DisAmount);
+		filterCoupon(Id,DisAmount){
+			this.$set(this.coupon[this.index], 'CouponId', Id);
+			this.$set(this.coupon[this.index], 'DisAmount', DisAmount);
 			
 			// #ifdef H5
 			Util.setCookie('coupon', JSON.stringify(this.coupon));

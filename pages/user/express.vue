@@ -44,11 +44,12 @@ export default {
 	},
 	onLoad(options) {
 		console.log(options);
+		
 		this.form.Weight = options.Weight;
 		this.form.ProvinceID = options.ProvinceID;
 		this.form.CityId = options.CityId;
 		this.form.AreaId = options.AreaId;
-		this.Id = options.Id;
+		
 		this.length = options.length * 1;
 		this.index = options.index * 1;
 
@@ -76,7 +77,7 @@ export default {
 		if (this.express.length <= 0) {
 			for (let i = 0; i < this.length; i++) {
 				this.express.push({
-					ShipId: '',
+					ShipId: 0,
 					ShipName: ''
 				});
 			}
