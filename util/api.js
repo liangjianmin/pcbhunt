@@ -86,8 +86,15 @@ const API = {
 	/**
 	 * 获取订单费用明细
 	 * */
-	GetOrderFeeDetail: API_BASE + "/api/Order/GetOrderFeeDetail"
-
+	GetOrderFeeDetail: API_BASE + "/api/Order/GetOrderFeeDetail",
+	/**
+	 * 获取单条地址
+	 * */
+	GetAddress: API_BASE + "/api/MbInfo/GetAddress",
+	/**
+	 * 编辑地址
+	 * */
+	UptModel: API_BASE + "/api/MbInfo/UptModel"
 }
 
 

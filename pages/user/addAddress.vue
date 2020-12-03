@@ -7,7 +7,7 @@
 			</view>
 			<view class="box row verCenter">
 				<text class="t1">手机号码</text>
-				<view class="wrap"><input type="text" placeholder="输入手机号码" placeholder-style="color:#CCCCCC;" v-model="form.ContactMobile" /></view>
+				<view class="wrap"><input type="number" placeholder="输入手机号码" placeholder-style="color:#CCCCCC;" v-model="form.ContactMobile" /></view>
 			</view>
 			<view class="box row verCenter">
 				<text class="t1">所在区域</text>
@@ -47,6 +47,12 @@ export default {
 			provinceName: '',
 			cityName: '',
 			areaName: '',
+			Id: '',
+			address: {},
+			editForm: {
+				Id: 0,
+				MbId: 0
+			},
 			form: {
 				ContactName: '',
 				ContactMobile: '',
@@ -57,13 +63,41 @@ export default {
 			}
 		};
 	},
-	onLoad(options) {},
+	onLoad(options) {
+		this.Id = options.Id || '';
+		if (this.Id) {
+			uni.setNavigationBarTitle({
+				title: '修改地址'
+			});
+			this.getData();
+		}
+	},
 	onShow() {
 		this.getProvince();
 	},
 	methods: {
 		toggle() {
 			this.form.IsDefault = !this.form.IsDefault;
+		},
+		getData() {
+			this.request(API.GetAddress, 'GET', { Id: this.Id }, true).then(res => {
+				if (res.Code === 200) {
+					this.address = res.Data;
+
+					this.form.ContactName = res.Data.ContactName;
+					this.form.ContactMobile = res.Data.ContactMobile;
+					this.form.Address = res.Data.Address;
+					this.provinceName = res.Data.ProvinceName;
+					this.cityName = res.Data.CityName;
+					this.areaName = res.Data.AreaName;
+
+					this.editForm.Id = res.Data.Id;
+					this.editForm.MbId = res.Data.MbId;
+					
+					this.form.CityNames = res.Data.ProvinceName + '/' + res.Data.CityName + '/' + res.Data.AreaName;
+					this.form.CityCodes = res.Data.ProvinceID + '/' + res.Data.CityId + '/' + res.Data.AreaId;
+				}
+			});
 		},
 		bindMultiPickerChange(e) {
 			console.log('picker发送选择改变，携带值为', e.target.value);
@@ -94,7 +128,7 @@ export default {
 			}
 		},
 		getProvince() {
-			this.request(API.GetProvinceCityList, 'GET', {ParId:0}, true).then(res => {
+			this.request(API.GetProvinceCityList, 'GET', { ParId: 0 }, true).then(res => {
 				if (res.Code === 200) {
 					this.province = res.Data;
 					this.$set(this.multiArray, 0, this.province);
@@ -125,21 +159,50 @@ export default {
 			});
 		},
 		submit() {
-			this.request(API.AddModel, 'POST', this.form).then(res => {
-				if (res.Code === 200) {
-					uni.showToast({
-						title: '添加成功',
-						icon: 'success',
-						duration: 2000
-					});
-				} else {
-					uni.showToast({
-						title: res.Message,
-						icon: 'none',
-						duration: 2000
-					});
-				}
-			});
+			if (this.Id) {
+				var param = Object.assign({}, this.form, this.editForm);
+				this.request(API.UptModel, 'POST', param).then(res => {
+					if (res.Code === 200) {
+						uni.showToast({
+							title: '修改成功',
+							icon: 'success',
+							duration: 2000
+						});
+						setTimeout(() => {
+							uni.navigateBack({
+								delta: 1
+							});
+						}, 2000);
+					} else {
+						uni.showToast({
+							title: res.Message,
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			} else {
+				this.request(API.AddModel, 'POST', this.form).then(res => {
+					if (res.Code === 200) {
+						uni.showToast({
+							title: '添加成功',
+							icon: 'success',
+							duration: 2000
+						});
+						setTimeout(() => {
+							uni.navigateBack({
+								delta: 1
+							});
+						}, 2000);
+					} else {
+						uni.showToast({
+							title: res.Message,
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			}
 		}
 	}
 };

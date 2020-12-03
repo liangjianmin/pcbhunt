@@ -6,7 +6,7 @@
 					<view>
 						<text class="t1">{{item.ContactName}}</text>
 						<text class="t2">{{item.ContactMobile}}</text>
-						<text class="iconfont iconiconaddressedit"></text>
+						<text class="iconfont iconiconaddressedit" @click.stop="toUrl(item.Id)"></text>
 					</view>
 					<text class="t3">{{item.ProvinceName}}{{item.CityName}}{{item.AreaName}}{{item.Address}}</text>
 				</view>
@@ -29,7 +29,8 @@ export default {
 	data() {
 		return {
 			allAddress:[],
-			active:0
+			active:0,
+			Id:''
 		};
 	},
 	onLoad(options) {},
@@ -37,6 +38,11 @@ export default {
 		this.getData();
 	},
 	methods: {
+		toUrl(id){
+			uni.navigateTo({
+				url:'/pages/user/addAddress?Id='+id
+			})
+		},
 		getData() {
 			this.request(API.GetAllAddress, 'GET', {},true).then(res => {
 				if (res.Code === 200) {
