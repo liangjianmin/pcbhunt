@@ -1,10 +1,10 @@
 <template>
 	<view class="cart">
-		<view class="prompt row verCenter">
+		<view class="prompt row verCenter" v-if="cartList.length > 0">
 			<text class="iconfont iconnotice"></text>
 			<text class="text">关于如何手机端上传文件教程，点击查看</text>
 		</view>
-		<view class="list" v-if="cartList">
+		<view class="list" v-if="cartList.length > 0">
 			<checkbox-group @change="checkboxChange">
 				<view class="boxs" v-for="(item, index) in cartList" :key="index">
 					<view class="title row verCenter">交期：{{ item.LeadTimeEnd }}</view>
@@ -51,7 +51,14 @@
 				</view>
 			</checkbox-group>
 		</view>
-		<view class="total-box row bothSide verCenter">
+		<template v-else>
+			<view class="no-data-box column rowCenter">
+				<view class="bg"></view>
+				<text class="text">当前购物车为空</text>
+				<navigator open-type="switchTab" class="link row rowCenter verCenter" url="/pages/index/index" hover-class="none">去计价</navigator>
+			</view>
+		</template>
+		<view class="total-box row bothSide verCenter" v-if="cartList.length > 0">
 			<view class="total row verCenter">
 				<view class="row verCenter">
 					<checkbox-group @change="changeBook">
@@ -229,8 +236,23 @@ export default {
 
 				return false;
 			}
+
+			for (let i = 0; i < this.cartList.length; i++) {
+				for (let j = 0; j < this.cartList[i].CartList.length; j++) {
+					if (this.cartList[i].CartList[j].PcbFilePath == null) {
+						uni.showToast({
+							title: 'pcb文件必须上传',
+							icon: 'none',
+							duration: 2000
+						});
+
+						return false;
+					}
+				}
+			}
+
 			uni.navigateTo({
-				url: '/pages/user/order?idList='+this.idList.join(',')
+				url: '/pages/user/order?idList=' + this.idList.join(',')
 			});
 		},
 		bindClick(id, unique) {

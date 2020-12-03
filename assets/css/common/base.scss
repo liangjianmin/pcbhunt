@@ -24,10 +24,10 @@
 	color: #008aff;
 }
 
-.no-data-box{
+.no-data-box {
 	text-align: center;
 }
-.no-data-box .bg{
+.no-data-box .bg {
 	width: 180rpx;
 	height: 155rpx;
 	background: url('http://m.pcbhunt.com/images/find.png') no-repeat center;
@@ -35,7 +35,16 @@
 	margin: 0 auto;
 }
 
-.no-data-box .text{
+.no-data-box .text {
 	font-size: 32rpx;
 	color: #666;
+}
+.link {
+	width: 132rpx;
+	height: 54rpx;
+	border-radius: 27rpx;
+	border: 2rpx solid #008aff;
+	font-size: 24rpx;
+	color: #008aff;
+	margin: 30rpx auto 0;
 }
