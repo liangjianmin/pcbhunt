@@ -33,7 +33,13 @@ export default {
 			Id: '',
 			length: 0,
 			index: 0,
-			express: [],
+			express: [
+				{
+					ShipName: '',
+					ShipId: 0,
+					index: -1
+				}
+			],
 			form: {
 				ProvinceID: '',
 				CityId: '',
@@ -44,12 +50,12 @@ export default {
 	},
 	onLoad(options) {
 		console.log(options);
-		
+
 		this.form.Weight = options.Weight;
 		this.form.ProvinceID = options.ProvinceID;
 		this.form.CityId = options.CityId;
 		this.form.AreaId = options.AreaId;
-		
+
 		this.length = options.length * 1;
 		this.index = options.index * 1;
 
@@ -73,15 +79,6 @@ export default {
 			// error
 		}
 		// #endif
-
-		if (this.express.length <= 0) {
-			for (let i = 0; i < this.length; i++) {
-				this.express.push({
-					ShipId: 0,
-					ShipName: ''
-				});
-			}
-		}
 	},
 	onShow() {
 		this.getData();
@@ -89,9 +86,10 @@ export default {
 	methods: {
 		tab(index, ShipName, ShipId) {
 			this.active = index;
-			
-			this.$set(this.express[this.index], 'ShipName', ShipName);
-			this.$set(this.express[this.index], 'ShipId', ShipId);
+
+			this.$set(this.express[0], 'ShipName', ShipName);
+			this.$set(this.express[0], 'ShipId', ShipId);
+			this.$set(this.express[0], 'index', this.index);
 
 			// #ifdef H5
 			Util.setCookie('express', JSON.stringify(this.express));

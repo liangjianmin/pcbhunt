@@ -52,7 +52,7 @@ export default {
 		},
 		tab(index,Id){
 			this.active=index;
-			this.request(API.UptDefault, 'POST', {Id:Id},true).then(res => {
+			this.request(API.UptDefault, 'GET', {Id:Id},true).then(res => {
 				if (res.Code === 200) {
 					uni.showToast({
 						title: '设置成功',

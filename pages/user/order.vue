@@ -47,13 +47,13 @@
 								<text class="iconfont iconyoujiantou"></text>
 							</template>
 							<template v-else>
-								<text class="num">0</text>
+								<text class="num">{{ item.UseCouponNum }}</text>
 								<text class="t2">张可用</text>
 								<text class="iconfont iconyoujiantou"></text>
 							</template>
 						</template>
 						<template v-else>
-							<text class="num">0</text>
+							<text class="num">{{ item.UseCouponNum }}</text>
 							<text class="t2">张可用</text>
 							<text class="iconfont iconyoujiantou"></text>
 						</template>
@@ -63,7 +63,9 @@
 					<text class="t1">快递物流</text>
 					<view class="row verCenter">
 						<text class="t2">{{ item.CartDatas.TotalWeight }}KG</text>
-						<text class="t2" v-if="express.length > 0">{{ express[index].ShipName }}</text>
+						<template v-if="item.ShipPriceDto">
+							<text class="t2">{{ item.ShipPriceDto.ShipName }}</text>
+						</template>
 						<text class="iconfont iconyoujiantou"></text>
 					</view>
 				</navigator>
@@ -74,7 +76,9 @@
 				<text class="t1">快递物流</text>
 				<view class="row verCenter">
 					<text class="t2">{{ cartList[0].CartDatas.TotalWeight }}KG</text>
-					<text class="t2" v-if="express.length > 0">{{ express[0].ShipName }}</text>
+					<template v-if="cartList[0].ShipPriceDto">
+						<text class="t2">{{ cartList[0].ShipPriceDto.ShipName }}</text>
+					</template>
 					<text class="iconfont iconyoujiantou"></text>
 				</view>
 			</view>
@@ -157,14 +161,14 @@ export default {
 			length: 0,
 			express: [],
 			coupon: [],
-			orderFeeDetail: {}
+			orderFeeDetail: {},
+			ProvinceId: '',
+			CityId: '',
+			AreaId: ''
 		};
 	},
-	watch:{
-		
-	},
 	onLoad(options) {
-		if(options.idList){
+		if (options.idList) {
 			this.idList = options.idList.split(',');
 		}
 
@@ -186,7 +190,6 @@ export default {
 	},
 	onShow() {
 		this.getRecommendAddress();
-		this.getData();
 
 		// #ifdef H5
 		this.ContactNameTech = decodeURIComponent(Util.getCookie('ContactNameTech'));
@@ -194,12 +197,12 @@ export default {
 		this.ContactQQTech = Util.getCookie('ContactQQTech');
 		try {
 			//物流
-			if(Util.getCookie('express')){
+			if (Util.getCookie('express')) {
 				this.express = JSON.parse(decodeURIComponent(Util.getCookie('express')));
 			}
 
 			//优惠券
-			if(Util.getCookie('coupon')){
+			if (Util.getCookie('coupon')) {
 				this.coupon = JSON.parse(decodeURIComponent(Util.getCookie('coupon')));
 			}
 		} catch (e) {}
@@ -225,11 +228,12 @@ export default {
 		updateParam() {
 			//更新CartIdList参数
 			var temp = [];
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.cartList.length; i++) {
 				temp.push([]);
 				this.form.push({
 					AddrId: this.AddrId,
-					ShipId: 0,
+					ShipId: this.cartList[i].ShipPriceDto.Id,
+					ShipName: this.cartList[i].ShipPriceDto.ShipName,
 					CartIdList: [],
 					ContactNameTech: this.ContactNameTech,
 					ContactMobileTech: this.ContactMobileTech,
@@ -247,9 +251,10 @@ export default {
 
 			//更新物流参数
 			if (this.express.length > 0) {
-				for (let i = 0; i < this.form.length; i++) {
-					this.$set(this.form[i], 'ShipId', this.express[i].ShipId);
-				}
+				this.$set(this.form[this.express[0].index], 'ShipId', this.express[0].ShipId);
+				this.$set(this.form[this.express[0].index], 'ShipName', this.express[0].ShipName);
+				this.$set(this.cartList[this.express[0].index], 'ShipPriceDto.ShipName', this.express[0].ShipName);
+				this.$set(this.cartList[this.express[0].index], 'ShipPriceDto.ShipId', this.express[0].ShipId);
 			}
 
 			//更新优惠券参数
@@ -282,14 +287,20 @@ export default {
 			this.request(API.GetRecommendAddress, 'GET', {}, true).then(res => {
 				if (res.Code === 200) {
 					this.recommendAddress = res.Data;
-					this.AddrId = res.Data.Id;
+
+					this.AddrId = res.Data.Id; //提交订单所需要的地址id
+
+					this.ProvinceId = res.Data.ProvinceID;
+					this.CityId = res.Data.CityId;
+					this.AreaId = res.Data.AreaId;
+
+					this.getData();
 				}
 			});
 		},
 		getData() {
-			this.request(API.GetCartList, 'POST', { IsMerge: this.IsMerge, idList: this.idList }).then(res => {
+			this.request(API.GetCartList, 'POST', { IsMerge: this.IsMerge, idList: this.idList, ProvinceId: this.ProvinceId, CityId: this.CityId, AreaId: this.AreaId }).then(res => {
 				this.form = [];
-
 				if (res.Code === 200) {
 					this.cartList = res.Data;
 					this.length = this.cartList.length;
@@ -325,8 +336,7 @@ export default {
 			// #ifdef MP-WEIXIN
 			uni.removeStorageSync('express');
 			// #endif
-			this.express=[];
-
+			this.express = [];
 
 			this.getData();
 		},
