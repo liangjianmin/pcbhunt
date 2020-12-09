@@ -357,8 +357,14 @@ export default {
 		submit() {
 			this.request(API.SubmitV2, 'POST', this.form, true).then(res => {
 				if (res.Code === 200) {
+					var Id = [],
+						MainNo = [];
+					for (let i = 0; i < res.Data.length; i++) {
+						Id.push(res.Data[i].Id);
+						MainNo.push(res.Data[i].MainNo);
+					}
 					uni.navigateTo({
-						url: '/pages/user/pay'
+						url: '/pages/user/pay?Id=' + Id.join(',') + '&totalAmout=' + this.orderFeeDetail.AllFee + '&MainNo=' + MainNo.join(',')
 					});
 				} else {
 					uni.showToast({

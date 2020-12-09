@@ -94,7 +94,15 @@ const API = {
 	/**
 	 * 编辑地址
 	 * */
-	UptModel: API_BASE + "/api/MbInfo/UptModel"
+	UptModel: API_BASE + "/api/MbInfo/UptModel",
+	/**
+	 * 发起AliPay支付请求
+	 * */
+	AliPayRequest: API_BASE + "/api/PayMent/AliPayRequest",
+	/**
+	 * AliPay
+	 * */
+	AliPayNotify: API_BASE + "/api/PayMent/AliPayNotify"
 }
 
 
