@@ -32,8 +32,8 @@
 				color: #008aff;
 				display: none;
 			}
-			&.curr{
-				.icon1ElementRadioOn{
+			&.curr {
+				.icon1ElementRadioOn {
 					display: block;
 				}
 			}
@@ -47,7 +47,7 @@
 		padding-left: 24rpx;
 		.iconfont {
 			font-size: 48rpx;
-			color: #FE7A32;
+			color: #fe7a32;
 			margin-right: 24rpx;
 		}
 		.t1 {
@@ -90,6 +90,50 @@
 			border-radius: 44rpx;
 			font-size: 28rpx;
 			color: #ffffff;
+		}
+	}
+}
+
+.layer-box {
+	padding-top: 60rpx;
+	padding-bottom: 40rpx;
+	.iconfont {
+		font-size: 128rpx;
+		color: #00b578;
+		text-align: center;
+	}
+	.btn1 {
+		width: 560rpx;
+		height: 88rpx;
+		background: #008aff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+		border-radius: 44rpx;
+		font-size: 32rpx;
+		color: #fff;
+		margin: 40rpx auto 0;
+	}
+	.btn2 {
+		width: 560rpx;
+		height: 88rpx;
+		background: #ffffff;
+		border-radius: 44rpx;
+		border: 2rpx solid #008aff;
+		font-size: 32rpx;
+		color: #008aff;
+		margin: 40rpx auto 0;
+	}
+	.text {
+		width: 560rpx;
+		margin-left: 60rpx;
+		margin-top: 68rpx;
+		.t1 {
+			font-size: 22rpx;
+			color: #666;
+			margin-bottom: 20rpx;
+		}
+		.t2 {
+			font-size: 22rpx;
+			color: #666;
 		}
 	}
 }
