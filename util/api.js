@@ -118,7 +118,11 @@ const API = {
 	/**
 	 * 生成进度
 	 * */
-	GetOrderStepList: API_BASE + "/api/order/GetOrderStepList"
+	GetOrderStepList: API_BASE + "/api/order/GetOrderStepList",
+	/**
+	 *  购物车删除
+	 * */
+	DelCart: API_BASE + "/api/Cart/DelCart"
 }
 
 

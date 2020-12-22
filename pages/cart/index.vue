@@ -10,7 +10,13 @@
 					<view class="title row verCenter">交期：{{ item.LeadTimeEnd }}</view>
 					<view class="data-box">
 						<uni-swipe-action>
-							<uni-swipe-action-item :right-options="options" @click="bindClick(1, 1)" @change="swipeChange($event, index)" v-for="(v, indexs) in item.CartList" :key="indexs">
+							<uni-swipe-action-item
+								:right-options="options"
+								@click="bindClick(1, 1)"
+								@change="swipeChange($event, index, v.Id)"
+								v-for="(v, indexs) in item.CartList"
+								:key="indexs"
+							>
 								<view class="box row bothSide verCenter">
 									<view class="left-bar row verCenter">
 										<checkbox :value="v.Id" :checked="v.checked" style="transform:scale(0.7)" @click="changeSingle(v.Id)" />
@@ -74,7 +80,18 @@
 			</view>
 			<view class="next row rowCenter verCenter" @click="submit">下一步</view>
 		</view>
-		<uni-popup ref="popup" type="dialog"><uni-popup-dialog title="操作确认提示" content="是否将该计价移除购物车删除将无法找回" type="input" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog></uni-popup>
+		<uni-popup ref="popup" type="dialog">
+			<uni-popup-dialog
+				title="操作确认提示"
+				content="是否将该计价移除购物车删除将无法找回"
+				type="input"
+				message="成功消息"
+				:duration="2000"
+				:before-close="true"
+				@close="close"
+				@confirm="confirm"
+			></uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -95,6 +112,7 @@ export default {
 			cartList: {},
 			totalPrice: 0.0,
 			size: 0,
+			cartIdList: [],
 			options: [
 				{
 					text: '删除',
@@ -258,14 +276,20 @@ export default {
 		bindClick(id, unique) {
 			this.$refs.popup.open();
 		},
-		swipeChange(e, index) {
-			console.log('e' + e, 'index' + index);
+		swipeChange(e, index, id) {
+			console.log(index, id);
+			this.cartIdList = [];
+			this.cartIdList.push(id);
 		},
 		close(done) {
-			this.$refs.detail.close();
+			this.$refs.popup.close();
 		},
 		confirm(done, value) {
-			console.log(value);
+			this.request(API.DelCart, 'POST', { cartIdList: this.cartIdList }, true).then(res => {
+				if (res.Code === 200) {
+					this.getData();
+				}
+			});
 			done();
 		}
 	},

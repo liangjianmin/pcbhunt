@@ -2,13 +2,13 @@
 	<view class="user-order">
 		<view class="user-search row bothSide verCenter">
 			<view class="search">
-				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" />
+				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" v-model="keyboard"/>
 				<text class="iconfont iconShape"></text>
 			</view>
-			<view class="btn">搜索</view>
+			<view class="btn" @click="search()">搜索</view>
 		</view>
 		<view class="tab row avarage verCenter">
-			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box  row rowCenter verCenter">{{ item }}({{numArr[index]}})</view>
+			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box  row rowCenter verCenter">{{ item }}({{numArr[index] || 0}})</view>
 		</view>
 
 		<view class="list" :style="{ display: isAvisible }">
@@ -89,7 +89,7 @@
 					<view class="top row bothSide verCenter">
 						<view class="l row verCenter">
 							<text class="t1">订单包：{{ item.MainNo }}</text>
-							<text class="t3">{{ item.AddAt }}</text>
+							<text class="t3">{{ item.AddAt }}</text>   
 						</view>
 					</view>
 					<view class="li row bothSide" v-for="v in item.InfoApi">
@@ -99,11 +99,6 @@
 								<text class="t2">{{ v.PcbFileName }}</text>
 							</view>
 							<view class="b">{{ v.OrderInfoDesc }}</view>
-							<view class="c">
-								<text class="t1">￥</text>
-								<text class="t2">{{ v.OrderFee }}</text>
-								<text class="t3">(含税)</text>
-							</view>
 						</view>
 						<view class="li-r column">
 							<view class="a">{{ v.StatusShow }}</view>
@@ -125,6 +120,11 @@
 									<navigator hover-class="none" :url="'/pages/user/progress?FactoryNo=' + v.FactoryNo" class="btn row rowCenter verCenter">生产进度</navigator>
 								</template>
 							</template>
+							<view class="b">
+								<text class="t1">￥</text>
+								<text class="t2">{{ v.OrderFee }}</text>
+								<text class="t3">(含税)</text>
+							</view>
 						</view>
 					</view>
 					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
@@ -173,7 +173,8 @@ export default {
 			more: 'more',
 			arr: [],
 			text: [],
-			numArr:[]
+			numArr:[0,0],
+			keyboard:''
 		};
 	},
 	onLoad(options) {},
@@ -197,7 +198,7 @@ export default {
 			});
 		},
 		getTotal(){
-			this.request(API.GetPlaceOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+			this.request(API.GetPlaceOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
 				if (res.Code === 200) {
 					if (res.Data.length > 0) {
 						this.numArr[1]=res.Pager.TotalCount;
@@ -205,10 +206,13 @@ export default {
 				}
 			});
 		},
+		search(){
+			
+		},
 		getData() {
 			this.more = 'loading';
 			if (this.active == 0) {
-				this.request(API.GetConfirmOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+				this.request(API.GetConfirmOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
@@ -229,11 +233,11 @@ export default {
 					}
 				});
 			} else if (this.active == 1) {
-				this.request(API.GetPlaceOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+				this.request(API.GetPlaceOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
-							this.placeOrderListTotal = res.Pager.TotalCount;
+							this.numArr[1]=res.Pager.TotalCount;
 							if (res.Pager.TotalCount >= this.PageSize) {
 								this.placeOrderList = this.placeOrderList.concat(res.Data);
 							} else {
