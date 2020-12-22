@@ -8,202 +8,218 @@
 			<view class="btn">搜索</view>
 		</view>
 		<view class="tab row avarage verCenter">
-			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index"  class="box  row rowCenter verCenter">{{item}}(5)</view>
+			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box  row rowCenter verCenter">{{ item }}(5)</view>
 		</view>
-		<view class="list">
-			<view class="wrap">
+		
+		<view class="list"  :style="{ display: isAvisible }">
+			<view class="wrap" v-for="(item, index) in confirmOrderLis" :key="index">
 				<view class="box">
 					<view class="top row bothSide verCenter">
-						<view class="l row">
-							<text class="t1">订单包：G584826</text>
-							<text class="t2">2020/07/20 18:00</text>
+						<view class="l row verCenter">
+							<text class="t1">订单包：{{ item.MainNo }}</text>
+							<text class="t2">{{ item.AddAt }}</text>
 						</view>
-						<view class="r"><text class="t1">已生产</text></view>
-					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
-							</view>
-							<view class="time row verCenter"><image src="../../static/24h.png" mode=""></image></view>
-						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
-							</view>
+						<view class="r">
+							<template v-if="item.Status === 10">
+								<navigator hover-class="none" :url="'/pages/user/pay?Id='+item.MainId+'&MainNo='+item.MainNo+'&totalAmout='+item.AllFee" class="t3 row verCenter rowCenter">支付尾款</navigator>
+							</template>
+							<template v-else>
+								<text class="t1">{{ item.StatusShow }}</text>
+							</template>
 						</view>
 					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
+					<view class="li row bothSide" v-for="v in item.InfoApi">
+						<view class="li-l">
+							<view class="a">
+								<text class="t1">{{ v.OrderNo }}</text>
+								<text class="t2">{{ v.PcbFileName }}</text>
 							</view>
-							<view class="time row verCenter"><image src="../../static/48h.png" mode=""></image></view>
+							<view class="b">{{ v.OrderInfoDesc }}</view>
 						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
+						<view class="li-r column">
+							<view class="a">{{ v.StatusShow }}</view>
+							<view class="time row verCenter">
+								<template v-if="v.LeadTimeHours == 28">
+									<image src="../../static/24h.png" mode="aspectFill"></image>
+								</template>
+								<template v-else-if="v.LeadTimeHours == 48">
+									<image src="../../static/48h.png" mode="aspectFill"></image>
+								</template>
+							</view>
+							<view class="b">
+								<text class="t1">￥</text>
+								<text class="t2">{{ item.PayFee }}</text>
+								<text class="t3">(含税)</text>
 							</view>
 						</view>
 					</view>
-					<view class="bottom row rowCenter verCenter">
-						<text class="t1">全部子订单</text>
+					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
+						<text class="y1">物流费用</text>
+						<view class="y2">
+							<text class="t1">￥</text>
+							<text class="t2">{{ item.ShipFee }}</text>
+							<text class="t3">(含税)</text>
+						</view>
+					</view>
+					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
+						<text class="y1">合计</text>
+						<view class="y2">
+							<text class="t1">￥</text>
+							<text class="t2">{{ item.AllFee }}</text>
+							<text class="t3">(含税)</text>
+						</view>
+					</view>
+					<view class="bottom row rowCenter verCenter" @click="toggle(index, arr[index])">
+						<text class="t1">{{ text[index] }}</text>
 						<text class="iconfont iconarrowzhankai"></text>
 					</view>
 				</view>
 			</view>
-			<view class="wrap">
+			<uni-load-more :status="more" v-if="confirmOrderLis.length >= PageSize"></uni-load-more>
+		</view>
+		<view class="list"  :style="{ display: isBvisible }">
+			<view class="wrap" v-for="(item, index) in placeOrderList" :key="index">
 				<view class="box">
 					<view class="top row bothSide verCenter">
-						<view class="l row">
-							<text class="t1">订单包：G584826</text>
-							<text class="t2">2020/07/20 18:00</text>
-						</view>
-						<view class="r"><navigator class="link row rowCenter verCenter" url="/pages/user/logistics" hover-class="none">查看物流</navigator></view>
-					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
-							</view>
-							<view class="time row verCenter"><image src="../../static/24h.png" mode=""></image></view>
-						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="wrap">
-				<view class="box">
-					<view class="top row bothSide verCenter">
-						<view class="l row">
-							<text class="t1">订单包：G584826</text>
-							<text class="t2">2020/07/20 18:00</text>
-						</view>
-						<view class="r"><text class="t2">审单中</text></view>
-					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
-							</view>
-							<view class="time row verCenter"><image src="../../static/24h.png" mode=""></image></view>
-						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="wrap">
-				<view class="box">
-					<view class="top row bothSide verCenter">
-						<view class="l row">
-							<text class="t1">订单包：G584826</text>
-							<text class="t2">2020/07/20 18:00</text>
-						</view>
-						<view class="r"><text class="t3">支付尾款</text></view>
-					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
-							</view>
-							<view class="time row verCenter"><image src="../../static/24h.png" mode=""></image></view>
-						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="wrap">
-				<view class="box">
-					<view class="top row bothSide verCenter">
-						<view class="l row">
-							<text class="t1">订单包：G584826</text>
-							<text class="t2">2020/07/20 18:00</text>
+						<view class="l row verCenter">
+							<text class="t1">订单包：{{ item.MainNo }}</text>
+							<text class="t2">{{ item.AddAt }}</text>
 						</view>
 						<view class="r">
-							<text class="iconfont icondetele"></text>
-							<text class="t4">已取消</text>
+							<template v-if="item.Status === 10">
+								<navigator class="t3 row verCenter rowCenter">支付尾款</navigator>
+							</template>
+							<template v-else>
+								<text class="t1">{{ item.StatusShow }}</text>
+							</template>
 						</view>
 					</view>
-					<view class="li">
-						<view class="d1 row bothSide verCenter">
-							<view class="row verCenter">
-								<text class="t1">NO#: #H2W-298921</text>
-								<text class="t2">珠海市猎板PCB打样.doc</text>
+					<view class="li row bothSide" v-for="v in item.InfoApi">
+						<view class="li-l">
+							<view class="a">
+								<text class="t1">{{ v.OrderNo }}</text>
+								<text class="t2">{{ v.PcbFileName }}</text>
 							</view>
-							<view class="time row verCenter"><image src="../../static/24h.png" mode=""></image></view>
+							<view class="b">{{ v.OrderInfoDesc }}</view>
 						</view>
-						<view class="d2">建滔A级，绿油白字，有铅喷锡，50000PCS，1.6，</view>
-						<view class="d3 row bothSide verCenter">
-							<text class="t1">2层，69.00x72.00cm</text>
-							<view>
-								<text class="t2">￥</text>
-								<text class="t3">3,232.00</text>
-								<text class="t4">(含税)</text>
+						<view class="li-r column">
+							<view class="a">{{ v.StatusShow }}</view>
+							<view class="time row verCenter">
+								<template v-if="v.LeadTimeHours == 28">
+									<image src="../../static/24h.png" mode="aspectFill"></image>
+								</template>
+								<template v-else-if="v.LeadTimeHours == 48">
+									<image src="../../static/48h.png" mode="aspectFill"></image>
+								</template>
+							</view>
+							<view class="b">
+								<text class="t1">￥</text>
+								<text class="t2">{{ item.PayFee }}</text>
+								<text class="t3">(含税)</text>
 							</view>
 						</view>
+					</view>
+					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
+						<text class="y1">物流费用</text>
+						<view class="y2">
+							<text class="t1">￥</text>
+							<text class="t2">{{ item.ShipFee }}</text>
+							<text class="t3">(含税)</text>
+						</view>
+					</view>
+					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
+						<text class="y1">合计</text>
+						<view class="y2">
+							<text class="t1">￥</text>
+							<text class="t2">{{ item.AllFee }}</text>
+							<text class="t3">(含税)</text>
+						</view>
+					</view>
+					<view class="bottom row rowCenter verCenter" @click="toggle(index, arr[index])">
+						<text class="t1">{{ text[index] }}</text>
+						<text class="iconfont iconarrowzhankai"></text>
 					</view>
 				</view>
 			</view>
+			<uni-load-more :status="more" v-if="placeOrderList.length >= PageSize"></uni-load-more>
 		</view>
 	</view>
 </template>
 
 <script>
 import { API } from '@/util/api.js';
+import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 export default {
 	data() {
 		return {
 			active: 0,
 			itemtext: ['确认中', '已下单'],
 			isAvisible: 'block',
-			isBvisible: 'none'
+			isBvisible: 'none',
+			PageSize: 10,
+			Page: 1,
+			confirmOrderLis: [],
+			placeOrderList: [],
+			status: false,
+			flag: false,
+			more: 'more',
+			arr: [],
+			text: []
 		};
 	},
 	onLoad(options) {},
+	onReachBottom() {
+		if (this.flag) return;
+		this.Page++;
+		this.getData();
+	},
+	onShow() {
+		this.getData();
+	},
 	methods: {
 		getData() {
-			this.request(API.GetCanUseCoupon, 'POST', {}, true).then(res => {
-				if (res.Code === 200) {
-					this.canUseCoupon = res.Data;
-				}
-			});
+			this.more = 'loading';
+			if (this.active == 0) {
+				this.request(API.GetConfirmOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+					this.arr = [];
+					if (res.Code === 200) {
+						if (res.Data.length > 0) {
+							this.confirmOrderLis = this.confirmOrderLis.concat(res.Data);
+							for (let i = 0; i < res.Pager.TotalCount; i++) {
+								this.arr.push(false);
+								this.text.push('展开全部订单信息');
+							}
+						} else {
+							this.flag = true;
+							this.more = 'noMore';
+						}
+					}
+				});
+			} else if (this.active == 1) {
+				this.request(API.GetPlaceOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+					this.arr = [];
+					if (res.Code === 200) {
+						if (res.Data.length > 0) {
+							this.placeOrderList = this.placeOrderList.concat(res.Data);
+							for (let i = 0; i < res.Pager.TotalCount; i++) {
+								this.arr.push(false);
+								this.text.push('展开全部订单信息');
+							}
+						} else {
+							this.flag = true;
+							this.more = 'noMore';
+						}
+					}
+				});
+			}
+		},
+		toggle(index, status) {
+			if (status) {
+				this.$set(this.text, index, '展开全部订单信息');
+			} else {
+				this.$set(this.text, index, '收起信息');
+			}
+			this.$set(this.arr, index, !this.arr[index]);
 		},
 		tab(index) {
 			this.active = index;
@@ -216,7 +232,8 @@ export default {
 			}
 			this.getData();
 		}
-	}
+	},
+	components: { uniLoadMore }
 };
 </script>
 

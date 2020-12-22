@@ -102,7 +102,15 @@ const API = {
 	/**
 	 * AliPay
 	 * */
-	AliPayNotify: API_BASE + "/api/PayMent/AliPayNotify"
+	AliPayNotify: API_BASE + "/api/PayMent/AliPayNotify",
+	/**
+	 * 确认中订单列表
+	 * */
+	GetConfirmOrderList: API_BASE + "/api/Order/GetConfirmOrderList",
+	/**
+	 * 已下单订单列表
+	 * */
+	GetPlaceOrderList: API_BASE + "/api/Order/GetPlaceOrderList"
 }
 
 

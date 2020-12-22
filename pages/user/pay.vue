@@ -52,6 +52,7 @@ export default {
 		return {
 			itemtext: ['支付宝支付', '微信支付'],
 			active: 0,
+			flag: false,
 			form: {
 				Tradeno: ['124411882323738624'],
 				Ordernostr: {},
@@ -74,12 +75,14 @@ export default {
 		this.form.Ordernostr = options.MainNo.split(',');
 		this.form.Subject = '订单：' + options.MainNo;
 		this.form.TotalAmout = options.totalAmout * 1;
-
-		this.$nextTick(function() {
-			this.$refs.pop.open();
-		});
 	},
-	onShow() {},
+	onShow() {
+		if (this.flag) {
+			this.$nextTick(function() {
+				this.$refs.pop.open();
+			});
+		}
+	},
 	methods: {
 		tab(index) {
 			this.active = index;
@@ -88,6 +91,7 @@ export default {
 			if (this.active == 0) {
 				this.request(API.AliPayRequest, 'POST', this.form, true).then(res => {
 					if (res.Code === 200) {
+						this.flag = true;
 						let divForm = document.getElementsByTagName('divform');
 						if (divForm.length) {
 							document.body.removeChild(divForm[0]);
