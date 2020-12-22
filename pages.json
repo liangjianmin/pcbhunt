@@ -10,67 +10,72 @@
 		"style": {
 			"navigationBarTitleText": "订单管理"
 		}
-	},{
+	}, {
 		"path": "pages/user/login",
 		"style": {
 			"navigationBarTitleText": "登录"
 		}
-	},{
+	}, {
 		"path": "pages/cart/index",
 		"style": {
 			"navigationBarTitleText": "购物车"
 		}
-	},{
+	}, {
 		"path": "pages/user/logistics",
 		"style": {
 			"navigationBarTitleText": "物流"
 		}
-	},{
+	}, {
 		"path": "pages/user/order",
 		"style": {
 			"navigationBarTitleText": "计价结果"
 		}
-	},{
+	}, {
 		"path": "pages/user/address",
 		"style": {
 			"navigationBarTitleText": "地址"
 		}
-	},{
+	}, {
 		"path": "pages/user/addAddress",
 		"style": {
 			"navigationBarTitleText": "地址"
 		}
-	},{
+	}, {
 		"path": "pages/user/express",
 		"style": {
 			"navigationBarTitleText": "快递"
 		}
-	},{
+	}, {
 		"path": "pages/user/coupon",
 		"style": {
 			"navigationBarTitleText": "优惠券"
 		}
-	},{
+	}, {
 		"path": "pages/user/status",
 		"style": {
 			"navigationBarTitleText": "支付结果"
 		}
-	},{
+	}, {
 		"path": "pages/index/param",
 		"style": {
 			"navigationBarTitleText": "计价"
 		}
-	},{
+	}, {
 		"path": "pages/user/contacts",
 		"style": {
 			"navigationBarTitleText": "联系人"
 		}
-	},{
+	}, {
 		"path": "pages/user/pay",
 		"style": {
 			"navigationBarTitleText": "支付"
 		}
-	},{
+	}, {
+		"path": "pages/user/progress",
+		"style": {
+			"navigationBarTitleText": "生产进度"
+		}
+	}, {
 		"path": "pages/cart/detail",
 		"style": {
 			"navigationBarTitleText": "计价详情页"

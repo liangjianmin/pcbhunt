@@ -8,10 +8,10 @@
 			<view class="btn">搜索</view>
 		</view>
 		<view class="tab row avarage verCenter">
-			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box  row rowCenter verCenter">{{ item }}(5)</view>
+			<view @click="tab(index)" :class="{ curr: active == index }" v-for="(item, index) in itemtext" :key="index" class="box  row rowCenter verCenter">{{ item }}({{numArr[index]}})</view>
 		</view>
-		
-		<view class="list"  :style="{ display: isAvisible }">
+
+		<view class="list" :style="{ display: isAvisible }">
 			<view class="wrap" v-for="(item, index) in confirmOrderLis" :key="index">
 				<view class="box">
 					<view class="top row bothSide verCenter">
@@ -20,8 +20,14 @@
 							<text class="t2">{{ item.AddAt }}</text>
 						</view>
 						<view class="r">
-							<template v-if="item.Status === 10">
-								<navigator hover-class="none" :url="'/pages/user/pay?Id='+item.MainId+'&MainNo='+item.MainNo+'&totalAmout='+item.AllFee" class="t3 row verCenter rowCenter">支付尾款</navigator>
+							<template v-if="item.PayStatus === 10">
+								<navigator
+									hover-class="none"
+									:url="'/pages/user/pay?Id=' + item.MainId + '&MainNo=' + item.MainNo + '&totalAmout=' + item.AllFee"
+									class="t3 row verCenter rowCenter"
+								>
+									支付尾款
+								</navigator>
 							</template>
 							<template v-else>
 								<text class="t1">{{ item.StatusShow }}</text>
@@ -48,7 +54,7 @@
 							</view>
 							<view class="b">
 								<text class="t1">￥</text>
-								<text class="t2">{{ item.PayFee }}</text>
+								<text class="t2">{{ v.OrderFee }}</text>
 								<text class="t3">(含税)</text>
 							</view>
 						</view>
@@ -77,21 +83,13 @@
 			</view>
 			<uni-load-more :status="more" v-if="confirmOrderLis.length >= PageSize"></uni-load-more>
 		</view>
-		<view class="list"  :style="{ display: isBvisible }">
+		<view class="list" :style="{ display: isBvisible }">
 			<view class="wrap" v-for="(item, index) in placeOrderList" :key="index">
 				<view class="box">
 					<view class="top row bothSide verCenter">
 						<view class="l row verCenter">
 							<text class="t1">订单包：{{ item.MainNo }}</text>
-							<text class="t2">{{ item.AddAt }}</text>
-						</view>
-						<view class="r">
-							<template v-if="item.Status === 10">
-								<navigator class="t3 row verCenter rowCenter">支付尾款</navigator>
-							</template>
-							<template v-else>
-								<text class="t1">{{ item.StatusShow }}</text>
-							</template>
+							<text class="t3">{{ item.AddAt }}</text>
 						</view>
 					</view>
 					<view class="li row bothSide" v-for="v in item.InfoApi">
@@ -101,6 +99,11 @@
 								<text class="t2">{{ v.PcbFileName }}</text>
 							</view>
 							<view class="b">{{ v.OrderInfoDesc }}</view>
+							<view class="c">
+								<text class="t1">￥</text>
+								<text class="t2">{{ v.OrderFee }}</text>
+								<text class="t3">(含税)</text>
+							</view>
 						</view>
 						<view class="li-r column">
 							<view class="a">{{ v.StatusShow }}</view>
@@ -112,11 +115,16 @@
 									<image src="../../static/48h.png" mode="aspectFill"></image>
 								</template>
 							</view>
-							<view class="b">
-								<text class="t1">￥</text>
-								<text class="t2">{{ item.PayFee }}</text>
-								<text class="t3">(含税)</text>
-							</view>
+							<template v-if="item.Status == 40">
+								<template v-if="item.ShipStatus === 30">
+									<navigator hover-class="none" :url="'/pages/user/logistics?OrderInfoId=' + v.InfoId" class="btn row rowCenter verCenter">查看物流</navigator>
+								</template>
+							</template>
+							<template v-if="item.Status == 30">
+								<template v-if="v.ProcessStatus === 10 && v.FactoryNo != null">
+									<navigator hover-class="none" :url="'/pages/user/progress?FactoryNo=' + v.FactoryNo" class="btn row rowCenter verCenter">生产进度</navigator>
+								</template>
+							</template>
 						</view>
 					</view>
 					<view class="hide-text row bothSide verCenter" v-if="arr[index]">
@@ -164,7 +172,8 @@ export default {
 			flag: false,
 			more: 'more',
 			arr: [],
-			text: []
+			text: [],
+			numArr:[]
 		};
 	},
 	onLoad(options) {},
@@ -175,8 +184,27 @@ export default {
 	},
 	onShow() {
 		this.getData();
+		this.getTotal();
 	},
 	methods: {
+		toUrl(obj) {
+			var arr = [];
+			for (let i = 0; i < obj.length; i++) {
+				arr.push(obj[i].InfoId);
+			}
+			uni.navigateTo({
+				url: '/pages/user/logistics?OrderInfoId=' + arr.join(',')
+			});
+		},
+		getTotal(){
+			this.request(API.GetPlaceOrderList, 'GET', { PageSize: 10, Page: this.Page }, true).then(res => {
+				if (res.Code === 200) {
+					if (res.Data.length > 0) {
+						this.numArr[1]=res.Pager.TotalCount;
+					} 
+				}
+			});
+		},
 		getData() {
 			this.more = 'loading';
 			if (this.active == 0) {
@@ -184,7 +212,12 @@ export default {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
-							this.confirmOrderLis = this.confirmOrderLis.concat(res.Data);
+							this.numArr[0]=res.Pager.TotalCount;
+							if (res.Pager.TotalCount >= this.PageSize) {
+								this.confirmOrderLis = this.confirmOrderLis.concat(res.Data);
+							} else {
+								this.placeOrderList = res.Data;
+							}
 							for (let i = 0; i < res.Pager.TotalCount; i++) {
 								this.arr.push(false);
 								this.text.push('展开全部订单信息');
@@ -200,7 +233,12 @@ export default {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
-							this.placeOrderList = this.placeOrderList.concat(res.Data);
+							this.placeOrderListTotal = res.Pager.TotalCount;
+							if (res.Pager.TotalCount >= this.PageSize) {
+								this.placeOrderList = this.placeOrderList.concat(res.Data);
+							} else {
+								this.placeOrderList = res.Data;
+							}
 							for (let i = 0; i < res.Pager.TotalCount; i++) {
 								this.arr.push(false);
 								this.text.push('展开全部订单信息');

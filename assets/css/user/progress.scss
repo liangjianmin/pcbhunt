@@ -1,0 +1,74 @@
+.progress {
+	min-height: 100%;
+	background: #F7F8FA;
+	padding-top: 24rpx;
+	padding-bottom: 100rpx;
+	.top {
+		width: 702rpx;
+		height: 94rpx;
+		background: linear-gradient(225deg, #00ceff 0%, #00abff 100%);
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0, 0, 0, 0.05);
+		border-radius: 8rpx;
+		margin: 0 auto;
+		padding: 0 24rpx;
+		.t1 {
+			font-size: 24rpx;
+			color: #fff;
+			font-weight: bold;
+		}
+	}
+	.content{
+		width: 702rpx;
+		background: #FFFFFF;
+		box-shadow: 0px 2rpx 12rpx 0px rgba(0,0,0,0.05);
+		border-radius: 8rpx;
+		margin: 20rpx auto 0;
+		padding: 44rpx 0 40rpx 0;
+		.box{
+			position: relative;
+			border-left: 4rpx solid #e5e5e5;
+			padding-bottom: 62rpx;
+			margin-left: 208rpx;
+			&:last-child {
+				border-left: none;
+			}
+			.circle {
+				position: absolute;
+				top: 7rpx;
+				left: -14rpx;
+				width: 24rpx;
+				height: 24rpx;
+				background: url('http://img.ichunt.com/images/ichunt/minProgram/pcb/02d50abe82717a1f09ad0572fbb785c6.png') no-repeat center;
+				background-size: cover;
+			}
+			.icontongyi {
+				position: absolute;
+				left: -19rpx;
+				top: -4rpx;
+				font-size: 37rpx;
+				color: #008aff;
+			}
+			.txt{
+				margin-left: 30rpx;
+			}
+			.t1 {
+				font-size: 28rpx;
+				color: #999999;
+				line-height: 40rpx;
+				margin-bottom: 16rpx;
+				font-weight: bold;
+			}
+			.t2 {
+				font-size: 24rpx;
+				color: #999999;
+			}
+			&.curr {
+				padding-bottom: 58rpx;
+				.t1 {
+					color: #323233;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}

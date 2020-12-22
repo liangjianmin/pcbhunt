@@ -110,7 +110,15 @@ const API = {
 	/**
 	 * 已下单订单列表
 	 * */
-	GetPlaceOrderList: API_BASE + "/api/Order/GetPlaceOrderList"
+	GetPlaceOrderList: API_BASE + "/api/Order/GetPlaceOrderList",
+	/**
+	 * 物流进度
+	 * */
+	GetOrderInfoShunFeng: API_BASE + "/api/Ship/GetOrderInfoShunFeng",
+	/**
+	 * 生成进度
+	 * */
+	GetOrderStepList: API_BASE + "/api/order/GetOrderStepList"
 }
 
 
