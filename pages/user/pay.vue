@@ -9,15 +9,13 @@
 					<template v-else-if="index == 1">
 						<text class="iconfont iconiconpayzhifubao"></text>
 					</template>
+					<template v-else-if="index == 2">
+						<text class="iconfont iconiconpayzhifubao2"></text>
+					</template>
 					<text class="t1">{{ item }}</text>
 				</view>
 				<text class="iconfont icon1ElementRadioOn"></text>
 			</view>
-		</view>
-		<view class="tip row verCenter">
-			<text class="iconfont iconiconpayzhifubao2"></text>
-			<text class="t1">对公转账</text>
-			<text class="t2">（移动端暂不支持，请至PC端操作）</text>
 		</view>
 		<view class="btn-box row bothSide verCenter">
 			<view class="row verCenter">
@@ -50,11 +48,11 @@ import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 export default {
 	data() {
 		return {
-			itemtext: ['支付宝支付', '微信支付'],
+			itemtext: ['支付宝支付', '微信支付', '对公转账'],
 			active: 0,
 			flag: false,
 			form: {
-				Tradeno: ['124411882323738624'],
+				Tradeno: [''],
 				Ordernostr: {},
 				Subject: {},
 				TotalAmout: 0.0,
@@ -63,15 +61,12 @@ export default {
 		};
 	},
 	onLoad(options) {
-		console.log(this.options);
-
 		let Tradeno = options.MainNo.split(',');
 		if (Tradeno.length > 1) {
 			this.form.Tradeno = 'mergepay';
 		} else {
 			this.form.Tradeno = options.MainNo;
 		}
-
 		this.form.Ordernostr = options.MainNo.split(',');
 		this.form.Subject = '订单：' + options.MainNo;
 		this.form.TotalAmout = options.totalAmout * 1;
@@ -110,6 +105,19 @@ export default {
 					}
 				});
 			} else if (this.active == 1) {
+				this.request(API.TenH5PayRequest, 'POST', this.form, true).then(res => {
+					if (res.Code === 200) {
+						window.location.href=res.Data;
+					} else {
+						uni.showToast({
+							title: res.Message,
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				})
+			}else if(this.active == 2){
+				 
 			}
 		}
 	}

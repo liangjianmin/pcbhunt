@@ -2,8 +2,8 @@
 	<view class="user-order">
 		<view class="user-search row bothSide verCenter">
 			<view class="search">
-				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" v-model="KeyWords" />
-				<text class="iconfont iconShape"></text>
+				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" v-model="KeyWords" @input="onKeyInput"/>
+				<view class="iconfont iconShape" @click="canels()"></view>
 			</view>
 			<view class="btn" @click="search()">搜索</view>
 		</view>
@@ -277,6 +277,16 @@ export default {
 					}
 				}
 			});
+		},
+		canels(){
+			this.KeyWords='';
+			this.search();
+		},
+		onKeyInput(event){
+			let value=event.target.value;
+			if(value == ''){
+				this.search();
+			}
 		},
 		toggle(index, status) {
 			if (status) {
