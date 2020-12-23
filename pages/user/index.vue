@@ -2,7 +2,7 @@
 	<view class="user-order">
 		<view class="user-search row bothSide verCenter">
 			<view class="search">
-				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" v-model="keyboard"/>
+				<input type="text" value="" placeholder="请输入订单编号/文件名" placeholder-style="color:#CCCCCC;" class="inp" v-model="KeyWords"/>
 				<text class="iconfont iconShape"></text>
 			</view>
 			<view class="btn" @click="search()">搜索</view>
@@ -174,7 +174,7 @@ export default {
 			arr: [],
 			text: [],
 			numArr:[0,0],
-			keyboard:''
+			KeyWords:''
 		};
 	},
 	onLoad(options) {},
@@ -198,21 +198,17 @@ export default {
 			});
 		},
 		getTotal(){
-			this.request(API.GetPlaceOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
-				if (res.Code === 200) {
-					if (res.Data.length > 0) {
-						this.numArr[1]=res.Pager.TotalCount;
-					} 
-				}
-			});
+			this.active=1;
+			this.getData();
 		},
 		search(){
-			
+			this.getData();
+			this.getTotal();
 		},
 		getData() {
 			this.more = 'loading';
 			if (this.active == 0) {
-				this.request(API.GetConfirmOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
+				this.request(API.GetConfirmOrderList, 'POST', { PageSize: 10, Page: this.Page,KeyWords:this.KeyWords }, true).then(res => {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
@@ -227,13 +223,16 @@ export default {
 								this.text.push('展开全部订单信息');
 							}
 						} else {
+							if(this.KeyWords != ''){
+								this.placeOrderList=[];
+							}
 							this.flag = true;
 							this.more = 'noMore';
 						}
 					}
 				});
 			} else if (this.active == 1) {
-				this.request(API.GetPlaceOrderList, 'POST', { PageSize: 10, Page: this.Page }, true).then(res => {
+				this.request(API.GetPlaceOrderList, 'POST', { PageSize: 10, Page: this.Page,KeyWords:this.KeyWords }, true).then(res => {
 					this.arr = [];
 					if (res.Code === 200) {
 						if (res.Data.length > 0) {
