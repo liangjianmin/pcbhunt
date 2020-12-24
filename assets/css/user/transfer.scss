@@ -1,0 +1,44 @@
+.transfer {
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	background: #F7F8FA;
+	padding-top: 24rpx;
+	padding-bottom: 100rpx;
+	overflow-x: hidden;
+	.box{
+		opacity: 0;
+	}
+	.im{
+		position: absolute;
+		top: 24rpx;
+		left: 0;
+		right: 0;
+		width: 702rpx;
+		height: 1000rpx;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.btn1 {
+		width: 702rpx;
+		height: 88rpx;
+		background: #008aff;
+		box-shadow: 0px 8rpx 16rpx 0px rgba(0, 138, 255, 0.2);
+		border-radius: 44rpx;
+		font-size: 32rpx;
+		color: #ffffff;
+		margin: 40rpx auto 0;
+	}
+	.btn2 {
+		width: 702rpx;
+		height: 88rpx;
+		background: #ffffff;
+		border-radius: 44rpx;
+		border: 2rpx solid #008aff;
+		font-size: 32rpx;
+		color: #008aff;
+		font-weight: bold;
+		margin: 40rpx auto 0;
+	}
+	
+}

@@ -76,11 +76,17 @@
 			"navigationBarTitleText": "生产进度"
 		}
 	}, {
+		"path": "pages/user/transfer",
+		"style": {
+			"navigationBarTitleText": "支付"
+		}
+	}, {
 		"path": "pages/cart/detail",
 		"style": {
 			"navigationBarTitleText": "计价详情页"
 		}
 	}],
+	"easycom": true,
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "猎板网",

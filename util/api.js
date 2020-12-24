@@ -122,7 +122,15 @@ const API = {
 	/**
 	 *  购物车删除
 	 * */
-	DelCart: API_BASE + "/api/Cart/DelCart"
+	DelCart: API_BASE + "/api/Cart/DelCart",
+	/**
+	 *  微信H5支付
+	 * */
+	TenH5PayRequest: API_BASE + "/api/Payment/TenH5PayRequest",
+	/**
+	 *  公帐信息
+	 * */
+	GetPublicAccount: API_BASE + "/api/Order/GetPublicAccount"
 }
 
 

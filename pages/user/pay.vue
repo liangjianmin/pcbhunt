@@ -51,6 +51,7 @@ export default {
 			itemtext: ['支付宝支付', '微信支付', '对公转账'],
 			active: 0,
 			flag: false,
+			orderMain:'',
 			form: {
 				Tradeno: [''],
 				Ordernostr: {},
@@ -62,6 +63,7 @@ export default {
 	},
 	onLoad(options) {
 		let Tradeno = options.MainNo.split(',');
+		this.orderMain=options.MainNo;
 		if (Tradeno.length > 1) {
 			this.form.Tradeno = 'mergepay';
 		} else {
@@ -117,7 +119,9 @@ export default {
 					}
 				})
 			}else if(this.active == 2){
-				 
+				 uni.navigateTo({
+				 	url:'/pages/user/transfer?orderMain='+this.orderMain
+				 })
 			}
 		}
 	}
