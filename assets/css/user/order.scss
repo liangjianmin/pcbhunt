@@ -101,11 +101,18 @@
 				padding: 40rpx 24rpx 40rpx;
 				margin-left: 24rpx;
 				border-bottom: 1px solid #e7e7e7;
+				.tt{
+					font-size: 24rpx;
+					color: #666666;
+					line-height: 34rpx;
+					margin-bottom: 24rpx;
+				}
 				.t1 {
 					font-size: 24rpx;
 					color: #666666;
 					line-height: 34rpx;
 					margin-bottom: 24rpx;
+					text-decoration: underline;
 				}
 				.t2 {
 					font-size: 28rpx;

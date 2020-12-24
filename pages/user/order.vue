@@ -25,13 +25,11 @@
 				</view>
 				<view class="wrap row bothSide" v-for="(v, indexs) in item.CartList" :key="indexs">
 					<view class="column">
-						<text class="t1">{{ v.CartNo }}</text>
-						<text class="t2 mb">尺寸：{{ v.Cart_DetailPCB.BoardWidth }}*{{ v.Cart_DetailPCB.BoardHeight }}cm</text>
-						<text class="t2">层数：{{ v.Cart_DetailPCB.BoardLayers }}层</text>
+						<text class="tt">{{ v.CartNo }}</text>
+						<text class="t2">尺寸：{{ v.Cart_DetailPCB.BoardWidth }}*{{ v.Cart_DetailPCB.BoardHeight }}cm</text>
 					</view>
 					<view class="column flex-end">
 						<text class="t1" v-if="v.PcbFileName">{{ v.PcbFileName }}</text>
-						<text class="t2 mb">数量：{{ v.Num }}PCS</text>
 						<view>
 							<text class="price">￥</text>
 							<text class="pricenum">{{ v.ProFee }}</text>
