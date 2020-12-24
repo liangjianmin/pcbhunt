@@ -57,7 +57,12 @@
 						</template>
 					</view>
 				</view>
-				<navigator v-if="IsMerge" class="coupon row bothSide verCenter" hover-class="none" @click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, item.CartDatas.TotalWeight, index)">
+				<navigator
+					v-if="IsMerge"
+					class="coupon row bothSide verCenter"
+					hover-class="none"
+					@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, item.CartDatas.TotalWeight, index)"
+				>
 					<text class="t1">快递物流</text>
 					<view class="row verCenter">
 						<text class="t2">{{ item.CartDatas.TotalWeight }}KG</text>
@@ -70,7 +75,11 @@
 			</view>
 		</view>
 		<view class="show-data column">
-			<view v-if="!IsMerge" class="box row bothSide verCenter" @click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, cartList[0].CartDatas.TotalWeight, 0)">
+			<view
+				v-if="!IsMerge"
+				class="box row bothSide verCenter"
+				@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, cartList[0].CartDatas.TotalWeight, 0)"
+			>
 				<text class="t1">快递物流</text>
 				<view class="row verCenter">
 					<text class="t2">{{ cartList[0].CartDatas.TotalWeight }}KG</text>
@@ -297,14 +306,16 @@ export default {
 			});
 		},
 		getData() {
-			this.request(API.GetCartList, 'POST', { IsMerge: this.IsMerge, idList: this.idList, ProvinceId: this.ProvinceId, CityId: this.CityId, AreaId: this.AreaId }).then(res => {
-				this.form = [];
-				if (res.Code === 200) {
-					this.cartList = res.Data;
-					this.length = this.cartList.length;
-					this.updateParam();
+			this.request(API.GetCartList, 'POST', { IsMerge: this.IsMerge, idList: this.idList, ProvinceId: this.ProvinceId, CityId: this.CityId, AreaId: this.AreaId }).then(
+				res => {
+					this.form = [];
+					if (res.Code === 200) {
+						this.cartList = res.Data;
+						this.length = this.cartList.length;
+						this.updateParam();
+					}
 				}
-			});
+			);
 		},
 		inputChange(e) {
 			var val = e.target.value;
@@ -353,6 +364,16 @@ export default {
 			});
 		},
 		submit() {
+			if (this.ProvinceId == 0) {
+				uni.showToast({
+					title: '请选择收货地址',
+					icon: 'none',
+					duration: 2000
+				});
+
+				return false;
+			}
+
 			this.request(API.SubmitV2, 'POST', this.form, true).then(res => {
 				if (res.Code === 200) {
 					var Id = [],
