@@ -217,7 +217,7 @@ export default {
 				};
 
 				$.ajax({
-					url: 'http://apitest.pcbhunt.com/api/Cart/UploadCartFile?CartId=' + id,
+					url: API.UploadCartFile+'?CartId=' + id,
 					type: 'POST',
 					data: formdata,
 					headers: header,
