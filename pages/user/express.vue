@@ -44,7 +44,8 @@ export default {
 				ProvinceID: '',
 				CityId: '',
 				AreaId: '',
-				Weight: ''
+				Weight: '',
+				IsSpecialOffer:false
 			}
 		};
 	},
@@ -55,6 +56,7 @@ export default {
 		this.form.ProvinceID = options.ProvinceID;
 		this.form.CityId = options.CityId;
 		this.form.AreaId = options.AreaId;
+		this.form.IsSpecialOffer = options.IsSpecialOffer;
 
 		this.length = options.length * 1;
 		this.index = options.index * 1;

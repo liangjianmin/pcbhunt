@@ -61,7 +61,7 @@
 					v-if="IsMerge"
 					class="coupon row bothSide verCenter"
 					hover-class="none"
-					@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, item.CartDatas.TotalWeight, index)"
+					@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, item.CartDatas.TotalWeight, index,item.IsSpecialOffer)"
 				>
 					<text class="t1">快递物流</text>
 					<view class="row verCenter">
@@ -78,7 +78,7 @@
 			<view
 				v-if="!IsMerge"
 				class="box row bothSide verCenter"
-				@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, cartList[0].CartDatas.TotalWeight, 0)"
+				@click="toLogistics(recommendAddress.ProvinceID, recommendAddress.CityId, recommendAddress.AreaId, cartList[0].CartDatas.TotalWeight, 0,item.IsSpecialOffer)"
 			>
 				<text class="t1">快递物流</text>
 				<view class="row verCenter">
@@ -358,9 +358,9 @@ export default {
 				url: '/pages/user/coupon?IdList=' + arr.join(',') + '&UsedCouponId=' + this.UsedCouponId.join(',') + '&length=' + this.length + '&index=' + index
 			});
 		},
-		toLogistics(ProvinceID, CityId, AreaId, Weight, index) {
+		toLogistics(ProvinceID, CityId, AreaId, Weight, index,IsSpecialOffer) {
 			uni.navigateTo({
-				url: '/pages/user/express?ProvinceID=' + ProvinceID + '&CityId=' + CityId + '&AreaId=' + AreaId + '&Weight=' + Weight + '&length=' + this.length + '&index=' + index
+				url: '/pages/user/express?ProvinceID=' + ProvinceID + '&CityId=' + CityId + '&AreaId=' + AreaId + '&Weight=' + Weight + '&length=' + this.length + '&index=' + index+'&IsSpecialOffer='+IsSpecialOffer
 			});
 		},
 		submit() {
