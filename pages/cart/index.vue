@@ -38,7 +38,7 @@
 										</view>
 									</view>
 									<view class="right-bar column">
-										<text class="t1">更新时间:{{ v.AddAt }}</text>
+										<text class="t1">更新时间:{{ v.AddAtShow }}</text>
 										<view class="price">
 											<text class="p1">￥</text>
 											<text class="p2">{{ v.ProFee }}</text>
