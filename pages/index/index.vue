@@ -9,9 +9,9 @@
 				<text class="label">板子尺寸</text>
 				<view class="wrap input-type1 row bothSide verCenter">
 					<view class="row verCenter">
-						<input type="text" placeholder="高度/y" v-model="QuoteObj.SingleBoardHeight" class="w1" placeholder-style="color:#cccccc;" />
+						<input type="number" placeholder="高度/y" v-model="QuoteObj.SingleBoardHeight" class="w1" placeholder-style="color:#cccccc;" />
 						<text class="txt">X</text>
-						<input type="text" placeholder="宽度/x" v-model="QuoteObj.SingleBoardWidth" class="w1" placeholder-style="color:#cccccc;" />
+						<input type="number" placeholder="宽度/x" v-model="QuoteObj.SingleBoardWidth" class="w1" placeholder-style="color:#cccccc;" />
 					</view>
 					<text class="unit">cm</text>
 				</view>
@@ -198,8 +198,8 @@
 					<view v-if="getTestTypeShow(item.Value)" :val="item.Value" @click="tab(item.Value, 'TestType')" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.TestType == item.Value }" v-for="(item, index) in InitDatas.TestTypeValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
-			<view class="pcb-input row verCenter h2">
-				<text class="label">金手指倒斜边</text>
+			<view class="pcb-input row h2">
+				<text class="label">金手指倒斜边 </text>
 				<view class="wrap list row verCenter">
 					<view @click="tab(item.Value, 'Goldfinger')" :val="item.Value" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.Goldfinger == item.Value }" v-for="(item, index) in InitDatas.GoldfingerValues" :key="index">{{ item.Title }}</view>
 				</view>
@@ -210,9 +210,9 @@
 					<view @click="tab(item.Value, 'IsBGA')" :val="item.Value" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.IsBGA == item.Value }" v-for="(item, index) in InitDatas.IsBGAValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
-			<view class="pcb-input row verCenter h1">
+				<view class="pcb-input row h2">
 				<text class="label">阻抗控制</text>
-				<view class="wrap list row verCenter">
+				<view class="wrap list row mb3">
 					<view @click="tab(item.Value, 'ImpedanceSize')" :val="item.Value" class="box row rowCenter verCenter" :class="{ curr: QuoteObj.ImpedanceSizeArr.indexOf(item.Value) != -1 }" v-for="(item, index) in InitDatas.ImpedanceSizeValues" :key="index">{{ item.Title }}</view>
 				</view>
 			</view>
