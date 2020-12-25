@@ -80,6 +80,11 @@
 		"style": {
 			"navigationBarTitleText": "支付"
 		}
+	},{
+		"path": "pages/user/mine",
+		"style": {
+			"navigationBarTitleText": "我的"
+		}
 	}, {
 		"path": "pages/cart/detail",
 		"style": {
@@ -115,6 +120,12 @@
 				"iconPath": "static/order@2x.png",
 				"selectedIconPath": "static/order_click@2x.png",
 				"text": "订单"
+			},
+			{
+				"pagePath": "pages/user/mine",
+				"iconPath": "static/icon／tab／订单.png",
+				"selectedIconPath": "static/icon／tab／订单@2x.png",
+				"text": "我的"
 			}
 		]
 	},

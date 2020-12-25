@@ -1,0 +1,63 @@
+.mine {
+	position: relative;
+	min-height: 100%;
+	background: #f7f8fa;
+	.head {
+		height: 160rpx;
+		background: #008aff;
+		border-radius: 2rpx;
+		padding-left: 30rpx;
+		.im {
+			width: 104rpx;
+			height: 104rpx;
+			border-radius: 50%;
+		}
+		.text {
+			margin-left: 30rpx;
+			.t1 {
+				font-size: 32rpx;
+				color: #fff;
+			}
+			.t2 {
+				margin-top: 22rpx;
+				font-size: 24rpx;
+				color: #fff;
+			}
+		}
+	}
+	.list {
+		margin-top: 24rpx;
+		padding-left: 24rpx;
+		background: #ffffff;
+		.box {
+			padding-right: 34rpx;
+			height: 96rpx;
+			border-bottom: 1px solid #eeeeee;
+			&:last-child {
+				border-bottom: none;
+			}
+			.t1 {
+				font-size: 34rpx;
+				color: #333;
+			}
+			.iconfont {
+				font-size: 30rpx;
+				color: #ccc;
+			}
+		}
+	}
+	.btn {
+		position: absolute;
+		bottom: 40rpx;
+		left: 0;
+		right: 0;
+		width: 702rpx;
+		height: 88rpx;
+		background: #ffffff;
+		border-radius: 44rpx;
+		border: 2rpx solid #008aff;
+		font-size: 32rpx;
+		color: #008aff;
+		margin: 0 auto;
+	}
+}

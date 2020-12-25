@@ -130,7 +130,15 @@ const API = {
 	/**
 	 *  公帐信息
 	 * */
-	GetPublicAccount: API_BASE + "/api/Order/GetPublicAccount"
+	GetPublicAccount: API_BASE + "/api/Order/GetPublicAccount",
+	/**
+	 *  我的
+	 * */
+	GetMemberBase: API_BASE + "/api/Member/GetMemberBase",
+	/**
+	 *  退出
+	 * */
+	UserSignOut: API_BASE + "/api/Member/UserSignOut"
 }
 
 

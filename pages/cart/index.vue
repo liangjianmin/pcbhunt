@@ -10,44 +10,38 @@
 					<view class="title row verCenter">交期：{{ item.LeadTimeEnd }}</view>
 					<view class="data-box">
 						<uni-swipe-action>
-							<uni-swipe-action-item
-								:right-options="options"
-								@click="bindClick(1, 1)"
-								@change="swipeChange($event, index, v.Id)"
-								v-for="(v, indexs) in item.CartList"
-								:key="indexs"
-							>
-								<view class="box row bothSide verCenter">
+							<uni-swipe-action-item :right-options="options" @click="bindClick(1, 1)" @change="swipeChange($event, index, v.Id)" v-for="(v, indexs) in item.CartList" :key="indexs">
+								<view class="box row bothSide">
 									<view class="left-bar row verCenter">
 										<checkbox :value="v.Id" :checked="v.checked" style="transform:scale(0.7)" @click="changeSingle(v.Id)" />
-										<view class="text column">
-											<view class="tt row">
-												<text class="tt-a">{{ v.CartNo }}</text>
-												<navigator class="tt-b" :url="'/pages/cart/detail?id=' + v.Id" hover-class="none">明细</navigator>
+										<view class="text">
+											<view class="number-detail row">
+												<text class="num">{{ v.CartNo }}</text>
+												<navigator class="detail" :url="'/pages/cart/detail?id=' + v.Id" hover-class="none">明细</navigator>
 											</view>
-											<text class="t1">尺寸：{{ v.Cart_DetailPCB.BoardWidth }}*{{ v.Cart_DetailPCB.BoardHeight }}cm</text>
-											<text class="t1">数量：{{ v.Num }}PCS</text>
-											<text class="t2">层数：{{ v.Cart_DetailPCB.BoardLayers }}层</text>
+											<view class="carInfoDesc">{{v.Cart_DetailPCB.CarInfoDesc}}</view>
+											<!-- #ifdef MP-WEIXIN -->
+											<view class="btn row rowCenter verCenter">上传文件</view>
+											<!-- #endif -->
+											
+											<!-- #ifdef H5 -->
+											<template v-if="v.PcbFilePath">
+												<view class="row verCenter afresh">
+													<view class="btn-re row rowCenter verCenter" @click="uploadFilesFun(v.Id)">重新上传</view>
+													<view class="re-text">{{ v.PcbFileName }}</view>
+												</view>
+											</template>
+											<template v-else>
+												<view class="btn row rowCenter verCenter" @click="uploadFilesFun(v.Id)">上传文件</view>
+											</template>
+											<!-- #endif -->
 										</view>
 									</view>
 									<view class="right-bar column">
 										<text class="t1">更新时间:{{ v.AddAt }}</text>
-										<!-- #ifdef MP-WEIXIN -->
-										<view class="btn row rowCenter verCenter">上传文件</view>
-										<!-- #endif -->
-
-										<!-- #ifdef H5 -->
-										<template v-if="v.PcbFilePath">
-											<view class="btn-re row rowCenter verCenter" @click="uploadFilesFun(v.Id)">重新上传</view>
-											<view class="re-text">{{ v.PcbFileName }}</view>
-										</template>
-										<template v-else>
-											<view class="btn row rowCenter verCenter" @click="uploadFilesFun(v.Id)">上传文件</view>
-										</template>
-										<!-- #endif -->
-										<view>
-											<text class="t2">￥</text>
-											<text class="t3">{{ v.ProFee }}</text>
+										<view class="price">
+											<text class="p1">￥</text>
+											<text class="p2">{{ v.ProFee }}</text>
 										</view>
 									</view>
 								</view>
@@ -125,6 +119,7 @@ export default {
 	},
 	onLoad(options) {},
 	onShow() {
+		this.totalPrice=0.0;
 		this.getData();
 	},
 	mounted() {},
