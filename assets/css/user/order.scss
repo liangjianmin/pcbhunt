@@ -101,11 +101,26 @@
 				padding: 40rpx 24rpx 40rpx;
 				margin-left: 24rpx;
 				border-bottom: 1px solid #e7e7e7;
-				.t1 {
+				.tt{
 					font-size: 24rpx;
 					color: #666666;
 					line-height: 34rpx;
 					margin-bottom: 24rpx;
+				}
+				.desc{
+					width: 422rpx;
+					font-size: 28rpx;
+					color: #323233;
+					line-height: 52rpx;
+				}
+				.t1 {
+					font-size: 24rpx;
+					color: #666666;
+					line-height: 34rpx;
+					text-decoration: underline;
+				}
+				.price-mt{
+					margin-top: 73rpx;
 				}
 				.t2 {
 					font-size: 28rpx;
