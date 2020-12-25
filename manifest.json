@@ -101,6 +101,6 @@
         "devServer" : {
             "port" : ""
         },
-        "domain" : "http://pcbhunt.viphk.ngrok.org"
+        "domain" : ""
     }
 }

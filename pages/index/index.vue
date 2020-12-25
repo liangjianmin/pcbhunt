@@ -304,6 +304,7 @@
 <script>
 import { API } from '@/util/api.js';
 import { request } from '@/util/util.js';
+import Util from '@/util/index.js'
 import uniPopup from '@/components/uni-popup/uni-popup.vue';
 import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue';
 import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
@@ -735,6 +736,7 @@ export default {
 	},
 	onLoad(options) {
 		uni.$on('savepcbset', this.savepcbset);
+		this.initQuote();
 	},
 	onUnload() {
 		uni.$off('savepcbset');
@@ -933,6 +935,35 @@ export default {
 			this.QuoteObj.GrooveWidth = data.GrooveWidth;
 			this.resetSize();
 		},
+		saveQuote() {
+			var data=JSON.stringify(this.QuoteObj);
+			// #ifdef MP-WEIXIN
+			uni.setStorageSync('quote',data);
+			// #endif
+			
+			// #ifdef H5
+			 var quote=localStorage.setItem("quote",data)
+			// #endif
+		},
+		initQuote() {
+			// #ifdef MP-WEIXIN
+			var quote = uni.getStorageSync('quote');
+			// #endif
+			
+			// #ifdef H5
+			 var quote=localStorage.getItem("quote");
+			// #endif
+			if(quote!=null){
+			this.QuoteObj=JSON.parse(quote);}
+		},delQuote() {
+			// #ifdef MP-WEIXIN
+			 uni.removeStorage('quote');
+			// #endif
+			
+			// #ifdef H5
+			localStorage.removeItem("quote");
+			// #endif
+		},
 		getSupportThickness() {
 			if (this.QuoteObj.BoardLayers == 1) return [1.0, 1.2, 1.6];
 			else if (this.QuoteObj.BoardLayers == 2) {
@@ -1063,8 +1094,11 @@ export default {
 			this.$refs.pop.close();
 		},
 		joinCar() {
+			if(this.checkSubmit()){
+				this.saveQuote();
 			this.request(API.addToCart, 'Post', JSON.stringify(this.QuoteObj), true).then(res => {
 				if (res.Code == 200) {
+					this.delQuote();
 					uni.switchTab({
 						url: '/pages/cart/index'
 					});
@@ -1075,14 +1109,14 @@ export default {
 						icon: 'none'
 					});
 				}
-			});
+			});}
 		},
 		check() {
 			if (this.QuoteObj.BoardHeight == '' || this.QuoteObj.BoardWidth == '') {
 				return false;
 			}
-			if (this.QuoteObj.Num == '') return false;
-			return this.checkSubmit();
+			if (Number(this.QuoteObj.Num) == 0) return false;
+				return this.checkSubmit();
 		},
 		checkBase() {
 			if (this.QuoteObj.BoardHeight == '' || this.QuoteObj.BoardWidth == '') {
@@ -1093,7 +1127,7 @@ export default {
 				});
 				return false;
 			}
-			if (this.QuoteObj.Num == '') {
+			if (Number(this.QuoteObj.Num) == 0) {
 				uni.showToast({
 					title: '请填写正确的板子数量',
 					duration: 2000,
@@ -1114,6 +1148,14 @@ export default {
 				} else if (this.QuoteObj.BoardWidth <= 0) {
 					$('#BoardWidth').focus();
 				}
+				return false;
+			}
+			if (Number(this.QuoteObj.Num) == 0) {
+				uni.showToast({
+					title: '请填写正确的板子数量',
+					duration: 2000,
+					icon: 'none'
+				});
 				return false;
 			}
 			if (this.QuoteObj.PcbUnit == 10) {
