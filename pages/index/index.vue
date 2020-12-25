@@ -743,7 +743,8 @@ export default {
 	},
 	onShow() {},
 	onPullDownRefresh() {
-		//this.refresh();
+		console.log('refresh');
+		uni.stopPullDownRefresh();
 	},
 	computed: {
 		// ImpedanceSize:function(){
