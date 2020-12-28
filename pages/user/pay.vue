@@ -62,6 +62,7 @@ export default {
 		};
 	},
 	onLoad(options) {
+		console.log(options)
 		let Tradeno = options.MainNo.split(',');
 		this.orderMain=options.MainNo;
 		if (Tradeno.length > 1) {
@@ -71,7 +72,7 @@ export default {
 		}
 		this.form.Ordernostr = options.MainNo.split(',');
 		this.form.Subject = '订单：' + options.MainNo;
-		this.form.TotalAmout = options.totalAmout * 1;
+		this.form.TotalAmout = options.TotalAmout * 1;
 	},
 	onShow() {
 		if (this.flag) {

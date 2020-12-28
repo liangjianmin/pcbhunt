@@ -383,7 +383,7 @@ export default {
 						MainNo.push(res.Data[i].MainNo);
 					}
 					uni.navigateTo({
-						url: '/pages/user/pay?Id=' + Id.join(',') + '&totalAmout=' + this.orderFeeDetail.AllFee + '&MainNo=' + MainNo.join(',')
+						url: '/pages/user/pay?Id=' + Id.join(',') + '&TotalAmout=' + this.orderFeeDetail.AllFee + '&MainNo=' + MainNo.join(',')
 					});
 				} else {
 					uni.showToast({
