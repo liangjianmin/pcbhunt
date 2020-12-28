@@ -15,6 +15,11 @@
 		"style": {
 			"navigationBarTitleText": "登录"
 		}
+	},{
+		"path": "pages/user/register",
+		"style": {
+			"navigationBarTitleText": "登录"
+		}
 	}, {
 		"path": "pages/cart/index",
 		"style": {

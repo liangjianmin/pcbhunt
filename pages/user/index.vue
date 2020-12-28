@@ -23,12 +23,12 @@
 							</view>
 							<view class="r">
 								<template v-if="item.PayStatus === 10">
-									<navigator hover-class="none" :url="'/pages/user/pay?Id=' + item.MainId + '&MainNo=' + item.MainNo + '&totalAmout=' + item.AllFee"class="t3 row verCenter rowCenter">
+									<navigator hover-class="none" :url="'/pages/user/pay?Id=' + item.MainId + '&MainNo=' + item.MainNo + '&TotalAmout=' + item.AllFee"class="t3 row verCenter rowCenter">
 										立即付款
 									</navigator>
 								</template>
 								<template v-else-if="item.PayStatus === 20">
-									<navigator hover-class="none" :url="'/pages/user/pay?Id=' + item.MainId + '&MainNo=' + item.MainNo + '&totalAmout=' + item.AllFee"class="t3 row verCenter rowCenter">
+									<navigator hover-class="none" :url="'/pages/user/pay?Id=' + item.MainId + '&MainNo=' + item.MainNo + '&TotalAmout=' + item.AllFee"class="t3 row verCenter rowCenter">
 										支付尾款
 									</navigator>
 								</template>
