@@ -252,14 +252,16 @@ export default {
 
 			for (let i = 0; i < this.cartList.length; i++) {
 				for (let j = 0; j < this.cartList[i].CartList.length; j++) {
-					if (this.cartList[i].CartList[j].PcbFilePath == null) {
-						uni.showToast({
-							title: 'pcb文件必须上传',
-							icon: 'none',
-							duration: 2000
-						});
+					if(this.idList.includes(this.cartList[i].CartList[j].Id)){
+						if (this.cartList[i].CartList[j].PcbFilePath == null) {
+							uni.showToast({
+								title: 'pcb文件必须上传',
+								icon: 'none',
+								duration: 2000
+							});
 
-						return false;
+							return false;
+						}
 					}
 				}
 			}
