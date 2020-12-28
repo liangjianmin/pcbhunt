@@ -28,7 +28,7 @@
 		<uni-popup ref="pop" type="center">
 			<view class="layer-box column rowCenter">
 				<view class="iconfont iconwait"></view>
-				<navigator class="btn1 row verCenter rowCenter" url="/pages/user/status" hover-class="none">支付完成</navigator>
+				<navigator class="btn1 row verCenter rowCenter" :url="'/pages/user/status?TotalAmout='+form.TotalAmout+'&MainNo='+orderMain" hover-class="none">支付完成</navigator>
 				<view class="btn2 row verCenter rowCenter">支付遇到问题失败</view>
 				<view class="text column">
 					<text class="t1">温馨提示：</text>

@@ -4,16 +4,16 @@
 			<!-- 成功 -->
 			<text class="iconfont iconsucess"></text>
 			<!-- 等待 -->
-			<text class="iconfont iconwait"></text>
+			<!-- <text class="iconfont iconwait"></text> -->
 			<!-- 失败 -->
-			<text class="iconfont iconShape"></text>
+			<!-- <text class="iconfont iconShape"></text> -->
 			<text class="t1">支付失败</text>
-			<text class="t2">支付金额：6585.00元</text>
-			<text class="t3">订单编号：LB84542124</text>
+			<text class="t2">支付金额：{{TotalAmout}}元</text>
+			<text class="t3">订单编号：{{MainNo}}</text>
 		</view>
 		<view class="btn-box">
-			<view class="btn1 row rowCenter verCenter">重新支付</view>
-			<view class="btn2 row rowCenter verCenter">电话联系客服人员</view>
+			<navigator open-type="switchTab" url="/pages/user/index" hover-class="none" class="btn1 row rowCenter verCenter">查看订单</navigator>
+			<navigator open-type="switchTab" url="/pages/index/index" hover-class="none" class="btn2 row rowCenter verCenter">继续下单</navigator>
 		</view>
 		<view class="text column">
 			<text class="t1">温馨提示：</text>
@@ -26,9 +26,15 @@
 import { API } from '@/util/api.js';
 export default {
 	data() {
-		return {}; 
+		return {
+			TotalAmout:'',
+			MainNo:''
+		}; 
 	},
-	onLoad(options) {},
+	onLoad(options) {
+		this.TotalAmout=options.TotalAmout;
+		this.MainNo=options.MainNo;
+	},
 	methods: {}
 };
 </script>
