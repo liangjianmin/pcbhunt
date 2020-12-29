@@ -1,8 +1,11 @@
 <template>
 	<view class="cart">
-		<view class="prompt row verCenter" v-if="cartList.length > 0">
-			<text class="iconfont iconnotice"></text>
-			<text class="text">关于如何手机端上传文件教程，点击查看</text>
+		<view class="prompt row bothSide verCenter" v-if="cartList.length > 0">
+			<view>
+				<text class="iconfont iconnotice"></text>
+				<text class="text">关于如何手机端上传文件教程，点击查看</text>
+			</view>
+			<text class="operation" @click="toggle">{{ text }}</text>
 		</view>
 		<view class="list" v-if="cartList.length > 0">
 			<checkbox-group @change="checkboxChange">
@@ -10,7 +13,13 @@
 					<view class="title row verCenter">交期：{{ item.LeadTimeEnd }}</view>
 					<view class="data-box">
 						<uni-swipe-action>
-							<uni-swipe-action-item :right-options="options" @click="bindClick(1, 1)" @change="swipeChange($event, index, v.Id)" v-for="(v, indexs) in item.CartList" :key="indexs">
+							<uni-swipe-action-item
+								:right-options="options"
+								@click="bindClick(1, 1)"
+								@change="swipeChange($event, index, v.Id)"
+								v-for="(v, indexs) in item.CartList"
+								:key="indexs"
+							>
 								<view class="box row bothSide">
 									<view class="left-bar row verCenter">
 										<checkbox :value="v.Id" :checked="v.checked" style="transform:scale(0.7)" @click="changeSingle(v.Id)" />
@@ -19,11 +28,11 @@
 												<text class="num">{{ v.CartNo }}</text>
 												<navigator class="detail" :url="'/pages/cart/detail?id=' + v.Id" hover-class="none">明细</navigator>
 											</view>
-											<view class="carInfoDesc">{{v.Cart_DetailPCB.CarInfoDesc}}</view>
+											<view class="carInfoDesc">{{ v.Cart_DetailPCB.CarInfoDesc }}</view>
 											<!-- #ifdef MP-WEIXIN -->
 											<view class="btn row rowCenter verCenter">上传文件</view>
 											<!-- #endif -->
-											
+
 											<!-- #ifdef H5 -->
 											<template v-if="v.PcbFilePath">
 												<view class="row verCenter afresh">
@@ -72,7 +81,12 @@
 				<text class="t3">¥</text>
 				<text class="t4">{{ totalPrice }}</text>
 			</view>
-			<view class="next row rowCenter verCenter" @click="submit">下一步</view>
+			<template v-if="!isDelete">
+				<view class="next row rowCenter verCenter" @click="submit()">下一步</view>
+			</template>
+			<template v-else>
+				<view class="deleteCars row rowCenter verCenter" @click="deleteCars()">删除</view>
+			</template>
 		</view>
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog
@@ -107,6 +121,8 @@ export default {
 			totalPrice: 0.0,
 			size: 0,
 			cartIdList: [],
+			isDelete: false,
+			text: '管理',
 			options: [
 				{
 					text: '删除',
@@ -119,7 +135,7 @@ export default {
 	},
 	onLoad(options) {},
 	onShow() {
-		this.totalPrice=0.0;
+		this.totalPrice = 0.0;
 		this.getData();
 	},
 	mounted() {},
@@ -217,7 +233,7 @@ export default {
 				};
 
 				$.ajax({
-					url: API.UploadCartFile+'?CartId=' + id,
+					url: API.UploadCartFile + '?CartId=' + id,
 					type: 'POST',
 					data: formdata,
 					headers: header,
@@ -252,7 +268,7 @@ export default {
 
 			for (let i = 0; i < this.cartList.length; i++) {
 				for (let j = 0; j < this.cartList[i].CartList.length; j++) {
-					if(this.idList.includes(this.cartList[i].CartList[j].Id)){
+					if (this.idList.includes(this.cartList[i].CartList[j].Id)) {
 						if (this.cartList[i].CartList[j].PcbFilePath == null) {
 							uni.showToast({
 								title: 'pcb文件必须上传',
@@ -288,6 +304,32 @@ export default {
 				}
 			});
 			done();
+		},
+		toggle() {
+			this.isDelete = !this.isDelete;
+			if (this.isDelete) {
+				this.text = '完成';
+			} else {
+				this.text = '管理';
+			}
+		},
+		deleteCars() {
+			var self=this;
+			uni.showModal({
+			    title: '',
+			    content: '确认要删除这'+self.idList.length+'种商品吗？',
+			    success: function (res) {
+			        if (res.confirm) {
+			           self.request(API.DelCart, 'POST', { cartIdList: self.idList }, true).then(res => {
+			           	if (res.Code === 200) {
+			           		self.getData();
+			           	}
+			           });
+			        } else if (res.cancel) {
+			            console.log('用户点击取消');
+			        }
+			    }
+			});
 		}
 	},
 	components: { uniSwipeAction, uniPopup, uniPopupMessage, uniPopupDialog }
