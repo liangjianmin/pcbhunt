@@ -7,7 +7,7 @@
 			<!-- <text class="iconfont iconwait"></text> -->
 			<!-- 失败 -->
 			<!-- <text class="iconfont iconShape"></text> -->
-			<text class="t1">支付失败</text>
+			<text class="t1">支付成功</text>
 			<text class="t2">支付金额：{{TotalAmout}}元</text>
 			<text class="t3">订单编号：{{MainNo}}</text>
 		</view>
