@@ -28,7 +28,9 @@
 		<uni-popup ref="pop" type="center">
 			<view class="layer-box column rowCenter">
 				<view class="iconfont iconwait"></view>
-				<navigator class="btn1 row verCenter rowCenter" :url="'/pages/user/status?TotalAmout='+form.TotalAmout+'&MainNo='+orderMain" hover-class="none">支付完成</navigator>
+				<navigator class="btn1 row verCenter rowCenter" :url="'/pages/user/status?TotalAmout=' + form.TotalAmout + '&MainNo=' + orderMain" hover-class="none">
+					支付完成
+				</navigator>
 				<view class="btn2 row verCenter rowCenter">支付遇到问题失败</view>
 				<view class="text column">
 					<text class="t1">温馨提示：</text>
@@ -51,7 +53,7 @@ export default {
 			itemtext: ['支付宝支付', '微信支付', '对公转账'],
 			active: 0,
 			flag: false,
-			orderMain:'',
+			orderMain: '',
 			form: {
 				Tradeno: [''],
 				Ordernostr: {},
@@ -62,9 +64,9 @@ export default {
 		};
 	},
 	onLoad(options) {
-		console.log(options)
+		console.log(options);
 		let Tradeno = options.MainNo.split(',');
-		this.orderMain=options.MainNo;
+		this.orderMain = options.MainNo;
 		if (Tradeno.length > 1) {
 			this.form.Tradeno = 'mergepay';
 		} else {
@@ -90,14 +92,9 @@ export default {
 				this.request(API.AliPayRequest, 'POST', this.form, true).then(res => {
 					if (res.Code === 200) {
 						this.flag = true;
-						let divForm = document.getElementsByTagName('divform');
-						if (divForm.length) {
-							document.body.removeChild(divForm[0]);
-						}
-						const div = document.createElement('divform');
+						const div = document.createElement('div');
 						div.innerHTML = res.Data;
 						document.body.appendChild(div);
-						document.forms[0].setAttribute('target', '_blank');
 						document.forms[0].submit();
 					} else {
 						uni.showToast({
@@ -110,7 +107,7 @@ export default {
 			} else if (this.active == 1) {
 				this.request(API.TenH5PayRequest, 'POST', this.form, true).then(res => {
 					if (res.Code === 200) {
-						window.location.href=res.Data;
+						window.location.href = res.Data;
 					} else {
 						uni.showToast({
 							title: res.Message,
@@ -118,11 +115,11 @@ export default {
 							duration: 2000
 						});
 					}
-				})
-			}else if(this.active == 2){
-				 uni.navigateTo({
-				 	url:'/pages/user/transfer?orderMain='+this.orderMain
-				 })
+				});
+			} else if (this.active == 2) {
+				uni.navigateTo({
+					url: '/pages/user/transfer?orderMain=' + this.orderMain
+				});
 			}
 		}
 	}
