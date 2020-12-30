@@ -249,6 +249,13 @@ export default {
 							setTimeout(() => {
 								self.getData();
 							}, 2000);
+						}else{
+							uni.showToast({
+								title: res.Message,
+								icon: 'none',
+								duration: 2000
+							});
+							
 						}
 					}
 				});
